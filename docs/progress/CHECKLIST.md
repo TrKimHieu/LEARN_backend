@@ -9,7 +9,8 @@
 - [ ] M2 remote three-repo mapping and credential/history source isolation acceptance.
 - [x] M3 independent local images and separate CI/release workflow code.
 - [ ] M3 successful AWS staging deployment, image rollback, DB restore and cross-client device walkthrough.
-- [ ] M3 signed APK completion and installation/auth/upload/deep-link on device.
+- [x] M3 signed APK build completed, downloaded and signature v2 verified.
+- [ ] M3 preview API endpoint configured and APK installation/auth/upload/deep-link accepted on device.
 - [x] M4 default-off stateless compute and local HTTP/full workflow pilot.
 - [x] Atomic core persistence regression on real PostgreSQL for cancellation/replay.
 - [ ] M4 cloud baseline, restart/replay/cancel/scale and rollback acceptance.

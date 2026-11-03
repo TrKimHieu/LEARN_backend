@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "2f294ee",
+  "typecheckFixtureFixCommit": "ef20d3d",
+  "contracts": {
+    "version": "1.0.0",
+    "hash": "f93391e681bf",
+    "sha256": "892545e1f59bf775e8fff83f400ee9d538c14c9e193a07bac4df482f656973bb"
+  },
+  "backendImageWorkflow": "https://github.com/TrKimHieu/LEARN_backend/actions/runs/41593708923",
+  "images": {
+    "image-api": "ghcr.io/trkimhieu/learn_backend-api@sha256:2bce0781a3faa7b1125ad90bbfd65dfb04931f483036ed41daac1dc854125aeb",
+    "image-compute": "ghcr.io/trkimhieu/learn_backend-compute@sha256:260d4172d8de30d881956fac5d93576cd9593e3023ddc8cebf3a3091233f4cb7",
+    "image-worker": "ghcr.io/trkimhieu/learn_backend-worker@sha256:586e04fb60d201238f5969f9245a0b48a620e1400654fb50a578b598b5550d23"
+  },
+  "mobileAppVersion": "1.0.0",
+  "apk": {
+    "buildId": "2460bdda-df0c-43d4-b667-2685f0a67851",
+    "status": "FINISHED",
+    "bytes": 110791925,
+    "sha256": "941bb9f799953f8f92825af13f6ea3b939a8f4065a8c078c1b80036a2b246619",
+    "path": "LEARN_mobile_standalone/.local/apk/learn-preview.apk",
+    "deviceAccepted": false,
+    "signatureVerified": true,
+    "signatureScheme": "v2",
+    "verifier": "Google Maven com.android.tools.build:apksig:8.13.2"
+  },
+  "awsStagingAccepted": false,
+  "remoteTeamAclAccepted": false
+}
