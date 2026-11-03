@@ -1,16 +1,16 @@
 {
-  "sourceCommit": "2f294ee",
+  "sourceCommit": "b725243617621bf8c9fb4534df6553f06dd2c1fd",
   "typecheckFixtureFixCommit": "ef20d3d",
   "contracts": {
     "version": "1.0.0",
     "hash": "f93391e681bf",
     "sha256": "892545e1f59bf775e8fff83f400ee9d538c14c9e193a07bac4df482f656973bb"
   },
-  "backendImageWorkflow": "https://github.com/TrKimHieu/LEARN_backend/actions/runs/41593708923",
+  "backendImageWorkflow": "https://github.com/TrKimHieu/LEARN_backend/actions/runs/41596105093",
   "images": {
-    "image-api": "ghcr.io/trkimhieu/learn_backend-api@sha256:2bce0781a3faa7b1125ad90bbfd65dfb04931f483036ed41daac1dc854125aeb",
-    "image-compute": "ghcr.io/trkimhieu/learn_backend-compute@sha256:260d4172d8de30d881956fac5d93576cd9593e3023ddc8cebf3a3091233f4cb7",
-    "image-worker": "ghcr.io/trkimhieu/learn_backend-worker@sha256:586e04fb60d201238f5969f9245a0b48a620e1400654fb50a578b598b5550d23"
+    "image-api": "ghcr.io/trkimhieu/learn_backend-api@sha256:a37f875e0998295f4a8c623dd31a8cd062835dee6ec2f377e752699dea49b2b0",
+    "image-compute": "ghcr.io/trkimhieu/learn_backend-compute@sha256:85dcb9d5f92ffa6019c444d48e33d6c26d02edd2ac117fb90dc4034a9bef3746",
+    "image-worker": "ghcr.io/trkimhieu/learn_backend-worker@sha256:be2fcc7b6c8fda0e8cf0b7e093226eef123266a2f2930a3a1063f3bdb32edfdc"
   },
   "mobileAppVersion": "1.0.0",
   "apk": {
@@ -25,5 +25,8 @@
     "verifier": "Google Maven com.android.tools.build:apksig:8.13.2"
   },
   "awsStagingAccepted": false,
-  "remoteTeamAclAccepted": false
+  "remoteTeamAclAccepted": false,
+  "backendCi": "https://github.com/TrKimHieu/LEARN_backend/actions/runs/41596070867",
+  "backendCiResult": "success",
+  "anonymousImageTokenStatus": 401
 }

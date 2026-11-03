@@ -1,6 +1,6 @@
 # Updated evidence
 
-The restricted-host limitations below are historical. Current evidence: clean npm ci --ignore-scripts and explicit Prisma generation pass; the previously unreadable file is captured/restored in a supplemental immutable snapshot (1043 files, no mismatches); Docker sandbox with real PostgreSQL/Redis/digest-pinned MinIO passes 20 integration tests and 23 workflow checks. Local full workflows pass with both local and remote compute. See ../progress/STATE.md for outstanding M2/M3/M4 gates. Registry publication, complete response-schema coverage and AWS/device acceptance are still pending.
+The restricted-host limitations below are historical. Current evidence: clean npm ci --ignore-scripts and explicit Prisma generation pass; the previously unreadable file is captured/restored in a supplemental immutable snapshot (1043 files, no mismatches); Docker sandbox with real PostgreSQL/Redis/digest-pinned MinIO passes 21 integration tests and 23 workflow checks. Local full workflows pass with both local and remote compute. See ../progress/STATE.md for outstanding M2/M3/M4 gates. Registry publication, complete response-schema coverage and AWS/device acceptance are still pending.
 
 ---
 
@@ -21,3 +21,5 @@ Full integration was **not run**: Docker daemon is unavailable, WSL access is de
 Independent review found four implementation defects: raw-response POST status inference, missing native logout header, missing named query parameters, and unsafe fixture cleanup after setup failure. These were corrected with regression coverage; original 201 expectations in the recovered auth integration tests are retained, consistent with Nest setting the response status before invoking a handler.
 
 Remaining gates: read/verify the inaccessible original document; clean registry install; live test stack/integration; reviewed registry publication/access from a client-only identity; complete remaining response DTOs before presenting the OpenAPI as fully typed. AWS deploy, service decomposition, mobile/web source changes and production migration are outside M0/M1 execution here.
+
+Final code baseline b725243: Backend CI41596070867 and immutable image publication41596105093 both SUCCESS. Added real PostgreSQL connection_limit=1 quota regression: RED pool exhaustion -> GREEN after transaction-scoped plan reads. All21 integration tests plus23 workflow checks pass per local/remote mode. Anonymous GHCR token requests401 for all3 published images; actual team ACL/history acceptance remains pending. APK complete and v2 signature verified. See release-evidence.json and workspace M2_M4_STATUS.md.
