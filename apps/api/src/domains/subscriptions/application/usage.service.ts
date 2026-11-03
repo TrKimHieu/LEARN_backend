@@ -51,11 +51,11 @@ export class UsageService {
     private readonly usageCounter: UsageCounterRepository,
   ) {}
 
-  async planForUser(userId: string): Promise<PlanLike> {
+  async planForUser(userId: string, db: Db = this.prisma.client): Promise<PlanLike> {
     // Hai câu độc lập — chạy song song thay vì nối tiếp.
     const [free, sub] = await Promise.all([
-      this.plans.findByCode('FREE'),
-      this.subscriptions.findFirstWithPlan(userId),
+      this.plans.findByCode('FREE', db),
+      this.subscriptions.findFirstWithPlan(userId, undefined, db),
     ]);
     return ((sub?.plan ?? free) as PlanLike | null) ?? FALLBACK_PLAN;
   }
@@ -100,7 +100,8 @@ export class UsageService {
     work: (tx: Prisma.TransactionClient) => Promise<T>,
   ): Promise<T> {
     return this.prisma.client.$transaction(async (tx) => {
-      const plan = await this.planForUser(userId);
+      // Reuse the held connection: pool-level reads here can deadlock a small pool.
+      const plan = await this.planForUser(userId, tx);
       const cfg = plan.limits[metric] as LimitConfig | undefined;
 
       if (!cfg) return work(tx);
