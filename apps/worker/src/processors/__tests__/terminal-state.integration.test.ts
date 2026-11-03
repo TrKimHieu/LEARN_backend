@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from 'vitest';
 import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import type { Server } from 'node:http';
 import { prisma, newId } from '@learn/db';
 import { createComputeServer } from '@learn/ai';
@@ -61,7 +62,7 @@ async function fixture() {
       documentId: d.id,
       index: 0,
       content: readFileSync(
-        new URL('../../../fixtures/sample-vi-http.md', import.meta.url),
+        join(process.cwd(), 'apps/worker/fixtures/sample-vi-http.md'),
         'utf8',
       ).slice(0, 6000),
       tokenCount: 1500,
