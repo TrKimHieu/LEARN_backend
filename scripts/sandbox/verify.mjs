@@ -3,6 +3,8 @@ import { createConnection } from 'node:net';
 import { mkdirSync, openSync, closeSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { sandboxEnv } from './config.mjs';
+import { S3Client, CreateBucketCommand } from '@aws-sdk/client-s3';
+import Redis from 'ioredis';
 
 const root = resolve(import.meta.dirname, '../..');
 const env = sandboxEnv();
@@ -35,7 +37,36 @@ if (await listening(4400)) {
 mkdirSync(join(root, '.local'), { recursive: true });
 const log = openSync(join(root, '.local/sandbox.log'), 'a');
 const children = [];
+async function resetSandboxRateWindows() {
+  // Only test-origin rate windows; preserve job queues, fixtures and application data.
+  const redis = new Redis(env.REDIS_URL);
+  try {
+    let cursor = '0';
+    do {
+      const [next, keys] = await redis.scan(cursor, 'MATCH', 'rl:*', 'COUNT', 100);
+      cursor = next;
+      if (keys.length) await redis.del(...keys);
+    } while (cursor !== '0');
+  } finally {
+    await redis.quit();
+  }
+}
 try {
+  await resetSandboxRateWindows();
+  // Create only the fixed isolated test bucket; no CLI image or existing storage is used.
+  const storage = new S3Client({
+    endpoint: env.S3_ENDPOINT,
+    region: env.S3_REGION,
+    forcePathStyle: true,
+    credentials: { accessKeyId: env.S3_ACCESS_KEY_ID, secretAccessKey: env.S3_SECRET_ACCESS_KEY },
+  });
+  try {
+    await storage.send(new CreateBucketCommand({ Bucket: env.S3_BUCKET }));
+  } catch (error) {
+    if (!['BucketAlreadyExists', 'BucketAlreadyOwnedByYou'].includes(error.name)) throw error;
+  } finally {
+    storage.destroy();
+  }
   for (const args of [
     [
       'node_modules/prisma/build/index.js',
@@ -79,6 +110,7 @@ try {
     { cwd: root, env, stdio: 'inherit' },
   );
   if (integration.status !== 0) throw new Error('Isolated auth/quota integration suites failed');
+  await resetSandboxRateWindows();
   const result = spawnSync(process.execPath, ['scripts/sandbox/workflow.mjs'], {
     cwd: root,
     env,

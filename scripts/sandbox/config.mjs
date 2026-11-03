@@ -19,6 +19,8 @@ export function sandboxEnv(source = process.env) {
     LLM_MODE: 'mock',
     LLM_PROVIDER: 'anthropic',
     LLM_API_KEY: '',
+    COMPUTE_URL: source.LEARN_SANDBOX_COMPUTE === '1' ? 'http://127.0.0.1:4500' : '',
+    COMPUTE_TOKEN: source.LEARN_SANDBOX_COMPUTE === '1' ? (source.COMPUTE_TOKEN ?? '') : '',
     MOCK_FIXTURES_PATH: '',
     MAIL_MODE: 'log',
     SMTP_URL: '',

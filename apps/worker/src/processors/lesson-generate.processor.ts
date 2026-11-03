@@ -19,6 +19,7 @@ import {
 import { RedisPublisher } from '../common/redis';
 import { createLlmProvider, estimateCostUsd } from '../common/llm';
 import { env } from '../environment';
+import { commitGeneration } from './commit-generation';
 
 export interface LessonGenerateJobData {
   aiJobId: string;
@@ -218,16 +219,6 @@ export class LessonGenerateProcessor {
         startIndex: await nextOrderIndex(courseId),
       });
 
-      await prisma.$transaction(
-        async (tx) => {
-          await tx.lesson.createMany({ data: rows.lessons });
-          if (rows.exercises.length) await tx.exercise.createMany({ data: rows.exercises });
-          if (rows.questions.length) await tx.question.createMany({ data: rows.questions });
-          if (rows.options.length) await tx.answerOption.createMany({ data: rows.options });
-        },
-        // Cận trên rộng rãi cho lượt sinh lớn; 4 câu lệnh thì vẫn về trong tích tắc.
-        { timeout: 30_000, maxWait: 10_000 },
-      );
       const lessonIds = rows.lessons.map((l) => l.id);
 
       const partialFailures =
@@ -235,22 +226,18 @@ export class LessonGenerateProcessor {
           ? failed.map((f) => ({ node: f.node.title, errors: f.errors }))
           : undefined;
 
-      await prisma.aIJob.update({
-        where: { id: aiJobId },
-        data: {
-          status: 'SUCCEEDED',
-          progress: 100,
-          progressLabel: 'Hoàn tất',
-          finishedAt: new Date(),
-          error: partialFailures
-            ? ({
-                code: 'PARTIAL_FAILURES',
-                message: 'Một số bài học không sinh được.',
-                detail: { partialFailures },
-              } as never)
-            : undefined,
-        },
-      });
+      const committed = await commitGeneration(
+        aiJobId,
+        rows,
+        partialFailures
+          ? {
+              code: 'PARTIAL_FAILURES',
+              message: 'Some lessons could not be generated.',
+              detail: { partialFailures },
+            }
+          : undefined,
+      );
+      if (!committed) throw new JobCancelledError();
       await this.publish(aiJobId, {
         status: 'SUCCEEDED',
         progress: 100,
@@ -465,10 +452,11 @@ export class LessonGenerateProcessor {
   private async fail(aiJobId: string, err: unknown): Promise<void> {
     if (err instanceof JobCancelledError) {
       // Status đã là CANCELLED (do endpoint huỷ đặt) — chỉ ghi finishedAt + publish sự kiện.
-      await prisma.aIJob.updateMany({
+      const cancelled = await prisma.aIJob.updateMany({
         where: { id: aiJobId, status: 'CANCELLED' },
         data: { finishedAt: new Date() },
       });
+      if (cancelled.count === 0) return;
       await this.redis.publishJobEvent(aiJobId, {
         status: 'CANCELLED',
         code: 'CANCELLED_BY_USER',
@@ -481,8 +469,8 @@ export class LessonGenerateProcessor {
       err instanceof JobError
         ? err
         : new JobError('AI_GENERATION_FAILED', err instanceof Error ? err.message : String(err));
-    await prisma.aIJob.update({
-      where: { id: aiJobId },
+    const failed = await prisma.aIJob.updateMany({
+      where: { id: aiJobId, status: 'RUNNING' },
       data: {
         status: 'FAILED',
         finishedAt: new Date(),
@@ -493,6 +481,18 @@ export class LessonGenerateProcessor {
         } as never,
       },
     });
+    if (failed.count === 0) {
+      const current = await prisma.aIJob.findUnique({
+        where: { id: aiJobId },
+        select: { status: true },
+      });
+      if (current?.status === 'CANCELLED') await this.fail(aiJobId, new JobCancelledError());
+      else
+        this.logger.warn(
+          `AIJob ${aiJobId}: failure event suppressed for terminal state ${current?.status ?? 'missing'}.`,
+        );
+      return;
+    }
     await this.redis.publishJobEvent(aiJobId, {
       status: 'FAILED',
       code: jobErr.code,

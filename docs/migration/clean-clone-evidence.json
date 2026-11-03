@@ -1,0 +1,44 @@
+{
+  "results": [
+    {
+      "client": "web",
+      "command": "npm.cmd ci --no-audit --no-fund",
+      "exitCode": 0
+    },
+    {
+      "client": "web",
+      "command": "npm.cmd run typecheck",
+      "exitCode": 0
+    },
+    {
+      "client": "web",
+      "command": "npm.cmd test",
+      "exitCode": 0
+    },
+    {
+      "client": "web",
+      "command": "npm.cmd run build",
+      "exitCode": 0
+    },
+    {
+      "client": "mobile",
+      "command": "npm.cmd ci --no-audit --no-fund",
+      "exitCode": 0
+    },
+    {
+      "client": "mobile",
+      "command": "npm.cmd run typecheck",
+      "exitCode": 0
+    },
+    {
+      "client": "mobile",
+      "command": "npm.cmd test",
+      "exitCode": 0
+    },
+    {
+      "client": "mobile",
+      "command": "npm.cmd run export",
+      "exitCode": 0
+    }
+  ]
+}

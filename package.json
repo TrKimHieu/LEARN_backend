@@ -14,7 +14,7 @@
     "dev": "concurrently -k -n api,worker \"npm:dev:api\" \"npm:dev:worker\"",
     "dev:api": "npm run dev -w apps/api",
     "dev:worker": "npm run dev -w apps/worker",
-    "build": "npm run build -w apps/api && npm run build -w apps/worker",
+    "build": "npm run build -w apps/api && npm run build -w apps/worker && npm run build -w apps/compute",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "eslint . && prettier --check . --ignore-path packages/config/prettier/.prettierignore",
     "contracts:hash": "node packages/contracts/scripts/contracts-hash.mjs",
@@ -28,11 +28,12 @@
     "db:studio": "npm run db:studio -w packages/db",
     "contracts:release": "node scripts/contracts/build-release.mjs",
     "contracts:pack": "npm run contracts:release && npm pack ./artifacts/api-contracts/1.0.0/sdk --pack-destination artifacts/api-contracts/1.0.0 --ignore-scripts --cache .local/npm-cache",
-    "test:tooling": "node --test scripts/contracts/*.test.mjs scripts/sandbox/*.test.mjs",
+    "test:tooling": "node --test scripts/contracts/*.test.mjs scripts/sandbox/*.test.mjs scripts/deploy/*.test.mjs",
     "sandbox:up": "docker compose -f infra/docker-compose.m1.yml up -d --wait",
     "sandbox:verify": "node scripts/sandbox/verify.mjs",
     "sandbox:stop": "docker compose -f infra/docker-compose.m1.yml stop",
-    "contracts:consumer": "node scripts/contracts/consumer-smoke.mjs"
+    "contracts:consumer": "node scripts/contracts/consumer-smoke.mjs",
+    "sandbox:compare": "node scripts/sandbox/compare-pilot.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

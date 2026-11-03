@@ -15,3 +15,8 @@
 - `apps/api/src/integration`: legacy auth/quota suites restored with sandbox-only safety guards.
 
 No web/mobile implementation or `packages/ui` is part of this repository.
+
+- `apps/compute`: opt-in stateless LLM HTTP process, no database credentials.
+- `packages/ai/src/compute`: internal protocol and bounded HTTP implementation.
+- `apps/worker/src/processors/commit-generation.ts`: atomic job terminal state and lesson persistence.
+- `scripts/deploy` and `infra/aws`: digest-pinned SSM delivery plan and reviewed host script.

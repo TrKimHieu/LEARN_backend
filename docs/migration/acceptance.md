@@ -1,3 +1,9 @@
+# Updated evidence
+
+The restricted-host limitations below are historical. Current evidence: clean npm ci --ignore-scripts and explicit Prisma generation pass; the previously unreadable file is captured/restored in a supplemental immutable snapshot (1043 files, no mismatches); Docker sandbox with real PostgreSQL/Redis/digest-pinned MinIO passes 20 integration tests and 23 workflow checks. Local full workflows pass with both local and remote compute. See ../progress/STATE.md for outstanding M2/M3/M4 gates. Registry publication, complete response-schema coverage and AWS/device acceptance are still pending.
+
+---
+
 # M0 / M1 acceptance evidence
 
 Status: **implementation prepared; full milestone acceptance pending external verification**.

@@ -16,6 +16,8 @@ test('sandbox never inherits a production database or live LLM credentials', asy
     LLM_API_KEY: 'fixture-not-a-real-key',
     SMTP_URL: 'smtp://production.invalid',
     S3_ENDPOINT: 'https://production.invalid',
+    COMPUTE_URL: 'https://production.invalid',
+    COMPUTE_TOKEN: 'fixture-not-a-real-key',
   });
   assert.equal(env.NODE_ENV, 'test');
   assert.equal(new URL(env.DATABASE_URL).hostname, '127.0.0.1');
@@ -25,4 +27,6 @@ test('sandbox never inherits a production database or live LLM credentials', asy
   assert.equal(env.LLM_API_KEY, '');
   assert.equal(env.SMTP_URL, '');
   assert.equal(env.HOST, '127.0.0.1');
+  assert.equal(env.COMPUTE_URL, '');
+  assert.equal(env.COMPUTE_TOKEN, '');
 });

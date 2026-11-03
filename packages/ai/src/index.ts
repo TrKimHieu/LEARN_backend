@@ -1,5 +1,7 @@
 export * from './chunker';
 export * from './llm/provider';
+export * from './llm/remote';
+export * from './compute/server';
 export * from './llm/mock';
 export * from './llm/anthropic';
 export * from './llm/gemini';

@@ -1,4 +1,4 @@
-name: Backend M1
+name: Backend CI
 on: [push, pull_request]
 permissions:
   contents: read
@@ -21,6 +21,6 @@ jobs:
       - run: npm run contracts:consumer
       - run: npm run build
       - run: npm run sandbox:up
-      - run: npm run sandbox:verify
+      - run: npm run sandbox:compare
       - if: always()
         run: npm run sandbox:stop

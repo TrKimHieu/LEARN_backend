@@ -1,0 +1,13 @@
+# M4 stateless compute pilot
+
+Status: local pilot under verification; AWS M3 and M4 acceptance remain pending. This is an opt-in branch feature, not an activated production service.
+
+Worker selects the current local provider by default. Set COMPUTE_URL, COMPUTE_TOKEN and COMPUTE_TIMEOUT_MS to route only LLM calls to apps/compute. Core still owns authorization, chunks, AIJob/GenerationRun, schema validation, quota, cancellation and all lesson/progress writes. Compute has no DB/Redis/storage credentials. Rollback: stop the worker gracefully, clear COMPUTE_URL, redeploy the previous worker image, resume and check jobs. Never run old/new workers together for a rollback rehearsal without checking claim/cancel semantics.
+
+POST /v1/generate accepts protocol version 1 and bounded LLM input. A shared bearer token restricts trusted worker access; use private networking and TLS on AWS. HTTP idempotency keys deduplicate concurrent requests with the same payload; conflicting reuse returns 409. Cache is bounded to 128 entries, TTL five minutes, per process. It does not provide durable cross-instance exactly-once billing. There are at most four active provider calls; timed-out calls keep their slot until they settle. The underlying provider cannot be cancelled through the current LlmProvider interface; timeout ends the HTTP wait, not provider billing. Core cancellation prevents persistence after computation, and needs an actual cancellation/replay staging drill before activation.
+
+Bad input/oversize/auth return 400/413/401, invalid provider output 502, busy 503 and timeout 504. Worker retries only a transient busy response once with the same HTTP key within its total deadline. No silent fallback to a live provider. Existing BullMQ/core job failure handling remains responsible for operator recovery; compute has no second queue or DLQ. Requests/results are not logged. GET /health/ready reports protocol readiness.
+
+Commands: npm run build; npm run sandbox:up; npm run sandbox:compare. Comparison writes artifacts/m4-pilot.json and private logs under .local. It compares actual isolated workflows with local vs remote mock computation. This smoke duration is not a production p95 or capacity result.
+
+Before enabling on staging: M3 linked client/device acceptance, cloud metrics baseline, TLS/private compute ingress, independent image rollback/scale, duplicate/retry/cancel tests under concurrent workers and process restart, provider cost accounting, durable idempotency design if cross-instance call deduplication is required. A successful local pilot alone does not pass these gates.

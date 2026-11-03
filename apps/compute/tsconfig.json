@@ -1,0 +1,5 @@
+{
+  "extends": "../../packages/config/typescript/base.json",
+  "compilerOptions": { "paths": { "@learn/ai": ["../../packages/ai/src/index.ts"] } },
+  "include": ["src"]
+}

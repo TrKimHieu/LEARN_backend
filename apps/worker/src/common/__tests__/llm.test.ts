@@ -4,6 +4,7 @@ import {
   GeminiLlmProvider,
   MockLlmProvider,
   OpenAiCompatibleLlmProvider,
+  RemoteLlmProvider,
 } from '@learn/ai';
 import { createLlmProvider, estimateCostUsd } from '../llm';
 import { env } from '../../environment';
@@ -18,6 +19,17 @@ const liveGoogle = {
 };
 
 describe('createLlmProvider — model dự phòng', () => {
+  it('uses the remote compute adapter only when explicitly configured', () => {
+    expect(
+      createLlmProvider({
+        ...env,
+        COMPUTE_URL: 'http://127.0.0.1:4500',
+        COMPUTE_TOKEN: 'test-compute-token-0123456789abcdef',
+        COMPUTE_TIMEOUT_MS: 1000,
+      }),
+    ).toBeInstanceOf(RemoteLlmProvider);
+    expect(createLlmProvider({ ...env, COMPUTE_URL: '' })).toBeInstanceOf(MockLlmProvider);
+  });
   it('không đặt LLM_MODEL_FALLBACK → dùng thẳng adapter, không bọc', () => {
     expect(createLlmProvider(liveGoogle)).toBeInstanceOf(GeminiLlmProvider);
   });

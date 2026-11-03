@@ -10,7 +10,11 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['apps/api/src/**/*.integration.test.ts', 'packages/**/*.integration.test.ts'],
+    include: [
+      'apps/api/src/**/*.integration.test.ts',
+      'apps/worker/src/**/*.integration.test.ts',
+      'packages/**/*.integration.test.ts',
+    ],
     exclude: ['**/node_modules/**', '**/dist/**'],
     testTimeout: 30_000,
     hookTimeout: 30_000,

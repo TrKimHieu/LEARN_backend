@@ -22,22 +22,14 @@ services:
       timeout: 3s
       retries: 20
   minio:
-    image: quay.io/minio/minio:latest
+    image: cgr.dev/chainguard/minio@sha256:709099319add48dfb44aa596a7070d3ddd8dd04d7ae881765719aec29df9e510
     command: server /data --console-address ':9001'
     environment:
       MINIO_ROOT_USER: learnm1local
       MINIO_ROOT_PASSWORD: learnm1local-only
     ports: ['127.0.0.1:19000:9000']
     volumes: [m1-storage:/data]
-  minio-init:
-    image: quay.io/minio/mc:latest
-    depends_on: [minio]
-    entrypoint: ['/bin/sh', '-c']
-    command:
-      - >-
-        until mc alias set local http://minio:9000 learnm1local learnm1local-only;
-        do sleep 2; done;
-        mc mb --ignore-existing local/learn-m1-documents
+
 volumes:
   m1-postgres:
   m1-storage:

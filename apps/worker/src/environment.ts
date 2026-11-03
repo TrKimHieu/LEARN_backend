@@ -4,6 +4,9 @@ import { z } from 'zod';
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   REDIS_URL: z.string().default('redis://localhost:6379'),
+  COMPUTE_URL: z.union([z.literal(''), z.string().url()]).default(''),
+  COMPUTE_TOKEN: z.string().default(''),
+  COMPUTE_TIMEOUT_MS: z.coerce.number().int().min(100).max(900000).default(65000),
   S3_ENDPOINT: z.string().url().default('http://localhost:9000'),
   S3_BUCKET: z.string().default('learn-documents'),
   S3_ACCESS_KEY_ID: z.string().default('minioadmin'),

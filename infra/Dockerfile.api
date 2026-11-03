@@ -1,65 +1,35 @@
 # syntax=docker/dockerfile:1
-
-###############################################################################
-# LEARN API — NestJS bundle qua tsup.
-# Build từ repo root:  docker build -f infra/Dockerfile.api -t learn-api .
-# NOTA: chưa kiểm chứng bằng thật vì máy dev không có Docker (xem docs/progress).
-###############################################################################
-
-ARG NODE_VERSION=22
-
-# ---- Builder: cài đủ deps (kể cả dev) + build ---------------------------------
-FROM node:${NODE_VERSION}-alpine AS builder
+FROM node:22-bookworm-slim AS builder
 WORKDIR /app
-
-# Chỉ copy manifest trước để tận dụng layer cache của npm.
-# npm workspaces yêu cầu đủ package.json của mọi workspace có mặt trong lockfile.
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
 COPY package.json package-lock.json ./
 COPY apps/api/package.json apps/api/package.json
 COPY apps/worker/package.json apps/worker/package.json
+COPY apps/compute/package.json apps/compute/package.json
 COPY packages/ai/package.json packages/ai/package.json
 COPY packages/config/package.json packages/config/package.json
 COPY packages/contracts/package.json packages/contracts/package.json
 COPY packages/db/package.json packages/db/package.json
-# Schema Prisma phải nằm trong context lúc `npm ci` (postinstall chạy `prisma generate`).
 COPY packages/db/prisma packages/db/prisma
-
-# Cache npm của BuildKit + thử lại khi mạng chập chờn: build lại không tải lại ~1.500 gói từ đầu.
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --fetch-retries=5 --fetch-retry-mintimeout=20000 --fetch-retry-maxtimeout=120000
-
+RUN --mount=type=cache,target=/root/.npm npm ci --ignore-scripts --no-audit --no-fund
 COPY . .
-
+RUN npm run db:generate
 RUN npm run build -w apps/api
-
-# ---- Runtime: chỉ prod deps cho apps/api --------------------------------------
-FROM node:${NODE_VERSION}-alpine AS runtime
-ENV NODE_ENV=production
+FROM node:22-bookworm-slim AS runtime
 WORKDIR /app
-
-COPY package.json package-lock.json ./
-COPY apps/api/package.json apps/api/package.json
-COPY apps/worker/package.json apps/worker/package.json
-COPY packages/ai/package.json packages/ai/package.json
-COPY packages/config/package.json packages/config/package.json
-COPY packages/contracts/package.json packages/contracts/package.json
-COPY packages/db/package.json packages/db/package.json
-
-# --ignore-scripts: postinstall (`prisma generate`) không cần — client đã generate
-# ở builder và được copy xuống. Tránh npm chạy script lúc install rồi fail vì thiếu prisma CLI.
-RUN --mount=type=cache,target=/root/.npm \
-    npm ci --fetch-retries=5 --fetch-retry-mintimeout=20000 --fetch-retry-maxtimeout=120000 \
-      --omit=dev --ignore-scripts -w apps/api
-
-# Prisma client đã generate (engine + client) — copy từ builder, KHÔNG generate lại lúc runtime.
-COPY --from=builder /app/node_modules/.prisma node_modules/.prisma
-COPY --from=builder /app/node_modules/@prisma/client node_modules/@prisma/client
-# Client Prisma của repo sinh ra `packages/db/generated/client` (schema.prisma `output`), đường dẫn
-# này được ghi cứng vào client lúc sinh — chép đúng chỗ để bundle tìm thấy query engine Linux.
+ENV NODE_ENV=production
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /app/package.json /app/package-lock.json ./
+COPY --from=builder /app/apps/api/package.json apps/api/package.json
+COPY --from=builder /app/apps/worker/package.json apps/worker/package.json
+COPY --from=builder /app/apps/compute/package.json apps/compute/package.json
+COPY --from=builder /app/packages/ai/package.json packages/ai/package.json
+COPY --from=builder /app/packages/config/package.json packages/config/package.json
+COPY --from=builder /app/packages/contracts/package.json packages/contracts/package.json
+COPY --from=builder /app/packages/db/package.json packages/db/package.json
+RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev --ignore-scripts --no-audit --no-fund -w apps/api
 COPY --from=builder /app/packages/db/generated packages/db/generated
-# Bundle tsup (apps/api/dist/main.js) — phụ thuộc @learn/* và native (@node-rs/argon2) đã có trong node_modules.
 COPY --from=builder /app/apps/api/dist apps/api/dist
-
 USER node
 EXPOSE 4000
 CMD ["node", "apps/api/dist/main.js"]

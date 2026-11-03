@@ -1,6 +1,7 @@
 import { Logger } from '@nestjs/common';
 import {
   MockLlmProvider,
+  RemoteLlmProvider,
   AnthropicLlmProvider,
   GeminiLlmProvider,
   OpenAiCompatibleLlmProvider,
@@ -18,6 +19,14 @@ const logger = new Logger('LlmProvider');
  * chuyển model khi model chính quá tải/hết quota (ADR 009).
  */
 export function createLlmProvider(cfg: Env = env): LlmProvider {
+  if (cfg.COMPUTE_URL) {
+    return new RemoteLlmProvider({
+      url: cfg.COMPUTE_URL,
+      token: cfg.COMPUTE_TOKEN,
+      model: cfg.LLM_MODEL_GENERATION,
+      timeoutMs: cfg.COMPUTE_TIMEOUT_MS,
+    });
+  }
   if (cfg.LLM_MODE === 'mock' || !cfg.LLM_API_KEY) {
     return new MockLlmProvider(1200, loadMockFixtures(cfg.MOCK_FIXTURES_PATH));
   }

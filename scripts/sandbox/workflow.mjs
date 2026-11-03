@@ -125,7 +125,7 @@ const job = (
     method: 'POST',
     token,
     body: { documentIds: [upload.documentId], difficulty: 'EASY', language: 'vi' },
-    expected: 202,
+    expected: 201,
   })
 ).value;
 await poll(

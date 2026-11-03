@@ -1,11 +1,11 @@
-# M0 / M1 status
+# Execution status through M4
 
-In progress on `migration/m0-m1`. Four original repositories are preserved.
+M0: supplementary full website snapshot now reads/restores all 1043 files, with staged/unstaged patches equal. Original immutable snapshot remains preserved. Other three original snapshots already verified. No original application source changed.
 
-M0: bundles, staged/unstaged patches and working-tree archives captured/restored. All accessible file hashes and patch contents match. `LEARN_website/docs/STRUCTURE.md` was unreadable: committed history is bundled, raw working-tree bytes unverified. Git status stat metadata differs on Windows, but semantic diffs match.
+M1: network and Docker available under updated permissions. Clean npm ci --ignore-scripts passed; Prisma explicitly generated; real PostgreSQL/Redis/digest-pinned MinIO sandbox passes auth/quota integration and full upload/extract/generate/submit/progress workflow. Contracts 1.0.0 retain f93391e681bf and are distributed as identical SHA256-pinned tarballs in each standalone client. Registry publication and incomplete OpenAPI response types remain explicit, not claimed complete.
 
-M1: backend-only source assembled. Prisma generation, lint, strict typecheck, API/worker build, **255 unit tests**, **4 tooling tests**, and isolated SDK tarball consumer runtime/type checks passed. Contract candidate `1.0.0` has hash `f93391e681bf`, 55 OpenAPI operations and synthetic fixtures; it is local, not registry-published. Partial response DTOs/query objects are marked explicitly.
+M2: application-only web/mobile snapshots and fresh local histories; original repos preserved. Web lint/typecheck/24 tests/build; mobile typecheck/42 tests/Expo export, lint 37 warnings and zero errors. Actual clean-clone checks and remote mapping/ACL acceptance still being finalized. User requests existing GitHub repos; only LEARN_website and LEARN_mobile exist for LEARN. Backend destination requested from user. Existing website history contains backend, so ACL/history separation is not accepted merely from a new branch.
 
-Registry network denied; offline clean install lacks tarballs. A version-matched local toolchain was used for verification only, not claimed as clean install. Docker daemon/WSL unavailable, no local DB/Redis/storage listening. Compose execution/plugin validation is unverified on this host. Live sandbox runner exits 2 rather than touching an existing database.
+M3: four images build and run locally, API/web/compute return HTTP 200 and worker stays running. Independent image/APK and guarded SSM staging workflows prepared. EAS project trankimhieu/learn-mobile created and linked; build 2460bdda-df0c-43d4-b667-2685f0a67851 submitted, status pending. No AWS account/region/target identified; AWS staging, device walkthrough, live rollback/backup drills not performed.
 
-Next: enable an accessible Docker/test stack and registry access, run clean npm ci and sandbox:verify, verify the unreadable original document, then finish acceptance/registry publication separately. Do not claim M0/M1 fully accepted before these gates.
+M4: stateless compute pilot implemented, default off. Five HTTP behavior tests and adapter wiring regression pass. Local-vs-remote full sandbox comparison passes. New atomic generation commit prevents cancelled/replayed jobs from writing lessons, verified by two real PostgreSQL tests. Cloud scaling/restart/cancellation/rollback acceptance and metrics baseline pending M3.

@@ -1,0 +1,34 @@
+# syntax=docker/dockerfile:1
+FROM node:22-bookworm-slim AS builder
+WORKDIR /app
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+COPY package.json package-lock.json ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/worker/package.json apps/worker/package.json
+COPY apps/compute/package.json apps/compute/package.json
+COPY packages/ai/package.json packages/ai/package.json
+COPY packages/config/package.json packages/config/package.json
+COPY packages/contracts/package.json packages/contracts/package.json
+COPY packages/db/package.json packages/db/package.json
+COPY packages/db/prisma packages/db/prisma
+RUN --mount=type=cache,target=/root/.npm npm ci --ignore-scripts --no-audit --no-fund
+COPY . .
+RUN npm run db:generate
+RUN npm run build -w apps/compute
+FROM node:22-bookworm-slim AS runtime
+WORKDIR /app
+ENV NODE_ENV=production
+RUN apt-get update && apt-get install -y --no-install-recommends openssl ca-certificates && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /app/package.json /app/package-lock.json ./
+COPY --from=builder /app/apps/api/package.json apps/api/package.json
+COPY --from=builder /app/apps/worker/package.json apps/worker/package.json
+COPY --from=builder /app/apps/compute/package.json apps/compute/package.json
+COPY --from=builder /app/packages/ai/package.json packages/ai/package.json
+COPY --from=builder /app/packages/config/package.json packages/config/package.json
+COPY --from=builder /app/packages/contracts/package.json packages/contracts/package.json
+COPY --from=builder /app/packages/db/package.json packages/db/package.json
+RUN --mount=type=cache,target=/root/.npm npm ci --omit=dev --ignore-scripts --no-audit --no-fund -w apps/compute
+COPY --from=builder /app/apps/compute/dist apps/compute/dist
+USER node
+EXPOSE 4500
+CMD ["node", "apps/compute/dist/main.js"]
