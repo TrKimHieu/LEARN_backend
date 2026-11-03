@@ -1,0 +1,1540 @@
+[
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/README.md",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/common/__tests__/errors.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/common/audit.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/common/errors.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/common/mail.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/common/request-id.middleware.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/common/security.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/common/security.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/common/services.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/core/exceptions/__tests__/errors.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/domains/README.md",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/domains/admin/application/admin.service.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/domains/admin/presentation/admin.decorators.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/domains/ai/application/ai.service.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/domains/auth/infrastructure/repositories/password-reset-token.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/domains/courses/application/courses.service.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/domains/learning/application/exercises.service.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/main.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/modules/admin/admin.controller.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/modules/admin/admin.decorators.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/modules/admin/admin.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/modules/admin/admin.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/modules/admin/admin.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/modules/health/health.controller.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/api/src/types/express.d.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "apps/worker/src/README.md",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/__tests__/document-types.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/__tests__/version.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/admin.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/ai.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/auth.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/common.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/course.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/document-types.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/document.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/exercise.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/index.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/lesson.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/meta.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/progress.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/subscription.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/contracts/src/version.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/anthropic.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/chunker-sections.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/chunker.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/fallback.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/gemini.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/mock.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/openai.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/prompts.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/sanitize-markdown.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/__tests__/validate.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/chunker.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/index.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/llm/anthropic.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/llm/fallback.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/llm/fixtures.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/llm/gemini.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/llm/mock.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/llm/openai.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/llm/provider.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/prompts/lesson.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/prompts/outline.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/schemas/output.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/validator/sanitize-markdown.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/ai/src/validator/validate.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/db/prisma/cleanup-e2e.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/db/prisma/migrations/20260914030213_init/migration.sql",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/db/prisma/migrations/20260928150257_password_reset_token/migration.sql",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/db/prisma/migrations/migration_lock.toml",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/db/prisma/schema.prisma",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/db/prisma/seed-demo-heavy.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN",
+    "path": "packages/db/prisma/seed.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/README.md",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/app.module.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/bootstrap/middlewares/request-id.middleware.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/common/__tests__/errors.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/core/exceptions/__tests__/errors.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/common/audit.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/common/errors.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/common/mail.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/common/request-id.middleware.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/common/security.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/common/security.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/common/services.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/core/exceptions/__tests__/errors.test.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/core/exceptions/__tests__/errors.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/core/exceptions/errors.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/core/security.module.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/core/security.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/README.md",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/admin/admin.module.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/admin/application/admin.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/admin/infrastructure/repositories/admin.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/admin/presentation/admin.controller.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/admin/presentation/admin.decorators.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/ai/ai.module.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/ai/application/ai.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/ai/infrastructure/repositories/ai-job.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/ai/infrastructure/repositories/generation-run.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/ai/presentation/ai.controller.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/auth/application/auth.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/auth/auth.module.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/auth/infrastructure/repositories/password-reset-token.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/auth/infrastructure/repositories/password-reset.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/auth/infrastructure/repositories/refresh-token.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/auth/infrastructure/repositories/user.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/auth/presentation/auth.controller.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/courses/application/courses.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/courses/courses.module.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/courses/infrastructure/repositories/course.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/courses/presentation/courses.controller.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/documents/application/documents.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/documents/documents.module.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/documents/infrastructure/repositories/document.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/documents/presentation/documents.controller.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/application/exercises.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/application/lesson-completion.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/application/lessons.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/application/progress.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/infrastructure/repositories/exercise.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/infrastructure/repositories/learning-progress.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/infrastructure/repositories/lesson.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/infrastructure/repositories/submission.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/learning.module.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/learning/presentation/learning.controller.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/subscriptions/application/billing.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/subscriptions/application/usage.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/subscriptions/infrastructure/repositories/payment.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/subscriptions/infrastructure/repositories/plan.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/subscriptions/infrastructure/repositories/subscription.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/subscriptions/infrastructure/repositories/usage-counter.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/subscriptions/presentation/subscription.controller.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/domains/subscriptions/subscriptions.module.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/infra/audit/audit.repository.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/infra/mail/mail.service.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/infra/services.ts",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/main.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/admin/admin.controller.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/admin/admin.decorators.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/admin/admin.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/admin/admin.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/admin/admin.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/ai/ai-job.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/ai/ai.controller.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/ai/ai.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/ai/ai.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/ai/generation-run.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/__tests__/auth.integration.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/integration/auth.integration.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/__tests__/native-auth.integration.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/integration/native-auth.integration.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/__tests__/password-reset-token.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/domains/auth/infrastructure/repositories/__tests__/password-reset-token.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/auth.controller.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/auth.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/auth.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/password-reset-token.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/password-reset.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/refresh-token.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/auth/user.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/courses/course.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/courses/courses.controller.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/courses/courses.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/courses/courses.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/documents/document.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/documents/documents.controller.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/documents/documents.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/documents/documents.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/health/health.controller.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/__tests__/day-key.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/domains/learning/application/__tests__/day-key.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/__tests__/exercises-grading.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/domains/learning/application/__tests__/exercises-grading.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/__tests__/grade-submission.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/domains/learning/application/__tests__/grade-submission.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/__tests__/lesson-completion.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/domains/learning/application/__tests__/lesson-completion.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/exercise.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/exercises.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/learning-progress.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/learning.controller.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/learning.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/lesson-completion.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/lesson.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/lessons.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/progress.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/learning/submission.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/__tests__/quota.integration.test.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "port",
+    "reason": "Restored legacy regression/integration suite, adapted imports and isolated sandbox safety",
+    "destinationPath": "apps/api/src/integration/quota.integration.test.ts"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/billing.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/payment.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/plan.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/subscription.controller.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/subscription.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/subscriptions.module.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/usage-counter.repository.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/modules/subscriptions/usage.service.ts",
+    "canonicalExists": false,
+    "otherExists": true,
+    "decision": "superseded-or-local-only",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/api/src/types/express.d.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "apps/worker/src/README.md",
+    "canonicalExists": true,
+    "otherExists": false,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  },
+  {
+    "sourceRepo": "LEARN_server",
+    "path": "packages/db/prisma/seed-demo-heavy.ts",
+    "canonicalExists": true,
+    "otherExists": true,
+    "decision": "canonical",
+    "reason": "Prefer completed domains/core/infra migration; removed packages in LEARN are retained from canonical; old common/modules and prior tests preserved in source bundle for review"
+  }
+]

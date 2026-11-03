@@ -1,0 +1,21 @@
+{
+  "name": "@learn/ai",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.0",
+    "@learn/contracts": "*",
+    "sanitize-html": "^2.14.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/sanitize-html": "^2.13.0",
+    "typescript": "^5.7.0"
+  }
+}

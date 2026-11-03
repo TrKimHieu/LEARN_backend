@@ -1,0 +1,13 @@
+node_modules
+**/dist
+**/.next
+**/coverage
+**/generated/**
+**/build
+package-lock.json
+docs/archive/
+CircleMascot
+.github/**
+infra/**
+artifacts/
+.local/

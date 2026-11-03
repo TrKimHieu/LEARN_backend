@@ -1,0 +1,12 @@
+.git
+**/.env
+**/.env.*
+**/node_modules
+**/dist
+**/generated
+**/*.tsbuildinfo
+**/*.log
+.local
+artifacts
+coverage
+docs/migration

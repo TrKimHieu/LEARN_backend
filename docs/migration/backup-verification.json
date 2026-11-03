@@ -1,0 +1,46 @@
+[
+  {
+    "repo": "LEARN",
+    "files": 562,
+    "restoredMismatches": [],
+    "originalMismatches": [],
+    "bundleIntact": true,
+    "archiveIntact": true,
+    "stagedPatchMatches": true,
+    "unstagedPatchMatches": true,
+    "unreadable": []
+  },
+  {
+    "repo": "LEARN_mobile",
+    "files": 156,
+    "restoredMismatches": [],
+    "originalMismatches": [],
+    "bundleIntact": true,
+    "archiveIntact": true,
+    "stagedPatchMatches": true,
+    "unstagedPatchMatches": true,
+    "unreadable": []
+  },
+  {
+    "repo": "LEARN_server",
+    "files": 581,
+    "restoredMismatches": [],
+    "originalMismatches": [],
+    "bundleIntact": true,
+    "archiveIntact": true,
+    "stagedPatchMatches": true,
+    "unstagedPatchMatches": true,
+    "unreadable": []
+  },
+  {
+    "repo": "LEARN_website",
+    "files": 1042,
+    "restoredMismatches": [],
+    "originalMismatches": [],
+    "bundleIntact": true,
+    "archiveIntact": true,
+    "stagedPatchMatches": true,
+    "unstagedPatchMatches": true,
+    "unreadable": ["docs/STRUCTURE.md"]
+  }
+]

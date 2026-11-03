@@ -1,0 +1,39 @@
+{
+  "_readme": "Mẫu kịch bản sẵn cho MockLlmProvider — copy file này (bỏ dấu .example) và sửa nội dung, rồi trỏ MOCK_FIXTURES_PATH tới nó. Mỗi phần tử trong `lessons` là 1 bài học chuẩn bị sẵn: khi worker sinh bài học cho một node outline, nếu nội dung chunk của node đó chứa chuỗi `match` (không phân biệt hoa/thường), worker dùng NGUYÊN VĂN title/summary/contentMd/exercises ở đây thay vì tự sinh chung chung — sourceChunkIds vẫn lấy từ chunk thật nên pipeline bám nguồn/validate vẫn chạy đúng. Xoá field `_readme` này khi dùng thật (không bắt buộc, worker bỏ qua field lạ).",
+  "lessons": [
+    {
+      "match": "Mảng và danh sách liên kết",
+      "title": "Mảng và Danh sách liên kết: chọn cấu trúc nào?",
+      "summary": "So sánh chi tiết giữa mảng (array) và danh sách liên kết (linked list) — đánh đổi giữa tốc độ truy cập và tốc độ chèn/xoá, cùng những tình huống thực tế nên chọn cấu trúc nào.",
+      "contentMd": "# Mảng và Danh sách liên kết: chọn cấu trúc nào?\n\nMảng và danh sách liên kết đều dùng để lưu một dãy phần tử, nhưng đánh đổi hiệu năng theo hai hướng ngược nhau.\n\n## Mảng (Array)\n\nCác phần tử nằm liên tiếp trong bộ nhớ, nên truy cập theo chỉ số là **O(1)** — máy tính nhảy thẳng tới đúng ô nhớ. Đổi lại, chèn hoặc xoá ở giữa mảng phải dịch chuyển mọi phần tử phía sau, tốn **O(n)**.\n\n## Danh sách liên kết (Linked List)\n\nMỗi phần tử là một nút giữ dữ liệu và con trỏ tới nút kế tiếp, không cần nằm liền kề trong bộ nhớ. Chèn/xoá khi đã có con trỏ tới vị trí là **O(1)** — chỉ cần đổi vài con trỏ. Nhưng muốn tới phần tử thứ *k* phải đi qua từng nút, tốn **O(n)**, không có \"nhảy thẳng\" như mảng.\n\n## Chọn cấu trúc nào?\n\n- Cần đọc/truy cập ngẫu nhiên nhiều, ít chèn/xoá ở giữa → **mảng**.\n- Cần chèn/xoá thường xuyên ở đầu hoặc giữa, ít truy cập ngẫu nhiên → **danh sách liên kết**.\n\nTrong thực tế, ngôn ngữ hiện đại thường dùng mảng động (dynamic array, như `ArrayList`/`Vec`/mảng JS) làm lựa chọn mặc định vì cache CPU thân thiện hơn với bộ nhớ liên tiếp — danh sách liên kết ít dùng hơn dù có ưu điểm lý thuyết.",
+      "estimatedMinutes": 10,
+      "exercises": [
+        {
+          "title": "Kiểm tra nhanh",
+          "instruction": "Chọn đáp án đúng nhất cho mỗi câu.",
+          "difficulty": "MEDIUM",
+          "questions": [
+            {
+              "type": "MULTIPLE_CHOICE",
+              "prompt": "Thao tác nào sau đây có độ phức tạp O(1) trên mảng nhưng KHÔNG có sẵn ở O(1) trên danh sách liên kết đơn?",
+              "options": [
+                { "content": "Truy cập phần tử theo chỉ số bất kỳ", "isCorrect": true },
+                { "content": "Chèn phần tử vào đầu danh sách", "isCorrect": false },
+                { "content": "Duyệt tuần tự từ đầu tới cuối", "isCorrect": false },
+                { "content": "Lưu trữ nhiều phần tử cùng kiểu dữ liệu", "isCorrect": false }
+              ],
+              "explanation": "Mảng truy cập theo chỉ số trực tiếp O(1) nhờ vị trí bộ nhớ liên tiếp; danh sách liên kết phải duyệt từng nút nên là O(n)."
+            },
+            {
+              "type": "TRUE_FALSE",
+              "prompt": "Đúng hay sai: chèn một phần tử vào giữa mảng luôn nhanh hơn chèn vào giữa danh sách liên kết.",
+              "statement": "Chèn vào giữa mảng luôn nhanh hơn chèn vào giữa danh sách liên kết.",
+              "answer": false,
+              "explanation": "Ngược lại — chèn vào mảng cần dịch chuyển các phần tử phía sau (O(n)), còn danh sách liên kết chỉ cần đổi con trỏ (O(1)) nếu đã có vị trí chèn."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

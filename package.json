@@ -1,0 +1,55 @@
+{
+  "name": "learn-backend",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LEARN shared API and background workers \u2014 private backend source",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,worker \"npm:dev:api\" \"npm:dev:worker\"",
+    "dev:api": "npm run dev -w apps/api",
+    "dev:worker": "npm run dev -w apps/worker",
+    "build": "npm run build -w apps/api && npm run build -w apps/worker",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "eslint . && prettier --check . --ignore-path packages/config/prettier/.prettierignore",
+    "contracts:hash": "node packages/contracts/scripts/contracts-hash.mjs",
+    "test": "vitest run",
+    "test:unit": "vitest run",
+    "test:int": "vitest run --config vitest.int.config.ts",
+    "db:generate": "npm run db:generate -w packages/db",
+    "db:migrate": "npm run db:migrate -w packages/db",
+    "db:deploy": "npm run db:deploy -w packages/db",
+    "db:seed": "npm run db:seed -w packages/db",
+    "db:studio": "npm run db:studio -w packages/db",
+    "contracts:release": "node scripts/contracts/build-release.mjs",
+    "contracts:pack": "npm run contracts:release && npm pack ./artifacts/api-contracts/1.0.0/sdk --pack-destination artifacts/api-contracts/1.0.0 --ignore-scripts --cache .local/npm-cache",
+    "test:tooling": "node --test scripts/contracts/*.test.mjs scripts/sandbox/*.test.mjs",
+    "sandbox:up": "docker compose -f infra/docker-compose.m1.yml up -d --wait",
+    "sandbox:verify": "node scripts/sandbox/verify.mjs",
+    "sandbox:stop": "docker compose -f infra/docker-compose.m1.yml stop",
+    "contracts:consumer": "node scripts/contracts/consumer-smoke.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.0",
+    "concurrently": "^9.1.0",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.18.0",
+    "vitest": "^2.1.8"
+  },
+  "allowScripts": {
+    "@swc/core@1.16.2": true,
+    "@prisma/client": true,
+    "@prisma/engines": true,
+    "prisma": true,
+    "esbuild": true,
+    "msgpackr-extract": true
+  }
+}

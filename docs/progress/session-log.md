@@ -1,0 +1,6 @@
+# Session log
+
+| Date       | Work                                     | Verification                                                                                                                                  | Decision                                                                                                       |
+| ---------- | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 2026-11-03 | M0 restore and backend-only M1 source    | Hashes and patch content match; one unreadable document recorded                                                                              | Original repos unchanged; no existing DB used. Clean install and live integration unverified.                  |
+| 2026-11-03 | M1 contract candidate and sandbox runner | Prisma/lint/typecheck/build pass; 255 unit + 4 tooling tests pass; isolated tarball consumer runtime/types pass. Reviewer findings corrected. | Clean npm install, live integration, raw unreadable document and registry publication remain acceptance gates. |

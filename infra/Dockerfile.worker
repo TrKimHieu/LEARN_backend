@@ -1,0 +1,54 @@
+# syntax=docker/dockerfile:1
+
+###############################################################################
+# LEARN Worker — BullMQ worker, bundle qua tsup. Scale độc lập khỏi API.
+# Build từ repo root:  docker build -f infra/Dockerfile.worker -t learn-worker .
+###############################################################################
+
+ARG NODE_VERSION=22
+
+FROM node:${NODE_VERSION}-alpine AS builder
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/worker/package.json apps/worker/package.json
+COPY packages/ai/package.json packages/ai/package.json
+COPY packages/config/package.json packages/config/package.json
+COPY packages/contracts/package.json packages/contracts/package.json
+COPY packages/db/package.json packages/db/package.json
+COPY packages/db/prisma packages/db/prisma
+
+# Cache npm của BuildKit + thử lại khi mạng chập chờn: build lại không tải lại ~1.500 gói từ đầu.
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --fetch-retries=5 --fetch-retry-mintimeout=20000 --fetch-retry-maxtimeout=120000
+
+COPY . .
+
+RUN npm run build -w apps/worker
+
+FROM node:${NODE_VERSION}-alpine AS runtime
+ENV NODE_ENV=production
+WORKDIR /app
+
+COPY package.json package-lock.json ./
+COPY apps/api/package.json apps/api/package.json
+COPY apps/worker/package.json apps/worker/package.json
+COPY packages/ai/package.json packages/ai/package.json
+COPY packages/config/package.json packages/config/package.json
+COPY packages/contracts/package.json packages/contracts/package.json
+COPY packages/db/package.json packages/db/package.json
+
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --fetch-retries=5 --fetch-retry-mintimeout=20000 --fetch-retry-maxtimeout=120000 \
+      --omit=dev --ignore-scripts -w apps/worker
+
+COPY --from=builder /app/node_modules/.prisma node_modules/.prisma
+COPY --from=builder /app/node_modules/@prisma/client node_modules/@prisma/client
+# Client Prisma của repo sinh ra `packages/db/generated/client` (schema.prisma `output`), đường dẫn
+# này được ghi cứng vào client lúc sinh — chép đúng chỗ để bundle tìm thấy query engine Linux.
+COPY --from=builder /app/packages/db/generated packages/db/generated
+COPY --from=builder /app/apps/worker/dist apps/worker/dist
+
+USER node
+CMD ["node", "apps/worker/dist/main.js"]

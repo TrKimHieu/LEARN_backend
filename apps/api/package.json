@@ -1,0 +1,47 @@
+{
+  "name": "@learn/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register src/main.ts",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.721.0",
+    "@aws-sdk/s3-request-presigner": "^3.721.0",
+    "@learn/ai": "*",
+    "@learn/contracts": "*",
+    "@learn/db": "*",
+    "@nestjs/common": "^11.0.0",
+    "@nestjs/config": "^4.0.0",
+    "@nestjs/core": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.0",
+    "bullmq": "^5.34.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.4.0",
+    "helmet": "^8.0.0",
+    "ioredis": "^5.4.0",
+    "jose": "^5.9.0",
+    "nodemailer": "^7.0.13",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.16.2",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/express": "^5.0.0",
+    "@types/nodemailer": "^8.0.2",
+    "@types/supertest": "^6.0.2",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "tsup": "^8.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.8"
+  }
+}

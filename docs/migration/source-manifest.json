@@ -1,0 +1,1469 @@
+[
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/nodemon.json",
+    "destinationPath": "apps/api/nodemon.json",
+    "action": "keep",
+    "sha256": "7325a1988320f8b502021c78917dbd60c0f9683c9e1879883f1e121c2b9f286d",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/package.json",
+    "destinationPath": "apps/api/package.json",
+    "action": "keep",
+    "sha256": "b943376b80ac56e13ea9be15221539d49c62634de0c6c95c509de44bad79e093",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/tsconfig.json",
+    "destinationPath": "apps/api/tsconfig.json",
+    "action": "keep",
+    "sha256": "c215703e50d2426c474224514546f842800de491dfe8d93cfc4aa855e0828ede",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/tsup.config.ts",
+    "destinationPath": "apps/api/tsup.config.ts",
+    "action": "keep",
+    "sha256": "d15e0d4d827197968ea7cf6166a8ad006c27b95b2c2732a7f27cc21457d01150",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/app.module.ts",
+    "destinationPath": "apps/api/src/app.module.ts",
+    "action": "keep",
+    "sha256": "ba279faba0d58bc347fda50748aebd565f159470a744be0c01b4951db674b844",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/environment.ts",
+    "destinationPath": "apps/api/src/environment.ts",
+    "action": "keep",
+    "sha256": "8561674dfc2256ec9470a682fb6fa091e65a2a67b0938c56b688f5c2adbbbfb7",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/main.ts",
+    "destinationPath": "apps/api/src/main.ts",
+    "action": "keep",
+    "sha256": "7edbe812f429d143c326ab1293f03d5cc12047262bef541b58133762ddcd3d85",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/README.md",
+    "destinationPath": "apps/api/src/README.md",
+    "action": "keep",
+    "sha256": "452556f87ecf7794242dba87cdfbbe765c843266a3a6a5abd3f4b06d10ae51dc",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/core/security.module.ts",
+    "destinationPath": "apps/api/src/core/security.module.ts",
+    "action": "keep",
+    "sha256": "6dcb0e62bcbbd4f9a7ddfbbe6d98cd3e4a5fcb12caaefc290b4ee8e03969df09",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/core/security.ts",
+    "destinationPath": "apps/api/src/core/security.ts",
+    "action": "keep",
+    "sha256": "aac1331260ab5b681da653efeeb76cf0992af695d623aeb8f6c350779b2ffa87",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/README.md",
+    "destinationPath": "apps/api/src/domains/README.md",
+    "action": "keep",
+    "sha256": "af13a2177318963f74ff745ea0b5da28e19c353b3f4d8083fa737f3d6ae608b7",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/infra/services.ts",
+    "destinationPath": "apps/api/src/infra/services.ts",
+    "action": "keep",
+    "sha256": "859d671bce9fbc64876cc700b1aadc282ca00ca12e94091578502876dfe98fb8",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/types/express.d.ts",
+    "destinationPath": "apps/api/src/types/express.d.ts",
+    "action": "keep",
+    "sha256": "db087e735e3ebc237609cb44e62ddb13be2a617e0294b04baf565a90d33d7c71",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/__tests__/environment.test.ts",
+    "destinationPath": "apps/api/src/__tests__/environment.test.ts",
+    "action": "keep",
+    "sha256": "afbbc28f2e177317eed6d0ccf6c8a72b3c26fa223f75afb07021b75827a6136d",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/bootstrap/middlewares/request-id.middleware.ts",
+    "destinationPath": "apps/api/src/bootstrap/middlewares/request-id.middleware.ts",
+    "action": "keep",
+    "sha256": "b72c6a20f21ab100432d6136ef2fcee4663d7b6858230a7d66192164792be02d",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/core/exceptions/errors.ts",
+    "destinationPath": "apps/api/src/core/exceptions/errors.ts",
+    "action": "keep",
+    "sha256": "9f884da64d6efb3e0544121d2b4a8c1f788856ca09f847a2b02591a8447b7c2e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/core/exceptions/__tests__/errors.test.ts",
+    "destinationPath": "apps/api/src/core/exceptions/__tests__/errors.test.ts",
+    "action": "keep",
+    "sha256": "a984df0f8f92e561df469d69f756a8ffdd1bb113feeb525d2ef3a8ac0568f8c4",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/admin/admin.module.ts",
+    "destinationPath": "apps/api/src/domains/admin/admin.module.ts",
+    "action": "keep",
+    "sha256": "0ebf64f0ea8a62b68819cbc338cbc671ff1ecb0079e0de341bfb6c718cee67c9",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/ai/ai.module.ts",
+    "destinationPath": "apps/api/src/domains/ai/ai.module.ts",
+    "action": "keep",
+    "sha256": "a24b83ec6d23929170fc9caa6768676224a319acbfc13a2f2505b88cba3bf1fb",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/auth/auth.module.ts",
+    "destinationPath": "apps/api/src/domains/auth/auth.module.ts",
+    "action": "keep",
+    "sha256": "4d8ab67240e6790a9e6bfb2bf2dc0296d4439eca9045dbcce7c252b58d9e9da6",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/courses/courses.module.ts",
+    "destinationPath": "apps/api/src/domains/courses/courses.module.ts",
+    "action": "keep",
+    "sha256": "5218092c6e359be3c7afcbc3047d89a219f99ba89416cf40b5a77e4ad4523881",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/documents/documents.module.ts",
+    "destinationPath": "apps/api/src/domains/documents/documents.module.ts",
+    "action": "keep",
+    "sha256": "e0bd2fda7124fbbdf3753e6e148d8f98f6cfcd7a774e552c4b92664c0497ef24",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/learning.module.ts",
+    "destinationPath": "apps/api/src/domains/learning/learning.module.ts",
+    "action": "keep",
+    "sha256": "73e6e784214a170e9f0edc2626c440353c3dea7c2f0681f6109c71f0f6747340",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/subscriptions/subscriptions.module.ts",
+    "destinationPath": "apps/api/src/domains/subscriptions/subscriptions.module.ts",
+    "action": "keep",
+    "sha256": "dc78c34992753a6b0280f714ee1861ed1142299edd39ff060c899390b2949e3d",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/admin/application/admin.service.ts",
+    "destinationPath": "apps/api/src/domains/admin/application/admin.service.ts",
+    "action": "keep",
+    "sha256": "5940068e588c992d4a80f849865d332689fc496727622aee39f8997f6faec616",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/admin/presentation/admin.controller.ts",
+    "destinationPath": "apps/api/src/domains/admin/presentation/admin.controller.ts",
+    "action": "keep",
+    "sha256": "c30914f9ac285ad08b8790651d6e04941d8beb9319af55f52cfdae242e0c57f4",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/admin/presentation/admin.decorators.ts",
+    "destinationPath": "apps/api/src/domains/admin/presentation/admin.decorators.ts",
+    "action": "keep",
+    "sha256": "7e2c7cb3f161482c2e2cf7e20f8da94ad9402eecb8c2ddcdc8b3c4549c5b8da8",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/admin/infrastructure/repositories/admin.repository.ts",
+    "destinationPath": "apps/api/src/domains/admin/infrastructure/repositories/admin.repository.ts",
+    "action": "keep",
+    "sha256": "3493929e7da566d99db635171ec5830ede93c60798e0115bb3e80b974e07f156",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/ai/application/ai.service.ts",
+    "destinationPath": "apps/api/src/domains/ai/application/ai.service.ts",
+    "action": "keep",
+    "sha256": "9e2f9d4e0f9419c5261a7b47e8f8fb7afd663d01b7eb48075099eafb819f2ffd",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/ai/presentation/ai.controller.ts",
+    "destinationPath": "apps/api/src/domains/ai/presentation/ai.controller.ts",
+    "action": "keep",
+    "sha256": "32b361d6164e243d4abcd91f15b9c222235d7f4ad2c5fa7afe39ef411bc9b42b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/ai/infrastructure/repositories/ai-job.repository.ts",
+    "destinationPath": "apps/api/src/domains/ai/infrastructure/repositories/ai-job.repository.ts",
+    "action": "keep",
+    "sha256": "bdfbc30c2f12932471abc436247309ca2036de4df7d0e860a648d0a5670cd5e0",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/ai/infrastructure/repositories/generation-run.repository.ts",
+    "destinationPath": "apps/api/src/domains/ai/infrastructure/repositories/generation-run.repository.ts",
+    "action": "keep",
+    "sha256": "1d19359f0c5d63622a129d2a558955b98f2b6d8d2d2216cad6ef7626daa50ddf",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/auth/application/auth.service.ts",
+    "destinationPath": "apps/api/src/domains/auth/application/auth.service.ts",
+    "action": "keep",
+    "sha256": "725ab13929a0348fc8a827c39806697fb4b44813f06f697a11d24a827d6aec4c",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/auth/presentation/auth.controller.ts",
+    "destinationPath": "apps/api/src/domains/auth/presentation/auth.controller.ts",
+    "action": "keep",
+    "sha256": "b3f230997280a4fce8f07375d124a16eb4cc29bac7e12250e92b8085693067c3",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/auth/infrastructure/repositories/password-reset-token.ts",
+    "destinationPath": "apps/api/src/domains/auth/infrastructure/repositories/password-reset-token.ts",
+    "action": "keep",
+    "sha256": "fbaf890f9e50389d45d96b9bb3d857ec7f355387d20e7827857b8eaaaaaf9081",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/auth/infrastructure/repositories/password-reset.repository.ts",
+    "destinationPath": "apps/api/src/domains/auth/infrastructure/repositories/password-reset.repository.ts",
+    "action": "keep",
+    "sha256": "93c917d53912e236522ee0c70080b66a5f38dbcbce7d9ff8a00db9b963de5b02",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/auth/infrastructure/repositories/refresh-token.repository.ts",
+    "destinationPath": "apps/api/src/domains/auth/infrastructure/repositories/refresh-token.repository.ts",
+    "action": "keep",
+    "sha256": "806029ad696df3c61994451fc6a16ce6cc16ffebe408f8c2c68d7317c9d38a0b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/auth/infrastructure/repositories/user.repository.ts",
+    "destinationPath": "apps/api/src/domains/auth/infrastructure/repositories/user.repository.ts",
+    "action": "keep",
+    "sha256": "984ef15dc5a836d855578b1cd5c0b48fcf0dc27b613954dd95669a25fc9fe807",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/courses/application/courses.service.ts",
+    "destinationPath": "apps/api/src/domains/courses/application/courses.service.ts",
+    "action": "keep",
+    "sha256": "b902d5cd34b1abfd00f6e5de305a7594942f199608ccabbecc500a8a6e485bf3",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/courses/presentation/courses.controller.ts",
+    "destinationPath": "apps/api/src/domains/courses/presentation/courses.controller.ts",
+    "action": "keep",
+    "sha256": "c77ca863b7cd8ff88fe20aec2ef3d52e43fcb31f968a60fa94e982fd9e7de798",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/courses/infrastructure/repositories/course.repository.ts",
+    "destinationPath": "apps/api/src/domains/courses/infrastructure/repositories/course.repository.ts",
+    "action": "keep",
+    "sha256": "9a72b5277d84dea799a564f675b80ba52314976b551eac7968ec954aa024c584",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/documents/application/documents.service.ts",
+    "destinationPath": "apps/api/src/domains/documents/application/documents.service.ts",
+    "action": "keep",
+    "sha256": "5d93c9a2f8559a6db222ba29490ff73635556c4f8a858e12ae0f697902e4833a",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/documents/presentation/documents.controller.ts",
+    "destinationPath": "apps/api/src/domains/documents/presentation/documents.controller.ts",
+    "action": "keep",
+    "sha256": "66bd3e415feaefa2d172e896ed1b42b3cd6a703acc1ec392818cdd77d089e3b6",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/documents/infrastructure/repositories/document.repository.ts",
+    "destinationPath": "apps/api/src/domains/documents/infrastructure/repositories/document.repository.ts",
+    "action": "keep",
+    "sha256": "3ded8eabde0092095cb5fcd628a7065962475e50929f315632c7e20cae5029e3",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/application/exercises.service.ts",
+    "destinationPath": "apps/api/src/domains/learning/application/exercises.service.ts",
+    "action": "keep",
+    "sha256": "305824e63cc0dc454f7828408653b661f368eea085c0df7ece5796c9ec2633b5",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/application/lesson-completion.ts",
+    "destinationPath": "apps/api/src/domains/learning/application/lesson-completion.ts",
+    "action": "keep",
+    "sha256": "3ca54e22b7844e46fac47e12bdcb17d603ffcdcfdd583066d4f74b3b8b1a89af",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/application/lessons.service.ts",
+    "destinationPath": "apps/api/src/domains/learning/application/lessons.service.ts",
+    "action": "keep",
+    "sha256": "a36883e85cd9034940e49591b000ac144649322dcea5af8cada49a24f582999f",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/application/progress.service.ts",
+    "destinationPath": "apps/api/src/domains/learning/application/progress.service.ts",
+    "action": "keep",
+    "sha256": "9ab92fdf090cfc6670ad2fd6606ccd95ecda35dc1d93ada198a07c138a0e0b15",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/presentation/learning.controller.ts",
+    "destinationPath": "apps/api/src/domains/learning/presentation/learning.controller.ts",
+    "action": "keep",
+    "sha256": "0a508bcb361c50aaa64569db1e6a1744602b134dbaea0347ba010a055e2f9fac",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/infrastructure/repositories/exercise.repository.ts",
+    "destinationPath": "apps/api/src/domains/learning/infrastructure/repositories/exercise.repository.ts",
+    "action": "keep",
+    "sha256": "0fe74bfd414cdb2e38f39a8878b9d835d8c1b8238496b71a707bcb72e2c8f9b7",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/infrastructure/repositories/learning-progress.repository.ts",
+    "destinationPath": "apps/api/src/domains/learning/infrastructure/repositories/learning-progress.repository.ts",
+    "action": "keep",
+    "sha256": "59bc8bcf672f5ea85c182945784617d7c1249721bb268cbfd21a14d3d16ef36e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/infrastructure/repositories/lesson.repository.ts",
+    "destinationPath": "apps/api/src/domains/learning/infrastructure/repositories/lesson.repository.ts",
+    "action": "keep",
+    "sha256": "5a997853485645e7868b42431804f1f192908d2ebb6a2db7fce5f8579586b69c",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/learning/infrastructure/repositories/submission.repository.ts",
+    "destinationPath": "apps/api/src/domains/learning/infrastructure/repositories/submission.repository.ts",
+    "action": "keep",
+    "sha256": "6befbdf26c556ecd6ca646d17bbe2cee09c8a7ce29bf09d9437be3a02c514e8e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/subscriptions/application/billing.service.ts",
+    "destinationPath": "apps/api/src/domains/subscriptions/application/billing.service.ts",
+    "action": "keep",
+    "sha256": "f082a7338691e53372c3de0eaffcbf0d5b401720935de8f8555490cc434d80df",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/subscriptions/application/usage.service.ts",
+    "destinationPath": "apps/api/src/domains/subscriptions/application/usage.service.ts",
+    "action": "keep",
+    "sha256": "42af2385049cd73cb3fb638b1f9341540e87cb96714fbc506c5fd9c1f003cfa7",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/subscriptions/presentation/subscription.controller.ts",
+    "destinationPath": "apps/api/src/domains/subscriptions/presentation/subscription.controller.ts",
+    "action": "keep",
+    "sha256": "c2a4aec0de2b7a14d4e05fb130ee3b9bf7c84a8fbc9c0357142934cca3f42917",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/subscriptions/infrastructure/repositories/payment.repository.ts",
+    "destinationPath": "apps/api/src/domains/subscriptions/infrastructure/repositories/payment.repository.ts",
+    "action": "keep",
+    "sha256": "34f7611e2a23b75892859e752ad5677b8b28258e0970a6bcf25e68b09251f25b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/subscriptions/infrastructure/repositories/plan.repository.ts",
+    "destinationPath": "apps/api/src/domains/subscriptions/infrastructure/repositories/plan.repository.ts",
+    "action": "keep",
+    "sha256": "b291df2e1b2df3704652fb948443a743f0d4f917ddf8b8a9ee2179668c793925",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/subscriptions/infrastructure/repositories/subscription.repository.ts",
+    "destinationPath": "apps/api/src/domains/subscriptions/infrastructure/repositories/subscription.repository.ts",
+    "action": "keep",
+    "sha256": "b0a39d66d1e513f9a6b5cbbdc3d8f8afe93de6ef8d54085e5720d10a66d8f0e1",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/domains/subscriptions/infrastructure/repositories/usage-counter.repository.ts",
+    "destinationPath": "apps/api/src/domains/subscriptions/infrastructure/repositories/usage-counter.repository.ts",
+    "action": "keep",
+    "sha256": "320b2d690fdafaf89e40785f5654ac6212c1810302012d1e79a218d9a6f08fbb",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/infra/audit/audit.repository.ts",
+    "destinationPath": "apps/api/src/infra/audit/audit.repository.ts",
+    "action": "keep",
+    "sha256": "ea72e72d067ae25b9c60717ef44404695922802fc197bbf9ddc8084c05970ec0",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/infra/mail/mail.service.ts",
+    "destinationPath": "apps/api/src/infra/mail/mail.service.ts",
+    "action": "keep",
+    "sha256": "72f15cea6bbf4f643100f9e8b9c7d1dbdfbdafbe0620c31b76ce8bead0d5fe2d",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/modules/health/health.controller.ts",
+    "destinationPath": "apps/api/src/modules/health/health.controller.ts",
+    "action": "keep",
+    "sha256": "587763c1192b3ce52a62e108aed831ea0653bd3c14032c2c5d14a89ef4141575",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/modules/health/health.module.ts",
+    "destinationPath": "apps/api/src/modules/health/health.module.ts",
+    "action": "keep",
+    "sha256": "8e6fe50b38d87d28ed07af3285935f9496908c98eabd92c987b1b6d8def8d08b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/modules/meta/meta.controller.ts",
+    "destinationPath": "apps/api/src/modules/meta/meta.controller.ts",
+    "action": "keep",
+    "sha256": "0d5989e306baa9a1b26d5eaa4aa31881108604d50fc9da59f7cc5d8283e02403",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/modules/meta/meta.module.ts",
+    "destinationPath": "apps/api/src/modules/meta/meta.module.ts",
+    "action": "keep",
+    "sha256": "0aecd487f615733084c8ac0109f911fc4d33c8482067ac09c77abfedff1f1150",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/api/src/modules/meta/__tests__/meta.controller.test.ts",
+    "destinationPath": "apps/api/src/modules/meta/__tests__/meta.controller.test.ts",
+    "action": "keep",
+    "sha256": "fc2adf21f6adc624616e912fd3205443aa335a7ecc615c8aadf7ce532a6c60d0",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/nodemon.json",
+    "destinationPath": "apps/worker/nodemon.json",
+    "action": "keep",
+    "sha256": "7325a1988320f8b502021c78917dbd60c0f9683c9e1879883f1e121c2b9f286d",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/package.json",
+    "destinationPath": "apps/worker/package.json",
+    "action": "keep",
+    "sha256": "45dd0d30036914532969b881432680a15e1a8af08f34dc7118011659bba1323e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/tsconfig.json",
+    "destinationPath": "apps/worker/tsconfig.json",
+    "action": "keep",
+    "sha256": "a4b6c1daa07762b42b85439fda04fb36c8747804a44ac6cd08b7ef75d61cec10",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/tsup.config.ts",
+    "destinationPath": "apps/worker/tsup.config.ts",
+    "action": "keep",
+    "sha256": "d15e0d4d827197968ea7cf6166a8ad006c27b95b2c2732a7f27cc21457d01150",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/fixtures/lessons.example.json",
+    "destinationPath": "apps/worker/fixtures/lessons.example.json",
+    "action": "keep",
+    "sha256": "50ba5c53dd0b66151a3ceb6e4968c88351bb10db38453fc6395f2be627564f0f",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/fixtures/sample-vi-http.md",
+    "destinationPath": "apps/worker/fixtures/sample-vi-http.md",
+    "action": "keep",
+    "sha256": "cc81ae7f706e7d4cc868b0725c92e8446ef2f1aa4554fb12c58925f6b676ee3c",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/environment.ts",
+    "destinationPath": "apps/worker/src/environment.ts",
+    "action": "keep",
+    "sha256": "13f7cb1f1b645a4e6e3066d94b6ee6ec5fb1dbe64a0d094e443394e56ff24395",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/main.ts",
+    "destinationPath": "apps/worker/src/main.ts",
+    "action": "keep",
+    "sha256": "097e54a4debb21ab9f4fbfcc369642385c415bdbf6693fb78437f5e4402681b9",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/README.md",
+    "destinationPath": "apps/worker/src/README.md",
+    "action": "keep",
+    "sha256": "770ed0fb9f61d22f44c66fb4a60cdbe6d6b6b0961e829ecca7308e9008533954",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/worker.module.ts",
+    "destinationPath": "apps/worker/src/worker.module.ts",
+    "action": "keep",
+    "sha256": "0aa5f65dc47d252f1884700f33dd1f2d2db6cc2aa6354be3239a842c4bcaaa58",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/common/llm.ts",
+    "destinationPath": "apps/worker/src/common/llm.ts",
+    "action": "keep",
+    "sha256": "e3f43244bbe76a6da248a25df461bffd704c4d711228dfcdf4db697c83a4be53",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/common/redis.ts",
+    "destinationPath": "apps/worker/src/common/redis.ts",
+    "action": "keep",
+    "sha256": "dfc3111cbba40b34e520496d5c5dc1b2096a41bac04cb81586b0b89335f48dd9",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/common/s3.ts",
+    "destinationPath": "apps/worker/src/common/s3.ts",
+    "action": "keep",
+    "sha256": "36156543bdecff1ecaed092265cfefda26764f1ce2411ebe00d3f2330a0ff882",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/extraction/errors.ts",
+    "destinationPath": "apps/worker/src/extraction/errors.ts",
+    "action": "keep",
+    "sha256": "388168be5e75d5a8923ef98b3865a149d56fef255becfd4477deea657d6c2c26",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/extraction/extract-text.ts",
+    "destinationPath": "apps/worker/src/extraction/extract-text.ts",
+    "action": "keep",
+    "sha256": "bc9b017b7d9a204d9523175d84d6dd9b37d0d83489110b4b11acb948e84c4389",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/extraction/office.ts",
+    "destinationPath": "apps/worker/src/extraction/office.ts",
+    "action": "keep",
+    "sha256": "731f3b6f42cdc5de4aee108dfba73151781ac50b32e6f675065daf4aa8e79c4b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/extraction/pdf-layout.ts",
+    "destinationPath": "apps/worker/src/extraction/pdf-layout.ts",
+    "action": "keep",
+    "sha256": "dc99e7580cea9bf3e03e21bc8b09401cf46de5e90753af98704b19e4ded5bd3d",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/extraction/pdf.ts",
+    "destinationPath": "apps/worker/src/extraction/pdf.ts",
+    "action": "keep",
+    "sha256": "663db715cc7e4f445e584801825b905f0038b517ddb75c96a02b078a956f3c8e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/processors/document-extract.processor.ts",
+    "destinationPath": "apps/worker/src/processors/document-extract.processor.ts",
+    "action": "keep",
+    "sha256": "afd5cd07d3ad8be9c634f66d0ca181f376a1fca39d0d390fd1dabeedea9a1175",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/processors/lesson-generate.processor.ts",
+    "destinationPath": "apps/worker/src/processors/lesson-generate.processor.ts",
+    "action": "keep",
+    "sha256": "b876ed77c03b1ff365293dbb1f77915ee34ea4488b4d9a8cee1b933c810c8cb9",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/scripts/compare-models.ts",
+    "destinationPath": "apps/worker/src/scripts/compare-models.ts",
+    "action": "keep",
+    "sha256": "4cc1372ed919cfcca3cd36f80a0efc8d44160d4bab9e1e0165009cf28ed5313e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/common/__tests__/llm.test.ts",
+    "destinationPath": "apps/worker/src/common/__tests__/llm.test.ts",
+    "action": "keep",
+    "sha256": "7c7cc7666847e9d61b218ef6b938f0f9be4aebfa9345b0a487d9da9f28343572",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/extraction/__tests__/office.test.ts",
+    "destinationPath": "apps/worker/src/extraction/__tests__/office.test.ts",
+    "action": "keep",
+    "sha256": "61a8a00384d2b61afeeb5400ca9867d66a492cb0ae70a722d137ac3cec5a05a1",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/extraction/__tests__/pdf-layout.test.ts",
+    "destinationPath": "apps/worker/src/extraction/__tests__/pdf-layout.test.ts",
+    "action": "keep",
+    "sha256": "9406134e3fef8aa0de69a2cddfd4bf77180568a305c06c2b4984791d3581db86",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "apps/worker/src/processors/__tests__/build-lesson-rows.test.ts",
+    "destinationPath": "apps/worker/src/processors/__tests__/build-lesson-rows.test.ts",
+    "action": "keep",
+    "sha256": "c5e52e0bca0bec0d7c4bb95e437a684ad5504aa396e05051529db75ac8d92e32",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/package.json",
+    "destinationPath": "packages/ai/package.json",
+    "action": "keep",
+    "sha256": "ac4d0fd74c65f6ca32742a950f3548866a4f58abdd7148b8ac31aba142b5ca28",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/README.md",
+    "destinationPath": "packages/ai/README.md",
+    "action": "keep",
+    "sha256": "f3bd61f0baf492b2bd60b0fe20c62446ff38a5b3fb56405982b97ab9af77030a",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/tsconfig.json",
+    "destinationPath": "packages/ai/tsconfig.json",
+    "action": "keep",
+    "sha256": "4f82216561f0ceca1c717c637459da2f32003081ca9e8f1cd1bf1de9071649b9",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/chunker.ts",
+    "destinationPath": "packages/ai/src/chunker.ts",
+    "action": "keep",
+    "sha256": "d22fa349d1130d2c8e3b6c2a3e07d4399b3a3779c5ee40a5c23f26e8fc3d051e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/index.ts",
+    "destinationPath": "packages/ai/src/index.ts",
+    "action": "keep",
+    "sha256": "b2da153efcfc54de5df5a1d38a4a38f69fd9a19661e9a4cf040c2e0146b6ad4f",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/llm/anthropic.ts",
+    "destinationPath": "packages/ai/src/llm/anthropic.ts",
+    "action": "keep",
+    "sha256": "dc821e12c1c773e3c329f0b9fa7eeae4ea1ac92d01c6215d0982082d2e563b60",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/llm/fallback.ts",
+    "destinationPath": "packages/ai/src/llm/fallback.ts",
+    "action": "keep",
+    "sha256": "2d9f9f9b53022031d18aa0d4160971607a3fb73e0d2136f156ad0c09fff3e630",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/llm/fixtures.ts",
+    "destinationPath": "packages/ai/src/llm/fixtures.ts",
+    "action": "keep",
+    "sha256": "9da2ec2261582bf8a87f2287074d0a76970d878b30500b942a8ac9cba5d53ce3",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/llm/gemini.ts",
+    "destinationPath": "packages/ai/src/llm/gemini.ts",
+    "action": "keep",
+    "sha256": "4ea72f0741f0c38a32b174b236331b9429af52d96ff66df84563fb7a381d0d43",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/llm/mock.ts",
+    "destinationPath": "packages/ai/src/llm/mock.ts",
+    "action": "keep",
+    "sha256": "097c8f9eb1fb292b532fd0f1579ef99ac980fcdaa9547fcc77a6e79e529519ac",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/llm/openai.ts",
+    "destinationPath": "packages/ai/src/llm/openai.ts",
+    "action": "keep",
+    "sha256": "28cdd0df32d870c5e5d870192cc7f1cef792cb942ec2a50546b0edf94eb435fa",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/llm/provider.ts",
+    "destinationPath": "packages/ai/src/llm/provider.ts",
+    "action": "keep",
+    "sha256": "af41b5c08d42fd1bf3bbdba1b532bb4b04c9c49f441ef56a702a5ea85d56ac0e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/prompts/lesson.ts",
+    "destinationPath": "packages/ai/src/prompts/lesson.ts",
+    "action": "keep",
+    "sha256": "f0c8c245b6cfc842359832c48f5598b68ee78b3471fef1c8445f202e18682563",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/prompts/outline.ts",
+    "destinationPath": "packages/ai/src/prompts/outline.ts",
+    "action": "keep",
+    "sha256": "afb4d382be9a34fd30ff9f5dcfe486d5c055a0e2fdcc21c181b7e90b4d7631ef",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/schemas/output.ts",
+    "destinationPath": "packages/ai/src/schemas/output.ts",
+    "action": "keep",
+    "sha256": "e20812840f522f4cf31d670f56161f329e52bc36ef554c1dc89f4f9168dd1f0b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/validator/sanitize-markdown.ts",
+    "destinationPath": "packages/ai/src/validator/sanitize-markdown.ts",
+    "action": "keep",
+    "sha256": "6e2443f58648c6e21129af24be128af266da6f7842918a163c95a38f9bd77b28",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/validator/validate.ts",
+    "destinationPath": "packages/ai/src/validator/validate.ts",
+    "action": "keep",
+    "sha256": "66cfbdb8cd7e4916b49346efc94b9896c80bef8d7b0267d75671f8a5656aada5",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/anthropic.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/anthropic.test.ts",
+    "action": "keep",
+    "sha256": "d677f4f29ca13cb0d17c73c28a8a87f5e8d7b8cb4ec0fa8acf21de36483283f5",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/chunker-sections.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/chunker-sections.test.ts",
+    "action": "keep",
+    "sha256": "0db58869b7b4c958cedcf87eac809fb3d819d05b67cb408183ac5b32231d4015",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/chunker.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/chunker.test.ts",
+    "action": "keep",
+    "sha256": "2a33035d0ecabbb44462c1ed154c47b9dfa2d5ba43d98d3b7fe0b3fee6023cd4",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/fallback.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/fallback.test.ts",
+    "action": "keep",
+    "sha256": "0e8bb73c1e8d7c955410e8e49b9214a5884ffee10574301c05bc1a270db6f9bf",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/gemini.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/gemini.test.ts",
+    "action": "keep",
+    "sha256": "70465a3dece60af4d97aa330431112a38c8d0fd1320fe64b0c26470553bbcdb0",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/mock.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/mock.test.ts",
+    "action": "keep",
+    "sha256": "d495fa11d16b83eac754811f42ee65b3aac6733f4863568ebbd027871b4836dc",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/openai.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/openai.test.ts",
+    "action": "keep",
+    "sha256": "69183ecb562ad7eca446b0f4fcc93fe9ccc842a30eaf0c2a74c9f471ee4f2d36",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/prompts.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/prompts.test.ts",
+    "action": "keep",
+    "sha256": "301fa3b41d7690ac3a5c37dbd519a36c85b263be77fd5439e8f587dbae1c497d",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/sanitize-markdown.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/sanitize-markdown.test.ts",
+    "action": "keep",
+    "sha256": "d97717352cadbc5255486fcba7206c3eb810845409eacd39b0ea21c1768fc5f0",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/ai/src/__tests__/validate.test.ts",
+    "destinationPath": "packages/ai/src/__tests__/validate.test.ts",
+    "action": "keep",
+    "sha256": "0e8dcbb95735859133a27adff51626b4ae2529948a129bbb38a10f0414be60dc",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/package.json",
+    "destinationPath": "packages/contracts/package.json",
+    "action": "keep",
+    "sha256": "2729bf31ca70014387ac40647819a29a59a9c237d593e80920b0e7114b61c4e5",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/README.md",
+    "destinationPath": "packages/contracts/README.md",
+    "action": "keep",
+    "sha256": "6e9ab25560ffc5ef3448fa314346188e03f0131ad5afe49a5278b22e2f5a2f46",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/tsconfig.json",
+    "destinationPath": "packages/contracts/tsconfig.json",
+    "action": "keep",
+    "sha256": "330e8ff7a4582e278c3c33a258045a5b3a6c4a4ef9c777bda87edffa01a21845",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/scripts/contracts-hash.mjs",
+    "destinationPath": "packages/contracts/scripts/contracts-hash.mjs",
+    "action": "keep",
+    "sha256": "42027e171e40405c5253f524fd2b9918dc8035e9f3cd44fe647dcd801279de25",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/admin.ts",
+    "destinationPath": "packages/contracts/src/admin.ts",
+    "action": "keep",
+    "sha256": "321bcba8830c595703fb40b21aac6e6d3e27148355ca18edaf566b217fd1aac1",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/ai.ts",
+    "destinationPath": "packages/contracts/src/ai.ts",
+    "action": "keep",
+    "sha256": "afa689774b854fe6eb60c7f9e84c97a0e46111d8687312f4fdd7d7678cc7e78e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/auth.ts",
+    "destinationPath": "packages/contracts/src/auth.ts",
+    "action": "keep",
+    "sha256": "0fdc29ecc910e197459f3330d574d8fa185ea233761c7d4be81280f243d32aba",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/common.ts",
+    "destinationPath": "packages/contracts/src/common.ts",
+    "action": "keep",
+    "sha256": "3752203e9ecd610732678102c4bc49369cb70a3e788237618e13c641b1de6a57",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/course.ts",
+    "destinationPath": "packages/contracts/src/course.ts",
+    "action": "keep",
+    "sha256": "2bc43880e2fee87f880d68bdd8a7c74fe4ee4a6b7e797f2221876093fa04c761",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/document-types.ts",
+    "destinationPath": "packages/contracts/src/document-types.ts",
+    "action": "keep",
+    "sha256": "508434ce1260641d974db3c67a61faa8394bdcb7959e1d0d9e9187a5c826ab4c",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/document.ts",
+    "destinationPath": "packages/contracts/src/document.ts",
+    "action": "keep",
+    "sha256": "a5a100740b32fe58ae0987c5854b8a76a4a6c9e09aa589f0c0fb7b1c352f4cd8",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/exercise.ts",
+    "destinationPath": "packages/contracts/src/exercise.ts",
+    "action": "keep",
+    "sha256": "d61d0379ac5c368b449c7f3ba15dc4734a970c2671993190c1de9328666f5adb",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/index.ts",
+    "destinationPath": "packages/contracts/src/index.ts",
+    "action": "keep",
+    "sha256": "53c69aebe8b50dad2a607763cbd2bfda9b3b02beb0a89ac65eabade345051565",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/lesson.ts",
+    "destinationPath": "packages/contracts/src/lesson.ts",
+    "action": "keep",
+    "sha256": "08f548fbdb60bf97b8cd8b442841973736a93f6c01b5eeb781afdc5f7b2520f9",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/meta.ts",
+    "destinationPath": "packages/contracts/src/meta.ts",
+    "action": "keep",
+    "sha256": "4f2c3020415876dd46bd944a5a64a08ecb5879df054e1d1b61d18cbe4122b2c1",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/progress.ts",
+    "destinationPath": "packages/contracts/src/progress.ts",
+    "action": "keep",
+    "sha256": "80211929151703c5efd7d75e30cdc890dadd76f29522641e98ef537fb8922874",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/subscription.ts",
+    "destinationPath": "packages/contracts/src/subscription.ts",
+    "action": "keep",
+    "sha256": "10352c07d19e0bd5fefbe794a4d61e0171947ad4b5f6b60b1d919a3157902cb9",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/version.ts",
+    "destinationPath": "packages/contracts/src/version.ts",
+    "action": "keep",
+    "sha256": "f208c6249a5e63d53ebc3c0f1a84066313d3c17134111b5501bc8ae6b44d7f31",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/__tests__/document-types.test.ts",
+    "destinationPath": "packages/contracts/src/__tests__/document-types.test.ts",
+    "action": "keep",
+    "sha256": "4ff443370658308a3274f8260591dab422834357333ef43f8e7206e06a35334c",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/contracts/src/__tests__/version.test.ts",
+    "destinationPath": "packages/contracts/src/__tests__/version.test.ts",
+    "action": "keep",
+    "sha256": "9bd8cdfe9b48820f24f44b086b2320c1cdf594c476dfda902a4eb6509888c895",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/package.json",
+    "destinationPath": "packages/db/package.json",
+    "action": "keep",
+    "sha256": "367521c4657841c3534eed863be8da4ed58382f232f8492f6897540be41cac10",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/README.md",
+    "destinationPath": "packages/db/README.md",
+    "action": "keep",
+    "sha256": "624879c2fdddf588a5ab7fcf5c4399d6b6ce7b3f928c8bf56027f6de5773af00",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/tsconfig.json",
+    "destinationPath": "packages/db/tsconfig.json",
+    "action": "keep",
+    "sha256": "0835edb66df6a352c9b065d7b48dcb25389f7031a62708dd25420ad85ac1863f",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/prisma/cleanup-e2e.ts",
+    "destinationPath": "packages/db/prisma/cleanup-e2e.ts",
+    "action": "keep",
+    "sha256": "b33a7c7c119db2daa44b9264f7d489639a8f8c619da65ac7f2b833c35fdead9c",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/prisma/schema.prisma",
+    "destinationPath": "packages/db/prisma/schema.prisma",
+    "action": "keep",
+    "sha256": "0b6ee34bf22996c12584c2068c82f1915b4f2dd09403b2699b9bb24e6c818614",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/prisma/seed-demo-heavy.ts",
+    "destinationPath": "packages/db/prisma/seed-demo-heavy.ts",
+    "action": "keep",
+    "sha256": "80890a3a8ef9734734fbd264e6898563f51e91f9eef2a718de0fa9146334818e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/prisma/seed.ts",
+    "destinationPath": "packages/db/prisma/seed.ts",
+    "action": "keep",
+    "sha256": "99d24c9cef7e0003ee96d502ab04a75795d2db63825340411ae00948073eafd1",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/src/index.ts",
+    "destinationPath": "packages/db/src/index.ts",
+    "action": "keep",
+    "sha256": "b7e61e8bd5dc96b573c1c4f9e5528e35ec309b135f7e54a37d5cf0ec8bb0675b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/prisma/migrations/migration_lock.toml",
+    "destinationPath": "packages/db/prisma/migrations/migration_lock.toml",
+    "action": "keep",
+    "sha256": "bc487c02c71ad9cae8694647129e3ea7f32b1fe7007d0a6ced064e51022cd3fb",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/prisma/migrations/20260914030213_init/migration.sql",
+    "destinationPath": "packages/db/prisma/migrations/20260914030213_init/migration.sql",
+    "action": "keep",
+    "sha256": "73289fb2e6a658faf743c83e546449c7eede5beee7fcb57a4c2a2eea5e80506b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/db/prisma/migrations/20260928150257_password_reset_token/migration.sql",
+    "destinationPath": "packages/db/prisma/migrations/20260928150257_password_reset_token/migration.sql",
+    "action": "keep",
+    "sha256": "bdbd4c8025e173dd6c34cba2db18040d40846ab4fa3d74405af259a6957d76d3",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/package.json",
+    "destinationPath": "packages/config/package.json",
+    "action": "keep",
+    "sha256": "5ba8004676a48260a07a2ebddcc00192fc901be508d4519fca8246f2c8b9b77f",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/README.md",
+    "destinationPath": "packages/config/README.md",
+    "action": "keep",
+    "sha256": "527cfadf081290de3218e96626e4f0c2e2706aa3f504af86ce6369142ee9c0dc",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/eslint/boundary-rules.mjs",
+    "destinationPath": "packages/config/eslint/boundary-rules.mjs",
+    "action": "keep",
+    "sha256": "854ce5df6eadaf348e7e32953ff898a85201360b6de6b7a07793374e7e1bcdcb",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/eslint/config.mjs",
+    "destinationPath": "packages/config/eslint/config.mjs",
+    "action": "keep",
+    "sha256": "c319cfde8a89f772b56c7f0db3182a9d60ad0d09a800d4e607d97b54e1daeb87",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/prettier/.prettierignore",
+    "destinationPath": "packages/config/prettier/.prettierignore",
+    "action": "keep",
+    "sha256": "40f678e8a33fc1ec18a55c2040d6c8e08bc398c084fa1d53a2372141801e733e",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/prettier/.prettierrc.json",
+    "destinationPath": "packages/config/prettier/.prettierrc.json",
+    "action": "keep",
+    "sha256": "15ebd235c34b9906dfaab42875fc510ac9c6a4fd514d6ff8a5c70a6e04128002",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/tailwind/theme.css",
+    "destinationPath": "packages/config/tailwind/theme.css",
+    "action": "keep",
+    "sha256": "dda366690d298dd59332a29dd647e42b5abcf7189e82fb79d937c5165ddf9177",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/typescript/base.json",
+    "destinationPath": "packages/config/typescript/base.json",
+    "action": "keep",
+    "sha256": "cb31fa9891bdbee8175ba13b717c3c044203c42fb27afefb8243bdd5a84869c8",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/typescript/nestjs.json",
+    "destinationPath": "packages/config/typescript/nestjs.json",
+    "action": "keep",
+    "sha256": "7eb68e670f24a15652d7fab011c3c09c4c1a67fc24e4c38de12bad4b66827cb8",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/typescript/nextjs.json",
+    "destinationPath": "packages/config/typescript/nextjs.json",
+    "action": "keep",
+    "sha256": "cf533d01cbe732e6ff6e357050ce838928f0b5c2195e036f3e0029b8ba6a2a42",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/typescript/root-base.json",
+    "destinationPath": "packages/config/typescript/root-base.json",
+    "action": "keep",
+    "sha256": "e941641fa89d32e20bacf221393b6648cc2411873e75d5224732c53f88c2508b",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/vitest/base.config.ts",
+    "destinationPath": "packages/config/vitest/base.config.ts",
+    "action": "keep",
+    "sha256": "26b08248dc49a739871074fd03b0c733ccb06cf357e928ba697bae807a10e937",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  },
+  {
+    "sourceRepo": "LEARN_website",
+    "sourceRef": "dbb8869+captured-working-tree",
+    "sourcePath": "packages/config/vitest/int.config.ts",
+    "destinationPath": "packages/config/vitest/int.config.ts",
+    "action": "keep",
+    "sha256": "a7630b3ae02d4f435e89ee5f0a3c2cf19e0c25a207a214b7696a1afd9db1a7e1",
+    "reason": "canonical domains/core/infra structure; source backups retain all alternatives"
+  }
+]

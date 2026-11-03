@@ -1,0 +1,6 @@
+* text=auto eol=lf
+*.node binary
+*.png binary
+*.pdf binary
+packages/db/prisma/migrations/** -text
+packages/db/prisma/schema.prisma -text

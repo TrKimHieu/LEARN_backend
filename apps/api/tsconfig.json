@@ -1,0 +1,11 @@
+{
+  "extends": "../../packages/config/typescript/nestjs.json",
+  "compilerOptions": {
+    "paths": {
+      "@learn/contracts": ["../../packages/contracts/src/index.ts"],
+      "@learn/db": ["../../packages/db/src/index.ts"],
+      "@learn/ai": ["../../packages/ai/src/index.ts"]
+    }
+  },
+  "include": ["src"]
+}

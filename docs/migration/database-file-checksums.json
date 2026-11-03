@@ -1,0 +1,26 @@
+[
+  {
+    "path": "packages/db/prisma/schema.prisma",
+    "sourceSha256": "0b6ee34bf22996c12584c2068c82f1915b4f2dd09403b2699b9bb24e6c818614",
+    "targetSha256": "0b6ee34bf22996c12584c2068c82f1915b4f2dd09403b2699b9bb24e6c818614",
+    "bytesIdentical": true
+  },
+  {
+    "path": "packages/db/prisma/migrations/migration_lock.toml",
+    "sourceSha256": "bc487c02c71ad9cae8694647129e3ea7f32b1fe7007d0a6ced064e51022cd3fb",
+    "targetSha256": "bc487c02c71ad9cae8694647129e3ea7f32b1fe7007d0a6ced064e51022cd3fb",
+    "bytesIdentical": true
+  },
+  {
+    "path": "packages/db/prisma/migrations/20260914030213_init/migration.sql",
+    "sourceSha256": "73289fb2e6a658faf743c83e546449c7eede5beee7fcb57a4c2a2eea5e80506b",
+    "targetSha256": "73289fb2e6a658faf743c83e546449c7eede5beee7fcb57a4c2a2eea5e80506b",
+    "bytesIdentical": true
+  },
+  {
+    "path": "packages/db/prisma/migrations/20260928150257_password_reset_token/migration.sql",
+    "sourceSha256": "bdbd4c8025e173dd6c34cba2db18040d40846ab4fa3d74405af259a6957d76d3",
+    "targetSha256": "bdbd4c8025e173dd6c34cba2db18040d40846ab4fa3d74405af259a6957d76d3",
+    "bytesIdentical": true
+  }
+]

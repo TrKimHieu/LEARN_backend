@@ -1,0 +1,10 @@
+{
+  "watch": [
+    "src",
+    "../../packages/db/src",
+    "../../packages/ai/src",
+    "../../packages/contracts/src"
+  ],
+  "ext": "ts,json",
+  "exec": "node -r ts-node/register/transpile-only -r tsconfig-paths/register src/main.ts"
+}
