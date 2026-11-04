@@ -136,7 +136,7 @@ export class AiService {
     return { jobs: jobs.map((j) => this.summary(j)) };
   }
 
-  async summary(job: JobLike) {
+  summary(job: JobLike) {
     return {
       id: job.id,
       courseId: job.courseId,
