@@ -83,7 +83,7 @@ export class DocumentExtractProcessor {
         );
       }
 
-      const result = await extractText(bytes, doc.mimeType);
+      const result = await extractText(bytes, doc.mimeType, { ocrMaxPages: env.OCR_MAX_PAGES });
       if (result.pageCount && result.pageCount > env.UPLOAD_MAX_PAGES) {
         throw new Error(
           `Tài liệu có ${result.pageCount} trang, vượt giới hạn ${env.UPLOAD_MAX_PAGES} trang.`,

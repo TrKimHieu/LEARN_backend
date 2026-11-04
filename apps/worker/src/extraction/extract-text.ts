@@ -1,5 +1,6 @@
 import { extractPdfText, isLikelyScanned } from './pdf';
 import { extractDocx, extractPptx } from './office';
+import { ocrPdf } from './ocr';
 import { UnsupportedFileError, ScannedPdfNotSupportedError, type ExtractResult } from './errors';
 
 export {
@@ -47,13 +48,28 @@ export function normalizeText(text: string): string {
     .trim();
 }
 
-/** Trích text theo loại file — HANDBOOK §8.2. OCR cho PDF scan: chưa hỗ trợ (FR-DOC-10). */
-export async function extractText(bytes: Buffer, mimeType: string): Promise<ExtractResult> {
+export interface ExtractOptions {
+  /** Số trang tối đa được OCR. Bỏ trống thì PDF scan bị từ chối. */
+  ocrMaxPages?: number;
+  ocr?: typeof ocrPdf;
+}
+
+/** Trích text theo loại file — HANDBOOK §8.2. PDF không có lớp chữ đi qua OCR (FR-DOC-10). */
+export async function extractText(
+  bytes: Buffer,
+  mimeType: string,
+  options: ExtractOptions = {},
+): Promise<ExtractResult> {
   verifyMagicBytes(bytes, mimeType);
 
   if (mimeType === 'application/pdf') {
-    const result = await extractPdfText(bytes);
-    if (isLikelyScanned(result)) throw new ScannedPdfNotSupportedError();
+    const text = await extractPdfText(bytes);
+    let result: ExtractResult = text;
+    if (isLikelyScanned(text)) {
+      if (options.ocrMaxPages === undefined) throw new ScannedPdfNotSupportedError();
+      const ocr = options.ocr ?? ocrPdf;
+      result = await ocr(bytes, text.pageCount, { maxPages: options.ocrMaxPages });
+    }
     return {
       pages: result.pages.map((p) => ({ pageNumber: p.pageNumber, text: normalizeText(p.text) })),
       pageCount: result.pageCount,
