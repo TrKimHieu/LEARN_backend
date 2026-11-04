@@ -35,9 +35,8 @@ export class ProgressService {
       this.lessons.countForOwner(userId),
       this.progress.countCompleted(userId),
       // score trong Submission là điểm % (0-100) đã chia tỷ lệ khi nộp bài (xem exercises.service).
-      // Trung bình tính bằng `aggregate` trong Postgres; bản trước kéo TOÀN BỘ Submission của
-      // người dùng về Node chỉ để cộng lại — không giới hạn, lớn dần mãi theo thời gian dùng.
-      this.submissions.averageForUser(userId),
+      // Nhóm trong Postgres theo bài tập: làm lại để cải thiện điểm không được kéo điểm xuống.
+      this.submissions.bestScoresForUser(userId),
       this.activeStreak(userId),
     ]);
 
@@ -45,7 +44,7 @@ export class ProgressService {
       courseCount,
       totalLessons,
       completedLessons,
-      averageScore: scores._avg.score == null ? null : Math.round(scores._avg.score * 10) / 10,
+      averageScore: averageOfBestScores(scores),
       activeStreak,
     };
   }
@@ -183,4 +182,14 @@ export function previousDayKey(key: string): string {
   const prev = new Date(Date.UTC(y ?? 1970, (m ?? 1) - 1, d ?? 1));
   prev.setUTCDate(prev.getUTCDate() - 1);
   return utcDayKey(prev);
+}
+
+/** Trung bình lần tốt nhất của mỗi bài tập, làm tròn một chữ số thập phân. */
+export function averageOfBestScores(
+  rows: ReadonlyArray<{ _max: { score: number | null } }>,
+): number | null {
+  const scores = rows.flatMap((r) => (r._max.score === null ? [] : [r._max.score]));
+  if (scores.length === 0) return null;
+  const average = scores.reduce((sum, score) => sum + score, 0) / scores.length;
+  return Math.round(average * 10) / 10;
 }
