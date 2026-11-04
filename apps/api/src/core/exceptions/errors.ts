@@ -5,12 +5,37 @@ import type { ZodType } from 'zod';
 import type { ErrorCode } from '@learn/contracts';
 import { requestIdSchema, ERROR_CODES } from '@learn/contracts';
 
+/**
+ * Thông báo mặc định của Zod là tiếng Anh và lộ thẳng tới người dùng. Message viết riêng trong schema
+ * vẫn được ưu tiên; hàm này chỉ dùng khi schema không tự viết.
+ */
+export function vietnameseIssueMessage(issue: {
+  code?: string;
+  input?: unknown;
+  minimum?: unknown;
+  maximum?: unknown;
+  origin?: unknown;
+  format?: unknown;
+}): string {
+  if (issue.code === 'too_small' && issue.origin === 'string') {
+    return Number(issue.minimum) <= 1
+      ? 'Không được để trống.'
+      : `Cần ít nhất ${String(issue.minimum)} ký tự.`;
+  }
+  if (issue.code === 'too_big' && issue.origin === 'string') {
+    return `Tối đa ${String(issue.maximum)} ký tự.`;
+  }
+  if (issue.code === 'invalid_format' && issue.format === 'email') return 'Email không hợp lệ.';
+  if (issue.input === undefined) return 'Không được để trống.';
+  return 'Giá trị không hợp lệ.';
+}
+
 /** Pipe: validate body bằng Zod. Lỗi → VALIDATION_FAILED kèm meta.fields. */
 export class ZodBodyPipe<T extends ZodType> implements PipeTransform<unknown, T['_output']> {
   constructor(private readonly schema: T) {}
 
   transform(value: unknown): T['_output'] {
-    const result = this.schema.safeParse(value);
+    const result = this.schema.safeParse(value, { error: vietnameseIssueMessage });
     if (!result.success) {
       const fields = Object.fromEntries(
         result.error.issues.map((i) => [i.path.join('.'), i.message]),
@@ -32,6 +57,25 @@ export class ZodParamPipe<T extends ZodType> implements PipeTransform<unknown, T
     }
     return result.data;
   }
+}
+
+/**
+ * Contract đã phát hành chỉ kiểm độ dài, nên chuỗi toàn khoảng trắng vẫn lọt qua. Kiểm ở đây để không
+ * phải đổi contract của các client đã ghim phiên bản.
+ */
+export function requireTrimmedText(
+  value: string,
+  field: string,
+  minLength: number,
+  message: string,
+): string {
+  const trimmed = value.trim();
+  if (trimmed.length < minLength) {
+    throw new ApiError(400, 'VALIDATION_FAILED', 'Dữ liệu gửi lên không hợp lệ.', {
+      fields: { [field]: message },
+    });
+  }
+  return trimmed;
 }
 
 // Thuận tiện dùng trong decorator: @Body(new zodBody(schema))

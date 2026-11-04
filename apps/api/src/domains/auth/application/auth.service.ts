@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { randomBytes, createHash } from 'crypto';
 import { newId, hashPassword, verifyPassword } from '@learn/db';
 import type { RegisterInput, LoginInput, PatchMeInput, UserPublic } from '@learn/contracts';
-import { ApiError } from '../../../core/exceptions/errors';
+import { ApiError, requireTrimmedText } from '../../../core/exceptions/errors';
 import { AuditService, SecurityService } from '../../../core/security';
 import { MailService } from '../../../infra/mail/mail.service';
 import { PrismaService, RedisService } from '../../../infra/services';
@@ -64,7 +64,12 @@ export class AuthService {
       .create({
         email: input.email,
         passwordHash,
-        displayName: input.displayName,
+        displayName: requireTrimmedText(
+          input.displayName,
+          'displayName',
+          2,
+          'Tên hiển thị cần ít nhất 2 ký tự.',
+        ),
         locale: input.locale,
       })
       .catch((e: unknown) => {
@@ -155,7 +160,19 @@ export class AuthService {
   }
 
   async patchMe(userId: string, body: PatchMeInput) {
-    const user = await this.users.update(userId, body);
+    const user = await this.users.update(userId, {
+      ...body,
+      ...(body.displayName === undefined
+        ? {}
+        : {
+            displayName: requireTrimmedText(
+              body.displayName,
+              'displayName',
+              2,
+              'Tên hiển thị cần ít nhất 2 ký tự.',
+            ),
+          }),
+    });
     return { user: toPublic(user) };
   }
 
