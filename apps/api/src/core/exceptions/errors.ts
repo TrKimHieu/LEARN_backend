@@ -79,6 +79,10 @@ export class ApiError extends Error {
     });
   }
 
+  static upstreamUnavailable(detail = 'Dịch vụ bên ngoài tạm thời không phản hồi.') {
+    return new ApiError(503, 'UPSTREAM_UNAVAILABLE', detail);
+  }
+
   static payloadTooLarge(detail = 'Dữ liệu gửi lên vượt giới hạn cho phép.') {
     return new ApiError(413, 'PAYLOAD_TOO_LARGE', detail);
   }
