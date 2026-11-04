@@ -17,15 +17,15 @@ CI holds no host credential and no port is opened for it: the host pulls. Web an
 
 ## Files
 
-| File | Purpose |
-| --- | --- |
-| `pipeline.yml` | ECR repositories, deploy bundle bucket, OIDC build role. One stack per AWS account |
-| `host.yml` | EC2 host, Elastic IP, firewall, instance role, OIDC deploy role. One stack per environment |
-| `learn-release.sh` | Runs on the host, one service at a time |
-| `../onebox/compose.yml` | Services on the host |
-| `scripts/deploy/release.mjs` | Checks the target and sends the SSM command. Same file in the web repository |
-| `.github/workflows/release.yml` | Full pipeline on merge to `main` |
-| `.github/workflows/deploy.yml` | Deploy step, also used by hand for rollback |
+| File                            | Purpose                                                                                    |
+| ------------------------------- | ------------------------------------------------------------------------------------------ |
+| `pipeline.yml`                  | ECR repositories, deploy bundle bucket, OIDC build role. One stack per AWS account         |
+| `host.yml`                      | EC2 host, Elastic IP, firewall, instance role, OIDC deploy role. One stack per environment |
+| `learn-release.sh`              | Runs on the host, one service at a time                                                    |
+| `../onebox/compose.yml`         | Services on the host                                                                       |
+| `scripts/deploy/release.mjs`    | Checks the target and sends the SSM command. Same file in the web repository               |
+| `.github/workflows/release.yml` | Full pipeline on merge to `main`                                                           |
+| `.github/workflows/deploy.yml`  | Deploy step, also used by hand for rollback                                                |
 
 ## First setup
 

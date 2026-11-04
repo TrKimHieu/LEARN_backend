@@ -4,7 +4,8 @@ import { execFileSync } from 'node:child_process';
 import { setTimeout as sleep } from 'node:timers/promises';
 import { pathToFileURL } from 'node:url';
 
-const ECR_DIGEST = /^\d{12}\.dkr\.ecr\.[a-z0-9-]+\.amazonaws\.com\/[a-z0-9_./-]+@sha256:[a-f0-9]{64}$/;
+const ECR_DIGEST =
+  /^\d{12}\.dkr\.ecr\.[a-z0-9-]+\.amazonaws\.com\/[a-z0-9_./-]+@sha256:[a-f0-9]{64}$/;
 const BUNDLE = /^s3:\/\/[a-z0-9.-]+\/onebox\/[a-f0-9]{40}$/;
 const HOME = '/opt/learn';
 const TIMEOUT_SECONDS = 900;
@@ -62,8 +63,8 @@ async function apply(input, plan) {
   if (aws('sts', 'get-caller-identity').Account !== input.account) {
     throw Error('AWS account mismatch');
   }
-  const target = aws('ec2', 'describe-instances', '--instance-ids', input.instance).Reservations?.[0]
-    ?.Instances?.[0];
+  const target = aws('ec2', 'describe-instances', '--instance-ids', input.instance)
+    .Reservations?.[0]?.Instances?.[0];
   if (!isTargetHost(target, input.environment)) {
     throw Error(`Target is not the running LEARN ${input.environment} host`);
   }
