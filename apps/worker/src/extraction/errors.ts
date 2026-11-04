@@ -12,6 +12,13 @@ export class ScannedPdfNotSupportedError extends Error {
   }
 }
 
+export class DocumentTooShortError extends Error {
+  constructor() {
+    super('Tài liệu có quá ít nội dung để tạo bài học. Hãy tải lên tài liệu dài hơn.');
+    this.name = 'DocumentTooShortError';
+  }
+}
+
 export interface ExtractedPage {
   pageNumber: number;
   text: string;

@@ -1,9 +1,15 @@
 import { extractPdfText, isLikelyScanned } from './pdf';
 import { extractDocx, extractPptx } from './office';
 import { ocrPdf } from './ocr';
-import { UnsupportedFileError, ScannedPdfNotSupportedError, type ExtractResult } from './errors';
+import {
+  DocumentTooShortError,
+  UnsupportedFileError,
+  ScannedPdfNotSupportedError,
+  type ExtractResult,
+} from './errors';
 
 export {
+  DocumentTooShortError,
   UnsupportedFileError,
   ScannedPdfNotSupportedError,
   type ExtractedPage,
@@ -46,6 +52,14 @@ export function normalizeText(text: string): string {
     .replace(/\n{3,}/g, '\n\n') // gộp nhiều dòng trống
     .replace(/[ \t]+\n/g, '\n')
     .trim();
+}
+
+/** Bài học cần tối thiểu 200 ký tự nội dung, nên tài liệu ngắn hơn không thể tạo được bài nào. */
+export const MIN_DOCUMENT_CHARS = 200;
+
+export function assertEnoughText(result: ExtractResult): void {
+  const chars = result.pages.reduce((sum, p) => sum + p.text.replace(/\s/g, '').length, 0);
+  if (chars < MIN_DOCUMENT_CHARS) throw new DocumentTooShortError();
 }
 
 export interface ExtractOptions {
