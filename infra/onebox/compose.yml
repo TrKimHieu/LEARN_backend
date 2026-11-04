@@ -3,14 +3,15 @@
 #   https://$DOMAIN/learn-documents/*  -> minio:9000 (presigned URLs signed for the public origin)
 #   https://$DOMAIN/*                  -> web:3000
 #
-# Runs published images only; set API_IMAGE/WORKER_IMAGE/WEB_IMAGE to tested digests in .env.
+# Runs published images only. On AWS, infra/aws/learn-release.sh sets the *_IMAGE digests in .env.
 # Build the web image with an empty NEXT_PUBLIC_API_URL so it calls relative /api paths.
 #
 #   cp infra/onebox/.env.example infra/onebox/.env      # fill real secrets, never commit .env
 #   docker compose -f infra/onebox/compose.yml --env-file infra/onebox/.env --profile ops run --rm migrate
 #   docker compose -f infra/onebox/compose.yml --env-file infra/onebox/.env up -d
 #
-# Migrations are an explicit, reviewed ops step (profile `ops`), never part of app startup.
+# Migrations are an explicit step (profile `ops`), never part of app startup: the release pipeline
+# runs them before the API, and production needs an approval first.
 # Only Caddy publishes ports. Never use `down -v`: it deletes the database and uploaded documents.
 
 name: learn-onebox
@@ -73,14 +74,12 @@ services:
 
   # Applies existing Prisma migrations; also runs the seed:
   #   ... --profile ops run --rm migrate npm run db:seed -w packages/db
-  # Built from this repository's builder stage, which carries the Prisma CLI and schema.
+  # The API image's builder stage, which carries the Prisma CLI and schema. Local trial:
+  #   docker build --target builder -f infra/Dockerfile.api -t learn-migrate:local .
   migrate:
     profiles: [ops]
     env_file: .env
-    build:
-      context: ../..
-      dockerfile: infra/Dockerfile.api
-      target: builder
+    image: ${MIGRATE_IMAGE:?Set MIGRATE_IMAGE in .env}
     command: ['npm', 'run', 'db:deploy', '-w', 'packages/db']
     environment:
       NODE_ENV: production

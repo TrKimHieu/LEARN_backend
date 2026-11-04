@@ -1,13 +1,77 @@
-# AWS staging delivery (prepared, not deployed)
+# AWS delivery: GitHub Actions to EC2 through ECR
 
-Use separate EC2 instances/SSM targets for API, worker and optional compute; web has its own target and repository pipeline. Build images contain no source checkout of another team. All targets need Docker, AWS SSM agent, TLS reverse proxy/load balancer for API/web, outbound registry credentials configured locally and least-privilege instance roles. Private images require image pull rights, not application source rights.
+Prepared and tested locally. No AWS resource has been created and no workflow has run on GitHub yet.
 
-Prerequisites still needed: approved AWS account/region, subnet/instance IDs, staging DNS/TLS, GitHub OIDC roles and Expo project. No resource creation or production change has run. Attach tags Project=LEARN, Environment=staging, Service=api|worker|compute|web. Install the reviewed learn-release.sh as /usr/local/bin/learn-release (root-owned 0755). Store per-process configuration at /etc/learn/<service>.env with 0600 permissions; never put secrets into SSM command parameters/logs.
+```
+merge to main
+  GitHub Actions: lint, typecheck, tests, build
+  build images once, push to ECR by commit SHA (OIDC, no stored AWS keys)
+  SSM command to the EC2 host
+    host pulls the image by digest using its instance role
+    migrations, restart one service, health check, restore previous digest on failure
+  smoke test through the public URL
+  staging done; production repeats with the same digests after approval
+```
 
-API and worker share staging PostgreSQL/Redis/S3 endpoints, never production. Enable TLS to managed DB/Redis, private routing/security groups and encrypted backups. Core is the sole schema/migration owner. Compute receives only COMPUTE_TOKEN and LLM settings, no DATABASE_URL or REDIS_URL. Do not activate compute until M3 baseline passes.
+CI holds no host credential and no port is opened for it: the host pulls. Web and backend have separate pipelines and share the host, and `learn-release.sh` takes a lock so releases take turns.
 
-The deploy workflow checks caller account and target tags, then invokes the host release command with one digest-pinned image. Image push and deploy are separate. A deployment replaces only the selected process and preserves prior containers for rollback; worker stops before replacement to avoid overlapping consumers. Migrations are a separately reviewed job, never automatic app startup.
+## Files
 
-Rollback: rerun the release workflow with the previous tested digest. Rehearse this on staging, including graceful worker shutdown, queue drain, schema compatibility, health and a completed test job. The script can check process liveness but that does not prove queue correctness. Archive old stopped containers only after evidence retention. No compose down -v or DB reset.
+| File | Purpose |
+| --- | --- |
+| `pipeline.yml` | ECR repositories, deploy bundle bucket, OIDC build role. One stack per AWS account |
+| `host.yml` | EC2 host, Elastic IP, firewall, instance role, OIDC deploy role. One stack per environment |
+| `learn-release.sh` | Runs on the host, one service at a time |
+| `../onebox/compose.yml` | Services on the host |
+| `scripts/deploy/release.mjs` | Checks the target and sends the SSM command. Same file in the web repository |
+| `.github/workflows/release.yml` | Full pipeline on merge to `main` |
+| `.github/workflows/deploy.yml` | Deploy step, also used by hand for rollback |
 
-Acceptance checklist: backup restore drill; web course ID visible on installed APK; mobile presigned upload through worker visible on web; cookie/native refresh, role/IDOR/quota; latency/error and queue age/failure metrics; rollback rehearsal; APK auth/upload/deep-link on device. Preserve image digest, contracts hash and app version for every run. Current local sandbox is not AWS staging.
+## First setup
+
+These steps create billable resources. Run them from a shell with AWS administrator credentials.
+
+1. Create the shared stack:
+
+   ```bash
+   aws cloudformation deploy --region ap-southeast-1 --stack-name learn-pipeline --template-file infra/aws/pipeline.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides GitHubOwner=OWNER WebRepo=WEB_REPO
+   ```
+
+2. Create the staging host. `SubnetId` must be a public subnet:
+
+   ```bash
+   aws cloudformation deploy --region ap-southeast-1 --stack-name learn-staging --template-file infra/aws/host.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides EnvironmentName=staging GitHubOwner=OWNER WebRepo=WEB_REPO VpcId=VPC_ID SubnetId=SUBNET_ID
+   ```
+
+3. Point the domain at the stack output `PublicIp`. Without a domain, use `<IP-with-dashes>.sslip.io`.
+
+4. Open a shell on the host with `aws ssm start-session --target INSTANCE_ID`, then create the secrets file. Secrets stay on the host and never pass through GitHub:
+
+   ```bash
+   sudo -i
+   vi /opt/learn/.env   # fill in from infra/onebox/.env.example, keep every *_IMAGE placeholder
+   chmod 600 /opt/learn/.env
+   ```
+
+5. In both GitHub repositories, set repository variables `AWS_ACCOUNT_ID`, `AWS_REGION`, `AWS_BUILD_ROLE_ARN` and `DEPLOY_BUCKET` (the last is used by the backend only).
+
+6. In both repositories, create the `staging` environment with variables `AWS_DEPLOY_ROLE_ARN`, `DEPLOY_INSTANCE_ID` and `APP_URL`.
+
+7. Merge to `main` in the backend first, because its bundle installs `learn-release.sh` on the host. Then merge to `main` in the web repository.
+
+## Production
+
+Repeat steps 2 to 4 with `EnvironmentName=production`. Create the `production` GitHub environment with **required reviewers**, then set repository variable `PRODUCTION_ENABLED=true`. The role only trusts jobs running in that environment, so skipping the approval is not possible from a workflow.
+
+## Rollback
+
+Run the `deploy` workflow by hand with the previous digests and leave `migrate_image` and `bundle` empty. Find digests in the previous run's summary or with `aws ecr describe-images`. Rollback does not revert the database, so migrations must stay compatible with the previous image: add first, remove in a later release.
+
+A failed health check during a release already restores the previous digest on its own.
+
+## Not covered yet
+
+- Database and document backups, and a restore drill. Everything lives on one encrypted disk, kept if the instance is terminated, but with no copy elsewhere.
+- Blocking on vulnerabilities. ECR scans each image on push, and nothing fails the pipeline on findings yet.
+- Monitoring and alerts.
+- Zero-downtime restarts. Each service restarts in place, so expect a short interruption.
