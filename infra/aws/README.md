@@ -31,16 +31,18 @@ CI holds no host credential and no port is opened for it: the host pulls. Web an
 
 These steps create billable resources. Run them from a shell with AWS administrator credentials.
 
+The templates trust GitHub's immutable OIDC subjects, which contain numeric IDs. To read them for each repository, run `gh api repos/OWNER/REPO/actions/oidc/customization/sub`.
+
 1. Create the shared stack:
 
    ```bash
-   aws cloudformation deploy --region ap-southeast-1 --stack-name learn-pipeline --template-file infra/aws/pipeline.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides GitHubOwner=OWNER WebRepo=WEB_REPO
+   aws cloudformation deploy --region ap-southeast-1 --stack-name learn-pipeline --template-file infra/aws/pipeline.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides GitHubOwner=OWNER GitHubOwnerId=OWNER_ID BackendRepoId=BACKEND_REPO_ID WebRepo=WEB_REPO WebRepoId=WEB_REPO_ID
    ```
 
 2. Create the staging host. `SubnetId` must be a public subnet:
 
    ```bash
-   aws cloudformation deploy --region ap-southeast-1 --stack-name learn-staging --template-file infra/aws/host.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides EnvironmentName=staging GitHubOwner=OWNER WebRepo=WEB_REPO VpcId=VPC_ID SubnetId=SUBNET_ID
+   aws cloudformation deploy --region ap-southeast-1 --stack-name learn-staging --template-file infra/aws/host.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides EnvironmentName=staging GitHubOwner=OWNER GitHubOwnerId=OWNER_ID BackendRepoId=BACKEND_REPO_ID WebRepo=WEB_REPO WebRepoId=WEB_REPO_ID VpcId=VPC_ID SubnetId=SUBNET_ID
    ```
 
 3. Point the domain at the stack output `PublicIp`. Without a domain, use `<IP-with-dashes>.sslip.io`.

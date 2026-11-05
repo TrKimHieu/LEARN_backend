@@ -5,11 +5,23 @@ Parameters:
   GitHubOwner:
     Type: String
     Description: GitHub user or organization that owns both repositories.
+  GitHubOwnerId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the GitHub owner, used in immutable OIDC subjects.
   BackendRepo:
     Type: String
     Default: LEARN_backend
+  BackendRepoId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the backend repository, used in immutable OIDC subjects.
   WebRepo:
     Type: String
+  WebRepoId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the web repository, used in immutable OIDC subjects.
   CreateOidcProvider:
     Type: String
     Default: 'true'
@@ -108,8 +120,8 @@ Resources:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
                 token.actions.githubusercontent.com:sub:
-                  - !Sub repo:${GitHubOwner}/${BackendRepo}:ref:refs/heads/main
-                  - !Sub repo:${GitHubOwner}/${WebRepo}:ref:refs/heads/main
+                  - !Sub repo:${GitHubOwner}@${GitHubOwnerId}/${BackendRepo}@${BackendRepoId}:ref:refs/heads/main
+                  - !Sub repo:${GitHubOwner}@${GitHubOwnerId}/${WebRepo}@${WebRepoId}:ref:refs/heads/main
       Policies:
         - PolicyName: push-images-and-bundle
           PolicyDocument:
