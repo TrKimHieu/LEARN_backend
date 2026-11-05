@@ -72,7 +72,7 @@ jobs:
       - name: Smoke test through the public URL
         run: |
           for attempt in $(seq 1 12); do
-            if curl --silent --show-error --fail --max-time 10 "${APP_URL}/api/v1/health/ready"; then
+            if node scripts/deploy/probe-readiness.mjs; then
               exit 0
             fi
             sleep 10
