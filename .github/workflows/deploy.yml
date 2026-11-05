@@ -1,0 +1,82 @@
+name: deploy
+# Called by release.yml after a build. Run it by hand with an older digest to roll back.
+on:
+  workflow_call:
+    inputs:
+      environment: { type: string, required: true }
+      api_image: { type: string, required: true }
+      worker_image: { type: string, required: true }
+      migrate_image: { type: string, required: false, default: '' }
+      bundle: { type: string, required: false, default: '' }
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        options: [staging, production]
+        required: true
+      api_image:
+        description: ECR image with sha256 digest
+        required: true
+      worker_image:
+        description: ECR image with sha256 digest
+        required: true
+      migrate_image:
+        description: Leave empty when rolling back, so no migration runs
+        required: false
+      bundle:
+        description: Leave empty to keep the compose files already on the host
+        required: false
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    # One release at a time per environment, and never cancel one halfway.
+    concurrency:
+      group: release-backend-${{ inputs.environment }}
+      cancel-in-progress: false
+    env:
+      DEPLOY_ENVIRONMENT: ${{ inputs.environment }}
+      DEPLOY_INSTANCE_ID: ${{ vars.DEPLOY_INSTANCE_ID }}
+      AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          mask-aws-account-id: false
+      - name: Run migrations
+        if: inputs.migrate_image != ''
+        run: node scripts/deploy/release.mjs --apply
+        env:
+          DEPLOY_SERVICE: migrate
+          DEPLOY_IMAGE: ${{ inputs.migrate_image }}
+          DEPLOY_BUNDLE: ${{ inputs.bundle }}
+      - name: Release API
+        run: node scripts/deploy/release.mjs --apply
+        env:
+          DEPLOY_SERVICE: api
+          DEPLOY_IMAGE: ${{ inputs.api_image }}
+          DEPLOY_BUNDLE: ${{ inputs.migrate_image == '' && inputs.bundle || '' }}
+      - name: Release worker
+        run: node scripts/deploy/release.mjs --apply
+        env:
+          DEPLOY_SERVICE: worker
+          DEPLOY_IMAGE: ${{ inputs.worker_image }}
+      - name: Smoke test through the public URL
+        run: |
+          for attempt in $(seq 1 12); do
+            if node scripts/deploy/probe-readiness.mjs; then
+              exit 0
+            fi
+            sleep 10
+          done
+          exit 1
+        env:
+          APP_URL: ${{ vars.APP_URL }}
