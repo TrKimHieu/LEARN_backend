@@ -14,3 +14,7 @@
 - [x] M4 default-off stateless compute and local HTTP/full workflow pilot.
 - [x] Atomic core persistence regression on real PostgreSQL for cancellation/replay.
 - [ ] M4 cloud baseline, restart/replay/cancel/scale and rollback acceptance.
+
+- [ ] Verify build and staging AWS OIDC roles with the manual Check AWS access workflow on main.
+
+- [ ] Publish and run ECR release on main; verify migration, API readiness and worker processing on the existing staging host.

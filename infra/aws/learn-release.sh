@@ -84,7 +84,7 @@ for attempt in $(seq 1 "$attempts"); do
     # The worker has no port, so staying up for a while is its health signal.
     if [[ "$attempt" -ge 10 ]]; then healthy=true; break; fi
   elif compose exec -T "$service" node -e \
-    "fetch('${probe}').then((r)=>process.exit(r.ok?0:1),()=>process.exit(1))"; then
+    "fetch('${probe}').then(async(r)=>process.exit(r.ok&&('${service}'!=='api'||(await r.json()).status==='ready')?0:1)).catch(()=>process.exit(1))"; then
     healthy=true
     break
   fi

@@ -1,79 +1,49 @@
-# AWS delivery: GitHub Actions to EC2 through ECR
+﻿# ECR release to the existing EC2 staging host
 
-Prepared and tested locally. No AWS resource has been created and no workflow has run on GitHub yet.
+This delivery update reuses manually created AWS resources. It does not recreate ECR, IAM, S3 or EC2, and it does not change application source.
 
+## Pipeline
+
+Merge to main runs reusable CI, builds API/worker runtime images and an API builder image for migrations, and pushes commit-SHA tags to ECR learn/api, learn/worker and learn/migrate. Deployment uses their immutable digests. Compose, Caddyfile and the host script are uploaded under onebox/COMMIT_SHA/ in the deploy bucket. The staging job assumes an OIDC role, downloads this bundle through SSM, applies migrations, deploys API/worker and checks the public API readiness URL. Web has a separate repository pipeline. The manual aws-check workflow only checks role assumption.
+
+## Configuration
+
+Repository variables: AWS_ACCOUNT_ID (actual account), AWS_REGION=ap-southeast-2, AWS_BUILD_ROLE_ARN, DEPLOY_BUCKET=learn-deploy-trkimhieu-2026. Leave PRODUCTION_ENABLED unset or false for staging.
+
+The staging GitHub environment needs AWS_DEPLOY_ROLE_ARN, DEPLOY_INSTANCE_ID and APP_URL. Restrict it to main where the GitHub plan supports branch rules. Match the OIDC subject format actually used by the repository, including immutable IDs when applicable; deploy subjects reference environment:staging.
+
+Build role: ECR publish for the three backend repositories and S3 PutObject for onebox/*. Deploy role: DescribeInstances, GetCommandInvocation, and SendCommand limited to AWS-RunShellScript and the target EC2. Host role: AmazonSSMManagedInstanceCore, ECR pull, S3 list/read for onebox/.
+
+## Host
+
+Amazon Linux 2023 x86_64 with Docker, Compose plugin, AWS CLI, bash and flock. Instance tags must be exactly Project=LEARN, Environment=staging, Service=onebox.
+
+Keep /opt/learn/.env root-owned mode 0600, based on infra/onebox/.env.example. Never upload it to GitHub or the deploy bucket. Keep nonempty API_IMAGE, WORKER_IMAGE, WEB_IMAGE and MIGRATE_IMAGE placeholders at bootstrap; each release replaces the relevant image with its digest. DOMAIN, APP_URL and S3_PUBLIC_ENDPOINT must use the same public origin. Update the temporary sslip.io address if the public IP changes.
+
+Application uploads use internal MinIO; its S3_REGION=us-east-1 is independent of AWS_REGION=ap-southeast-2 for ECR/SSM/deploy storage. Allow inbound HTTP/HTTPS and outbound registry/AWS/certificate access; SSM does not require inbound SSH.
+
+Migration does not reset the database or seed accounts. Seed initial plans/admin separately once after migration if needed. AI mock, mail log and demo billing settings do not establish live feature acceptance.
+
+## Rollback and limits
+
+Run deploy manually on main with previous tested API/worker ECR digest references. Leave migrate_image and bundle empty for image-only rollback. Database changes are not reverted; migrations must remain compatible with the previous app.
+
+The host attempts service-level image rollback after a failed health check, provided a previous digest exists. API and worker update separately; a failed public smoke test does not roll back the entire release. Worker liveness does not prove queue processing. Brief service interruptions are expected.
+
+ECR tags are immutable: rebuilding an already-published commit tag may fail on rerun. Reuse known digests through deploy, or publish a new reviewed commit. Preserve deployed images and rollback candidates in registry retention rules.
+
+Backups, restore drills, monitoring, vulnerability blocking and end-to-end staging acceptance remain pending. The deploy bucket is not a DB/document backup. Production requires a separate host/data/secrets and an actual approval gate; it promotes the same tested image digests.
+
+## New environments from templates
+
+Current staging uses the manually created resources above. Do not deploy `pipeline.yml` or `host.yml` against it: they are not what created those resources, and `pipeline.yml` names its build role `learn-github-build`, not `learn-github-build-backend`.
+
+For a new account or environment, the commands below create billable resources. The templates trust GitHub's immutable OIDC subjects, which contain numeric IDs. To read them for each repository, run `gh api repos/OWNER/REPO/actions/oidc/customization/sub`.
+
+```bash
+aws cloudformation deploy --region REGION --stack-name learn-pipeline --template-file infra/aws/pipeline.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides GitHubOwner=OWNER GitHubOwnerId=OWNER_ID BackendRepoId=BACKEND_REPO_ID WebRepo=WEB_REPO WebRepoId=WEB_REPO_ID
 ```
-merge to main
-  GitHub Actions: lint, typecheck, tests, build
-  build images once, push to ECR by commit SHA (OIDC, no stored AWS keys)
-  SSM command to the EC2 host
-    host pulls the image by digest using its instance role
-    migrations, restart one service, health check, restore previous digest on failure
-  smoke test through the public URL
-  staging done; production repeats with the same digests after approval
+
+```bash
+aws cloudformation deploy --region REGION --stack-name learn-ENVIRONMENT --template-file infra/aws/host.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides EnvironmentName=ENVIRONMENT GitHubOwner=OWNER GitHubOwnerId=OWNER_ID BackendRepoId=BACKEND_REPO_ID WebRepo=WEB_REPO WebRepoId=WEB_REPO_ID VpcId=VPC_ID SubnetId=SUBNET_ID
 ```
-
-CI holds no host credential and no port is opened for it: the host pulls. Web and backend have separate pipelines and share the host, and `learn-release.sh` takes a lock so releases take turns.
-
-## Files
-
-| File                            | Purpose                                                                                    |
-| ------------------------------- | ------------------------------------------------------------------------------------------ |
-| `pipeline.yml`                  | ECR repositories, deploy bundle bucket, OIDC build role. One stack per AWS account         |
-| `host.yml`                      | EC2 host, Elastic IP, firewall, instance role, OIDC deploy role. One stack per environment |
-| `learn-release.sh`              | Runs on the host, one service at a time                                                    |
-| `../onebox/compose.yml`         | Services on the host                                                                       |
-| `scripts/deploy/release.mjs`    | Checks the target and sends the SSM command. Same file in the web repository               |
-| `.github/workflows/release.yml` | Full pipeline on merge to `main`                                                           |
-| `.github/workflows/deploy.yml`  | Deploy step, also used by hand for rollback                                                |
-
-## First setup
-
-These steps create billable resources. Run them from a shell with AWS administrator credentials.
-
-The templates trust GitHub's immutable OIDC subjects, which contain numeric IDs. To read them for each repository, run `gh api repos/OWNER/REPO/actions/oidc/customization/sub`.
-
-1. Create the shared stack:
-
-   ```bash
-   aws cloudformation deploy --region ap-southeast-1 --stack-name learn-pipeline --template-file infra/aws/pipeline.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides GitHubOwner=OWNER GitHubOwnerId=OWNER_ID BackendRepoId=BACKEND_REPO_ID WebRepo=WEB_REPO WebRepoId=WEB_REPO_ID
-   ```
-
-2. Create the staging host. `SubnetId` must be a public subnet:
-
-   ```bash
-   aws cloudformation deploy --region ap-southeast-1 --stack-name learn-staging --template-file infra/aws/host.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides EnvironmentName=staging GitHubOwner=OWNER GitHubOwnerId=OWNER_ID BackendRepoId=BACKEND_REPO_ID WebRepo=WEB_REPO WebRepoId=WEB_REPO_ID VpcId=VPC_ID SubnetId=SUBNET_ID
-   ```
-
-3. Point the domain at the stack output `PublicIp`. Without a domain, use `<IP-with-dashes>.sslip.io`.
-
-4. Open a shell on the host with `aws ssm start-session --target INSTANCE_ID`, then create the secrets file. Secrets stay on the host and never pass through GitHub:
-
-   ```bash
-   sudo -i
-   vi /opt/learn/.env   # fill in from infra/onebox/.env.example, keep every *_IMAGE placeholder
-   chmod 600 /opt/learn/.env
-   ```
-
-5. In both GitHub repositories, set repository variables `AWS_ACCOUNT_ID`, `AWS_REGION`, `AWS_BUILD_ROLE_ARN` and `DEPLOY_BUCKET` (the last is used by the backend only).
-
-6. In both repositories, create the `staging` environment with variables `AWS_DEPLOY_ROLE_ARN`, `DEPLOY_INSTANCE_ID` and `APP_URL`.
-
-7. Merge to `main` in the backend first, because its bundle installs `learn-release.sh` on the host. Then merge to `main` in the web repository.
-
-## Production
-
-Repeat steps 2 to 4 with `EnvironmentName=production`. Create the `production` GitHub environment with **required reviewers**, then set repository variable `PRODUCTION_ENABLED=true`. The role only trusts jobs running in that environment, so skipping the approval is not possible from a workflow.
-
-## Rollback
-
-Run the `deploy` workflow by hand with the previous digests and leave `migrate_image` and `bundle` empty. Find digests in the previous run's summary or with `aws ecr describe-images`. Rollback does not revert the database, so migrations must stay compatible with the previous image: add first, remove in a later release.
-
-A failed health check during a release already restores the previous digest on its own.
-
-## Not covered yet
-
-- Database and document backups, and a restore drill. Everything lives on one encrypted disk, kept if the instance is terminated, but with no copy elsewhere.
-- Blocking on vulnerabilities. ECR scans each image on push, and nothing fails the pipeline on findings yet.
-- Monitoring and alerts.
-- Zero-downtime restarts. Each service restarts in place, so expect a short interruption.
