@@ -7,11 +7,23 @@ Parameters:
     AllowedValues: [staging, production]
   GitHubOwner:
     Type: String
+  GitHubOwnerId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the GitHub owner, used in immutable OIDC subjects.
   BackendRepo:
     Type: String
     Default: LEARN_backend
+  BackendRepoId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the backend repository, used in immutable OIDC subjects.
   WebRepo:
     Type: String
+  WebRepoId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the web repository, used in immutable OIDC subjects.
   InstanceType:
     Type: String
     Default: t3.large
@@ -146,8 +158,8 @@ Resources:
               StringEquals:
                 token.actions.githubusercontent.com:aud: sts.amazonaws.com
                 token.actions.githubusercontent.com:sub:
-                  - !Sub repo:${GitHubOwner}/${BackendRepo}:environment:${EnvironmentName}
-                  - !Sub repo:${GitHubOwner}/${WebRepo}:environment:${EnvironmentName}
+                  - !Sub repo:${GitHubOwner}@${GitHubOwnerId}/${BackendRepo}@${BackendRepoId}:environment:${EnvironmentName}
+                  - !Sub repo:${GitHubOwner}@${GitHubOwnerId}/${WebRepo}@${WebRepoId}:environment:${EnvironmentName}
       Policies:
         - PolicyName: release-through-ssm
           PolicyDocument:
