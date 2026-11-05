@@ -1,13 +1,35 @@
-# AWS staging delivery (prepared, not deployed)
+﻿# ECR release to the existing EC2 staging host
 
-Use separate EC2 instances/SSM targets for API, worker and optional compute; web has its own target and repository pipeline. Build images contain no source checkout of another team. All targets need Docker, AWS SSM agent, TLS reverse proxy/load balancer for API/web, outbound registry credentials configured locally and least-privilege instance roles. Private images require image pull rights, not application source rights.
+This delivery update reuses manually created AWS resources. It does not recreate ECR, IAM, S3 or EC2, and it does not change application source.
 
-Prerequisites still needed: approved AWS account/region, subnet/instance IDs, staging DNS/TLS, GitHub OIDC roles and Expo project. No resource creation or production change has run. Attach tags Project=LEARN, Environment=staging, Service=api|worker|compute|web. Install the reviewed learn-release.sh as /usr/local/bin/learn-release (root-owned 0755). Store per-process configuration at /etc/learn/<service>.env with 0600 permissions; never put secrets into SSM command parameters/logs.
+## Pipeline
 
-API and worker share staging PostgreSQL/Redis/S3 endpoints, never production. Enable TLS to managed DB/Redis, private routing/security groups and encrypted backups. Core is the sole schema/migration owner. Compute receives only COMPUTE_TOKEN and LLM settings, no DATABASE_URL or REDIS_URL. Do not activate compute until M3 baseline passes.
+Merge to main runs reusable CI, builds API/worker runtime images and an API builder image for migrations, and pushes commit-SHA tags to ECR learn/api, learn/worker and learn/migrate. Deployment uses their immutable digests. Compose, Caddyfile and the host script are uploaded under onebox/COMMIT_SHA/ in the deploy bucket. The staging job assumes an OIDC role, downloads this bundle through SSM, applies migrations, deploys API/worker and checks the public API readiness URL. Web has a separate repository pipeline. The manual aws-check workflow only checks role assumption.
 
-The deploy workflow checks caller account and target tags, then invokes the host release command with one digest-pinned image. Image push and deploy are separate. A deployment replaces only the selected process and preserves prior containers for rollback; worker stops before replacement to avoid overlapping consumers. Migrations are a separately reviewed job, never automatic app startup.
+## Configuration
 
-Rollback: rerun the release workflow with the previous tested digest. Rehearse this on staging, including graceful worker shutdown, queue drain, schema compatibility, health and a completed test job. The script can check process liveness but that does not prove queue correctness. Archive old stopped containers only after evidence retention. No compose down -v or DB reset.
+Repository variables: AWS_ACCOUNT_ID (actual account), AWS_REGION=ap-southeast-2, AWS_BUILD_ROLE_ARN, DEPLOY_BUCKET=learn-deploy-trkimhieu-2026. Leave PRODUCTION_ENABLED unset or false for staging.
 
-Acceptance checklist: backup restore drill; web course ID visible on installed APK; mobile presigned upload through worker visible on web; cookie/native refresh, role/IDOR/quota; latency/error and queue age/failure metrics; rollback rehearsal; APK auth/upload/deep-link on device. Preserve image digest, contracts hash and app version for every run. Current local sandbox is not AWS staging.
+The staging GitHub environment needs AWS_DEPLOY_ROLE_ARN, DEPLOY_INSTANCE_ID and APP_URL. Restrict it to main where the GitHub plan supports branch rules. Match the OIDC subject format actually used by the repository, including immutable IDs when applicable; deploy subjects reference environment:staging.
+
+Build role: ECR publish for the three backend repositories and S3 PutObject for onebox/*. Deploy role: DescribeInstances, GetCommandInvocation, and SendCommand limited to AWS-RunShellScript and the target EC2. Host role: AmazonSSMManagedInstanceCore, ECR pull, S3 list/read for onebox/.
+
+## Host
+
+Amazon Linux 2023 x86_64 with Docker, Compose plugin, AWS CLI, bash and flock. Instance tags must be exactly Project=LEARN, Environment=staging, Service=onebox.
+
+Keep /opt/learn/.env root-owned mode 0600, based on infra/onebox/.env.example. Never upload it to GitHub or the deploy bucket. Keep nonempty API_IMAGE, WORKER_IMAGE, WEB_IMAGE and MIGRATE_IMAGE placeholders at bootstrap; each release replaces the relevant image with its digest. DOMAIN, APP_URL and S3_PUBLIC_ENDPOINT must use the same public origin. Update the temporary sslip.io address if the public IP changes.
+
+Application uploads use internal MinIO; its S3_REGION=us-east-1 is independent of AWS_REGION=ap-southeast-2 for ECR/SSM/deploy storage. Allow inbound HTTP/HTTPS and outbound registry/AWS/certificate access; SSM does not require inbound SSH.
+
+Migration does not reset the database or seed accounts. Seed initial plans/admin separately once after migration if needed. AI mock, mail log and demo billing settings do not establish live feature acceptance.
+
+## Rollback and limits
+
+Run deploy manually on main with previous tested API/worker ECR digest references. Leave migrate_image and bundle empty for image-only rollback. Database changes are not reverted; migrations must remain compatible with the previous app.
+
+The host attempts service-level image rollback after a failed health check, provided a previous digest exists. API and worker update separately; a failed public smoke test does not roll back the entire release. Worker liveness does not prove queue processing. Brief service interruptions are expected.
+
+ECR tags are immutable: rebuilding an already-published commit tag may fail on rerun. Reuse known digests through deploy, or publish a new reviewed commit. Preserve deployed images and rollback candidates in registry retention rules.
+
+Backups, restore drills, monitoring, vulnerability blocking and end-to-end staging acceptance remain pending. The deploy bucket is not a DB/document backup. Production requires a separate host/data/secrets and an actual approval gate; it promotes the same tested image digests.

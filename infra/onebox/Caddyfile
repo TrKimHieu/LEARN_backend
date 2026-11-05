@@ -1,0 +1,29 @@
+# One origin for web + API + uploaded documents (ADR 017).
+# Caddy obtains and renews a Let's Encrypt certificate for {$DOMAIN} (e.g. 3-1-2-4.sslip.io).
+# Local trial: DOMAIN=localhost uses Caddy's internal CA (browser warns; expected).
+
+{$DOMAIN} {
+	encode zstd gzip
+
+	handle /api/* {
+		reverse_proxy api:4000
+	}
+
+	handle /learn-documents/* {
+		# Uploads are capped by UPLOAD_MAX_BYTES (25MB); leave headroom.
+		request_body {
+			max_size 30MB
+		}
+		# Host is preserved so SigV4 signatures for the public origin still match.
+		reverse_proxy minio:9000
+	}
+
+	handle {
+		reverse_proxy web:3000
+	}
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+	}
+}

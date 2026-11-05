@@ -16,3 +16,5 @@
 - [ ] M4 cloud baseline, restart/replay/cancel/scale and rollback acceptance.
 
 - [ ] Verify build and staging AWS OIDC roles with the manual Check AWS access workflow on main.
+
+- [ ] Publish and run ECR release on main; verify migration, API readiness and worker processing on the existing staging host.

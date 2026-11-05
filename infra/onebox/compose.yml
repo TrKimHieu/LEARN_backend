@@ -1,0 +1,176 @@
+# LEARN one-origin host (ADR 017): Caddy + web + API + worker + PostgreSQL/Redis/MinIO on one machine.
+#   https://$DOMAIN/api/*              -> api:4000
+#   https://$DOMAIN/learn-documents/*  -> minio:9000 (presigned URLs signed for the public origin)
+#   https://$DOMAIN/*                  -> web:3000
+#
+# Runs published images only. On AWS, infra/aws/learn-release.sh sets the *_IMAGE digests in .env.
+# Build the web image with an empty NEXT_PUBLIC_API_URL so it calls relative /api paths.
+#
+#   cp infra/onebox/.env.example infra/onebox/.env      # fill real secrets, never commit .env
+#   docker compose -f infra/onebox/compose.yml --env-file infra/onebox/.env --profile ops run --rm migrate
+#   docker compose -f infra/onebox/compose.yml --env-file infra/onebox/.env up -d
+#
+# Migrations are an explicit step (profile `ops`), never part of app startup: the release pipeline
+# runs them before the API, and production needs an approval first.
+# Only Caddy publishes ports. Never use `down -v`: it deletes the database and uploaded documents.
+
+name: learn-onebox
+
+x-app: &app
+  env_file: .env
+  restart: unless-stopped
+  networks: [internal]
+
+services:
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    depends_on: [web, api, minio]
+    ports:
+      - '${HTTP_PORT:-80}:80'
+      - '${HTTPS_PORT:-443}:443'
+      - '${HTTPS_PORT:-443}:443/udp'
+    environment:
+      DOMAIN: ${DOMAIN:?Set DOMAIN in .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks: [internal]
+
+  web:
+    <<: *app
+    image: ${WEB_IMAGE:?Set WEB_IMAGE in .env}
+    depends_on: [api]
+
+  api:
+    <<: *app
+    image: ${API_IMAGE:?Set API_IMAGE in .env}
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: '4000'
+      TRUST_PROXY: '1'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      storage-init:
+        condition: service_completed_successfully
+
+  worker:
+    <<: *app
+    image: ${WORKER_IMAGE:?Set WORKER_IMAGE in .env}
+    environment:
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      storage-init:
+        condition: service_completed_successfully
+
+  # Applies existing Prisma migrations; also runs the seed:
+  #   ... --profile ops run --rm migrate npm run db:seed -w packages/db
+  # The API image's builder stage, which carries the Prisma CLI and schema. Local trial:
+  #   docker build --target builder -f infra/Dockerfile.api -t learn-migrate:local .
+  migrate:
+    profiles: [ops]
+    env_file: .env
+    image: ${MIGRATE_IMAGE:?Set MIGRATE_IMAGE in .env}
+    command: ['npm', 'run', 'db:deploy', '-w', 'packages/db']
+    environment:
+      NODE_ENV: production
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: 'no'
+    networks: [internal]
+
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-learn}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_DB: ${POSTGRES_DB:-learn}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-learn}']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks: [internal]
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    command: ['redis-server', '--appendonly', 'yes']
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks: [internal]
+
+  minio:
+    image: cgr.dev/chainguard/minio@sha256:709099319add48dfb44aa596a7070d3ddd8dd04d7ae881765719aec29df9e510
+    restart: unless-stopped
+    command: server /data
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY_ID:?Set S3_ACCESS_KEY_ID in .env}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_ACCESS_KEY:?Set S3_SECRET_ACCESS_KEY in .env}
+    volumes:
+      - minio-data:/data
+    networks: [internal]
+
+  # Creates the private document bucket with the S3 SDK already shipped in the API image,
+  # so no separate MinIO CLI image is needed. Retries until MinIO accepts connections.
+  storage-init:
+    image: ${API_IMAGE:?Set API_IMAGE in .env}
+    env_file: .env
+    depends_on: [minio]
+    entrypoint:
+      - node
+      - -e
+      - |
+        const { S3Client, CreateBucketCommand } = require('@aws-sdk/client-s3');
+        const s3 = new S3Client({
+          endpoint: process.env.S3_ENDPOINT,
+          region: process.env.S3_REGION,
+          forcePathStyle: true,
+          credentials: {
+            accessKeyId: process.env.S3_ACCESS_KEY_ID,
+            secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+          },
+        });
+        const done = ['BucketAlreadyExists', 'BucketAlreadyOwnedByYou'];
+        (async () => {
+          for (let attempt = 1; ; attempt++) {
+            try {
+              await s3.send(new CreateBucketCommand({ Bucket: process.env.S3_BUCKET }));
+              return;
+            } catch (error) {
+              if (done.includes(error.name)) return;
+              if (attempt >= 30) throw error;
+              await new Promise((r) => setTimeout(r, 2000));
+            }
+          }
+        })().then(() => console.log('bucket ready'), (error) => { console.error(error); process.exit(1); });
+    restart: 'no'
+    networks: [internal]
+
+networks:
+  internal:
+
+volumes:
+  postgres-data:
+  redis-data:
+  minio-data:
+  caddy-data:
+  caddy-config:

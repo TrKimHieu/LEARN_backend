@@ -15,3 +15,5 @@ Backend image pipeline41593708923 successfully published three immutable GHCR re
 Final code baseline b725243: Backend CI41596070867 and immutable image publication41596105093 both SUCCESS. Added real PostgreSQL connection_limit=1 quota regression: RED pool exhaustion -> GREEN after transaction-scoped plan reads. All21 integration tests plus23 workflow checks pass per local/remote mode. Anonymous GHCR token requests401 for all3 published images; actual team ACL/history acceptance remains pending. APK complete and v2 signature verified. See release-evidence.json and workspace M2_M4_STATUS.md.
 
 AWS access check: added a manual-only workflow to check build/staging OIDC roles with STS GetCallerIdentity. No AWS resource mutation or deployment is included. Remote authentication is not yet verified.
+
+AWS staging delivery update: prepared reusable CI, ECR publication, S3 bundle and SSM deployment for the existing onebox host. User reports both manual OIDC jobs green. No application changes or resource creation; AWS release remains unverified.
