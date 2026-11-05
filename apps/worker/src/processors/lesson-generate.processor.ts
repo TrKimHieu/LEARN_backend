@@ -10,6 +10,7 @@ import {
   OutlineOutput,
   lessonPrompt,
   LESSON_PROMPT_VERSION,
+  restoreChunkIds,
   validateLessonOutput,
   extractJson,
   type LlmProvider,
@@ -361,7 +362,7 @@ export class LessonGenerateProcessor {
         continue;
       }
 
-      const result = validateLessonOutput(raw, validateCtx);
+      const result = validateLessonOutput(restoreChunkIds(raw, ctx.chunks), validateCtx);
       await this.recordRun(
         aiJobId,
         `lesson:${ctx.nodeTitle}`,

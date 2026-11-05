@@ -7,8 +7,15 @@ export class UnsupportedFileError extends Error {
 
 export class ScannedPdfNotSupportedError extends Error {
   constructor() {
-    super('Tài liệu là PDF scan (không có lớp text) — OCR chưa được hỗ trợ ở phiên bản này.');
+    super('Tài liệu là PDF scan (không có lớp text) — máy chủ này chưa cài OCR.');
     this.name = 'ScannedPdfNotSupportedError';
+  }
+}
+
+export class DocumentTooShortError extends Error {
+  constructor() {
+    super('Tài liệu có quá ít nội dung để tạo bài học. Hãy tải lên tài liệu dài hơn.');
+    this.name = 'DocumentTooShortError';
   }
 }
 

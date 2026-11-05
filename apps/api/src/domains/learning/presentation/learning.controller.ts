@@ -1,4 +1,14 @@
-import { Controller, Get, Patch, Post, Delete, Body, Param, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Patch,
+  Post,
+  Delete,
+  Body,
+  Param,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { z } from 'zod';
 import {
   patchLessonSchema,
@@ -9,7 +19,13 @@ import {
   type SubmitExerciseInput,
 } from '@learn/contracts';
 import { zodBody, zodParam } from '../../../core/exceptions/errors';
-import { Auth, CurrentUser, type UserContext } from '../../../core/security';
+import {
+  Auth,
+  CurrentUser,
+  RateLimitGuard,
+  Throttle,
+  type UserContext,
+} from '../../../core/security';
 import { LessonsService } from '../application/lessons.service';
 import { ExercisesService } from '../application/exercises.service';
 import { ProgressService } from '../application/progress.service';
@@ -107,7 +123,11 @@ export class LearningController {
     return this.exercises.getExerciseRead(user.userId, lessonId, exerciseId);
   }
 
+  // Mỗi lượt nộp có thể gọi model nhiều lần nên cần chặn spam tốn tiền. RateLimitGuard đặt trên
+  // @Auth để chạy sau xác thực, đếm theo người dùng thay vì theo IP.
   @Post('lessons/:lessonId/exercise/submit')
+  @UseGuards(RateLimitGuard)
+  @Throttle(10, 60)
   @Auth()
   async submit(
     @CurrentUser() user: UserContext,

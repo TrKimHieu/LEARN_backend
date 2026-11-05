@@ -33,3 +33,17 @@ The host attempts service-level image rollback after a failed health check, prov
 ECR tags are immutable: rebuilding an already-published commit tag may fail on rerun. Reuse known digests through deploy, or publish a new reviewed commit. Preserve deployed images and rollback candidates in registry retention rules.
 
 Backups, restore drills, monitoring, vulnerability blocking and end-to-end staging acceptance remain pending. The deploy bucket is not a DB/document backup. Production requires a separate host/data/secrets and an actual approval gate; it promotes the same tested image digests.
+
+## New environments from templates
+
+Current staging uses the manually created resources above. Do not deploy `pipeline.yml` or `host.yml` against it: they are not what created those resources, and `pipeline.yml` names its build role `learn-github-build`, not `learn-github-build-backend`.
+
+For a new account or environment, the commands below create billable resources. The templates trust GitHub's immutable OIDC subjects, which contain numeric IDs. To read them for each repository, run `gh api repos/OWNER/REPO/actions/oidc/customization/sub`.
+
+```bash
+aws cloudformation deploy --region REGION --stack-name learn-pipeline --template-file infra/aws/pipeline.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides GitHubOwner=OWNER GitHubOwnerId=OWNER_ID BackendRepoId=BACKEND_REPO_ID WebRepo=WEB_REPO WebRepoId=WEB_REPO_ID
+```
+
+```bash
+aws cloudformation deploy --region REGION --stack-name learn-ENVIRONMENT --template-file infra/aws/host.yml --capabilities CAPABILITY_NAMED_IAM --parameter-overrides EnvironmentName=ENVIRONMENT GitHubOwner=OWNER GitHubOwnerId=OWNER_ID BackendRepoId=BACKEND_REPO_ID WebRepo=WEB_REPO WebRepoId=WEB_REPO_ID VpcId=VPC_ID SubnetId=SUBNET_ID
+```

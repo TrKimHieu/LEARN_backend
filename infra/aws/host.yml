@@ -1,0 +1,186 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: LEARN single Docker host for one environment, reached only through SSM, plus its GitHub OIDC deploy role.
+
+Parameters:
+  EnvironmentName:
+    Type: String
+    AllowedValues: [staging, production]
+  GitHubOwner:
+    Type: String
+  GitHubOwnerId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the GitHub owner, used in immutable OIDC subjects.
+  BackendRepo:
+    Type: String
+    Default: LEARN_backend
+  BackendRepoId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the backend repository, used in immutable OIDC subjects.
+  WebRepo:
+    Type: String
+  WebRepoId:
+    Type: String
+    AllowedPattern: '^[0-9]+$'
+    Description: Numeric ID of the web repository, used in immutable OIDC subjects.
+  InstanceType:
+    Type: String
+    Default: t3.large
+  VolumeSizeGb:
+    Type: Number
+    Default: 60
+  ComposeVersion:
+    Type: String
+    Default: v5.6.0
+  ImageId:
+    Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
+    Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+  SubnetId:
+    Type: AWS::EC2::Subnet::Id
+    Description: Public subnet with a route to an internet gateway.
+
+Resources:
+  # Only Caddy listens publicly. There is no SSH port: administration goes through Session Manager.
+  HostSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: !Sub LEARN ${EnvironmentName} public web traffic
+      VpcId: !Ref VpcId
+      SecurityGroupIngress:
+        - { IpProtocol: tcp, FromPort: 80, ToPort: 80, CidrIp: 0.0.0.0/0 }
+        - { IpProtocol: tcp, FromPort: 443, ToPort: 443, CidrIp: 0.0.0.0/0 }
+        - { IpProtocol: udp, FromPort: 443, ToPort: 443, CidrIp: 0.0.0.0/0 }
+
+  HostRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub learn-${EnvironmentName}-host
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal: { Service: ec2.amazonaws.com }
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - !Sub arn:${AWS::Partition}:iam::aws:policy/AmazonSSMManagedInstanceCore
+      Policies:
+        - PolicyName: pull-images-and-bundle
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: ecr:GetAuthorizationToken
+                Resource: '*'
+              - Effect: Allow
+                Action:
+                  - ecr:BatchCheckLayerAvailability
+                  - ecr:BatchGetImage
+                  - ecr:GetDownloadUrlForLayer
+                Resource: !Sub
+                  - ${Prefix}/*
+                  - Prefix: !ImportValue learn-ecr-arn-prefix
+              - Effect: Allow
+                Action: s3:ListBucket
+                Resource: !Sub
+                  - arn:${AWS::Partition}:s3:::${Bucket}
+                  - Bucket: !ImportValue learn-deploy-bucket
+              - Effect: Allow
+                Action: s3:GetObject
+                Resource: !Sub
+                  - arn:${AWS::Partition}:s3:::${Bucket}/onebox/*
+                  - Bucket: !ImportValue learn-deploy-bucket
+
+  HostProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles: [!Ref HostRole]
+
+  Host:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref ImageId
+      InstanceType: !Ref InstanceType
+      IamInstanceProfile: !Ref HostProfile
+      SubnetId: !Ref SubnetId
+      SecurityGroupIds: [!Ref HostSecurityGroup]
+      MetadataOptions:
+        HttpTokens: required
+        HttpPutResponseHopLimit: 1
+      BlockDeviceMappings:
+        - DeviceName: /dev/xvda
+          Ebs:
+            VolumeSize: !Ref VolumeSizeGb
+            VolumeType: gp3
+            Encrypted: true
+            # The database and uploaded documents live on this disk.
+            DeleteOnTermination: false
+      Tags:
+        - { Key: Name, Value: !Sub 'learn-${EnvironmentName}' }
+        - { Key: Project, Value: LEARN }
+        - { Key: Environment, Value: !Ref EnvironmentName }
+        - { Key: Service, Value: onebox }
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash
+          set -euo pipefail
+          dnf install -y docker
+          mkdir -p /usr/local/lib/docker/cli-plugins
+          cd /usr/local/lib/docker/cli-plugins
+          base=https://github.com/docker/compose/releases/download/${ComposeVersion}
+          curl -fsSLo docker-compose "$base/docker-compose-linux-x86_64"
+          curl -fsSL "$base/docker-compose-linux-x86_64.sha256" | awk '{print $1"  docker-compose"}' | sha256sum -c -
+          chmod 0755 docker-compose
+          systemctl enable --now docker
+          install -d -m 0700 /opt/learn
+
+  HostAddress:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref Host
+
+  # Only a GitHub job running in this environment can release to this host.
+  DeployRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub learn-github-deploy-${EnvironmentName}
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Sub arn:${AWS::Partition}:iam::${AWS::AccountId}:oidc-provider/token.actions.githubusercontent.com
+            Action: sts:AssumeRoleWithWebIdentity
+            Condition:
+              StringEquals:
+                token.actions.githubusercontent.com:aud: sts.amazonaws.com
+                token.actions.githubusercontent.com:sub:
+                  - !Sub repo:${GitHubOwner}@${GitHubOwnerId}/${BackendRepo}@${BackendRepoId}:environment:${EnvironmentName}
+                  - !Sub repo:${GitHubOwner}@${GitHubOwnerId}/${WebRepo}@${WebRepoId}:environment:${EnvironmentName}
+      Policies:
+        - PolicyName: release-through-ssm
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: ec2:DescribeInstances
+                Resource: '*'
+              - Effect: Allow
+                Action: ssm:SendCommand
+                Resource:
+                  - !Sub arn:${AWS::Partition}:ssm:${AWS::Region}::document/AWS-RunShellScript
+                  - !Sub arn:${AWS::Partition}:ec2:${AWS::Region}:${AWS::AccountId}:instance/${Host}
+              - Effect: Allow
+                Action: ssm:GetCommandInvocation
+                Resource: '*'
+
+Outputs:
+  InstanceId:
+    Value: !Ref Host
+  PublicIp:
+    Value: !Ref HostAddress
+  DeployRoleArn:
+    Value: !GetAtt DeployRole.Arn

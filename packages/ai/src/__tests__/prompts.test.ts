@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { lessonPrompt, LESSON_PROMPT_VERSION } from '../prompts/lesson';
+import { lessonPrompt, LESSON_PROMPT_VERSION, restoreChunkIds } from '../prompts/lesson';
 import {
   coverageFeedback,
   outlineCoverage,
@@ -43,7 +43,7 @@ describe('lessonPrompt — nêu đủ hợp đồng output để model thật kh
   });
 
   it('đổi nội dung prompt thì tăng version để GenerationRun phân biệt được', () => {
-    expect(LESSON_PROMPT_VERSION).toBe('lesson@3');
+    expect(LESSON_PROMPT_VERSION).toBe('lesson@4');
   });
 });
 
@@ -128,5 +128,58 @@ describe('outlineCoverage', () => {
 
   it('tài liệu rỗng → không chia cho 0', () => {
     expect(outlineCoverage({ nodes: [] }, []).ratio).toBe(0);
+  });
+});
+
+describe('lessonPrompt — lesson@4 giảm bài bị loại với model thật', () => {
+  const chunks = [
+    { id: '019a0000-0000-7000-8000-000000000001', content: 'Nội dung một' },
+    { id: '019a0000-0000-7000-8000-000000000002', content: 'Nội dung hai' },
+  ];
+  const p = lessonPrompt({
+    language: 'vi',
+    courseTitle: 'HTTP',
+    nodeTitle: 'GET',
+    nodeDescription: 'Phương thức',
+    chunks,
+  });
+
+  it('nêu luật độ dài đáp án đúng mà validator tầng 2 đang áp dụng', () => {
+    expect(p).toMatch(/không dài quá 2 lần/i);
+  });
+
+  it('dùng mã chunk ngắn, không đưa UUID cho model chép', () => {
+    expect(p).toContain('---- chunk C1 ----');
+    expect(p).toContain('---- chunk C2 ----');
+    expect(p).not.toContain(chunks[0]!.id);
+  });
+
+  it('khôi phục mã ngắn về id thật ở cả bài học và từng câu hỏi', () => {
+    const restored = restoreChunkIds(
+      {
+        sourceChunkIds: ['C2', 'C1'],
+        exercises: [{ questions: [{ sourceChunkId: 'C2' }, { sourceChunkId: 'c1' }] }],
+      },
+      chunks,
+    ) as {
+      sourceChunkIds: string[];
+      exercises: Array<{ questions: Array<{ sourceChunkId: string }> }>;
+    };
+    expect(restored.sourceChunkIds).toEqual([chunks[1]!.id, chunks[0]!.id]);
+    expect(restored.exercises[0]!.questions.map((q) => q.sourceChunkId)).toEqual([
+      chunks[1]!.id,
+      chunks[0]!.id,
+    ]);
+  });
+
+  it('mã không tồn tại giữ nguyên để validator loại, không tự gán chunk khác', () => {
+    const restored = restoreChunkIds({ sourceChunkIds: ['C9'] }, chunks) as {
+      sourceChunkIds: string[];
+    };
+    expect(restored.sourceChunkIds).toEqual(['C9']);
+  });
+
+  it('output không phải object thì trả nguyên để tầng schema báo lỗi', () => {
+    expect(restoreChunkIds('sai', chunks)).toBe('sai');
   });
 });

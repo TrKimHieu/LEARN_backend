@@ -7,6 +7,7 @@ import { LessonRepository } from './infrastructure/repositories/lesson.repositor
 import { LearningProgressRepository } from './infrastructure/repositories/learning-progress.repository';
 import { ExerciseRepository } from './infrastructure/repositories/exercise.repository';
 import { SubmissionRepository } from './infrastructure/repositories/submission.repository';
+import { ShortAnswerGrader } from './infrastructure/short-answer-grader';
 import { CoursesModule } from '../../domains/courses/courses.module';
 
 @Module({
@@ -20,6 +21,7 @@ import { CoursesModule } from '../../domains/courses/courses.module';
     LearningProgressRepository,
     ExerciseRepository,
     SubmissionRepository,
+    ShortAnswerGrader,
   ],
   exports: [LessonsService, ExercisesService],
 })

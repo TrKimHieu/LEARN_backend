@@ -10,5 +10,6 @@ export * from './llm/fallback';
 export * from './llm/fixtures';
 export * from './prompts/outline';
 export * from './prompts/lesson';
+export * from './prompts/grade-short-answer';
 export * from './schemas/output';
 export * from './validator/validate';

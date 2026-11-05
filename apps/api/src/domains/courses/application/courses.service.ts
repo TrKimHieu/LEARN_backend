@@ -6,7 +6,7 @@ import type {
   CourseSummary,
   CourseDetail,
 } from '@learn/contracts';
-import { ApiError } from '../../../core/exceptions/errors';
+import { ApiError, requireTrimmedText } from '../../../core/exceptions/errors';
 import { UsageService } from '../../subscriptions/application/usage.service';
 import { CourseRepository } from '../infrastructure/repositories/course.repository';
 
@@ -77,11 +77,12 @@ export class CoursesService {
    * `usage.consume()`, nên hai request đồng thời không cùng lọt qua một suất cuối.
    */
   async create(userId: string, input: CreateCourseInput): Promise<CourseDetail> {
+    const title = requireTrimmedText(input.title, 'title', 1, 'Vui lòng nhập tên khóa học.');
     const course = await this.usage.consume(userId, 'COURSES_CREATED', (tx) =>
       this.courses.create(
         {
           ownerId: userId,
-          title: input.title,
+          title,
           description: input.description ?? null,
           language: input.language as 'vi' | 'en',
         },
@@ -96,7 +97,10 @@ export class CoursesService {
     // Prisma bỏ qua field `undefined`, nên không cần đọc trước rồi điền lại giá trị cũ —
     // và làm vậy còn ghi đè thay đổi của request song song bằng dữ liệu đã cũ.
     const updated = await this.courses.update(courseId, {
-      title: input.title,
+      title:
+        input.title === undefined
+          ? undefined
+          : requireTrimmedText(input.title, 'title', 1, 'Vui lòng nhập tên khóa học.'),
       description: input.description,
       status: input.status as CourseStatus | undefined,
     });

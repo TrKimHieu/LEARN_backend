@@ -98,9 +98,13 @@ export class SubmissionRepository {
     return { id, attemptNo, createdAt: submission.createdAt };
   }
 
-  /** Trung bình điểm (0-100) của một người — aggregate trong Postgres. */
-  averageForUser(userId: string, db: Db = this.prisma.client) {
-    return db.submission.aggregate({ where: { userId }, _avg: { score: true } });
+  /** Điểm (0-100) cao nhất của một người ở từng bài tập — tính trong Postgres. */
+  bestScoresForUser(userId: string, db: Db = this.prisma.client) {
+    return db.submission.groupBy({
+      by: ['exerciseId'],
+      where: { userId },
+      _max: { score: true },
+    });
   }
 
   /**

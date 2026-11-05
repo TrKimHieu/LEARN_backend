@@ -6,7 +6,9 @@ import { S3Service } from '../common/s3';
 import {
   extractText,
   UnsupportedFileError,
+  DocumentTooShortError,
   ScannedPdfNotSupportedError,
+  assertEnoughText,
 } from '../extraction/extract-text';
 import { env } from '../environment';
 
@@ -83,7 +85,8 @@ export class DocumentExtractProcessor {
         );
       }
 
-      const result = await extractText(bytes, doc.mimeType);
+      const result = await extractText(bytes, doc.mimeType, { ocrMaxPages: env.OCR_MAX_PAGES });
+      assertEnoughText(result);
       if (result.pageCount && result.pageCount > env.UPLOAD_MAX_PAGES) {
         throw new Error(
           `Tài liệu có ${result.pageCount} trang, vượt giới hạn ${env.UPLOAD_MAX_PAGES} trang.`,
@@ -139,9 +142,11 @@ export class DocumentExtractProcessor {
           ? 'UNSUPPORTED_FILE'
           : err instanceof ScannedPdfNotSupportedError
             ? 'SCANNED_PDF_UNSUPPORTED'
-            : err instanceof PagesQuotaExceededError
-              ? 'PAGE_QUOTA_EXCEEDED'
-              : 'EXTRACTION_FAILED';
+            : err instanceof DocumentTooShortError
+              ? 'DOCUMENT_TOO_SHORT'
+              : err instanceof PagesQuotaExceededError
+                ? 'PAGE_QUOTA_EXCEEDED'
+                : 'EXTRACTION_FAILED';
       const message = err instanceof Error ? err.message : 'Lỗi không xác định khi trích xuất.';
       await prisma.document.update({
         where: { id: documentId },

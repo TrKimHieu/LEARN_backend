@@ -12,6 +12,7 @@ import { ExerciseRepository } from '../infrastructure/repositories/exercise.repo
 import { SubmissionRepository } from '../infrastructure/repositories/submission.repository';
 import { LearningProgressRepository } from '../infrastructure/repositories/learning-progress.repository';
 import { LessonRepository } from '../infrastructure/repositories/lesson.repository';
+import { ShortAnswerGrader } from '../infrastructure/short-answer-grader';
 import { isLessonComplete } from './lesson-completion';
 
 export interface GradedAnswer {
@@ -49,6 +50,7 @@ export class ExercisesService {
     private readonly exercises: ExerciseRepository,
     private readonly submissions: SubmissionRepository,
     private readonly progress: LearningProgressRepository,
+    private readonly grader: ShortAnswerGrader,
   ) {}
 
   /**
@@ -146,8 +148,12 @@ export class ExercisesService {
       input.answers.map((a) => [a.questionId, a]),
     );
 
+    // Gọi model trước khi mở transaction: không giữ connection DB trong lúc chờ mạng.
+    const semanticVerdicts = await gradeFreeTextAnswers(questions, answerByQuestion, this.grader);
+
     const { results, percent, passed } = gradeSubmission(questions, answerByQuestion, {
       passScore: exercise.passScore,
+      semanticVerdicts,
     });
 
     const created = await this.persistSubmission({
@@ -268,6 +274,7 @@ function rawAnswerOf(answer: SubmittedAnswer | undefined): Prisma.InputJsonValue
 interface GradableQuestion {
   id: string;
   type: string;
+  prompt?: string;
   points: number;
   correctAnswer: unknown;
   explanation: string | null;
@@ -281,7 +288,7 @@ interface GradableQuestion {
 export function gradeSubmission(
   questions: GradableQuestion[],
   answerByQuestion: Map<string, SubmittedAnswer>,
-  opts: { passScore: number },
+  opts: { passScore: number; semanticVerdicts?: Map<string, boolean> },
 ): { results: GradedAnswer[]; percent: number; passed: boolean } {
   // `|| 1` chặn chia cho 0 khi bài tập không có câu hỏi nào có điểm.
   const maxPoints = questions.reduce((sum, q) => sum + q.points, 0) || 1;
@@ -289,7 +296,9 @@ export function gradeSubmission(
 
   const results: GradedAnswer[] = questions.map((q) => {
     const answer = answerByQuestion.get(q.id);
-    const isCorrect = answer ? gradeAnswer(q, answer).isCorrect : false;
+    const isCorrect = answer
+      ? gradeAnswer(q, answer).isCorrect || opts.semanticVerdicts?.get(q.id) === true
+      : false;
     if (isCorrect) pointsEarned += q.points;
     return {
       questionId: q.id,
@@ -302,6 +311,35 @@ export function gradeSubmission(
 
   const percent = Math.round((pointsEarned / maxPoints) * SCORE_SCALE);
   return { results, percent, passed: percent >= opts.passScore };
+}
+
+/**
+ * Chấm theo nghĩa các câu SHORT_ANSWER không khớp đáp án mẫu. Câu đã khớp không tốn lượt gọi model.
+ * Model lỗi thì báo 503 và không ghi Submission: người học nộp lại được, không nhận điểm sai vĩnh viễn.
+ */
+export async function gradeFreeTextAnswers(
+  questions: GradableQuestion[],
+  answerByQuestion: Map<string, SubmittedAnswer>,
+  grader: Pick<ShortAnswerGrader, 'grade'>,
+): Promise<Map<string, boolean>> {
+  const pending = questions.flatMap((q) => {
+    const answer = answerByQuestion.get(q.id);
+    if (q.type !== 'SHORT_ANSWER' || answer?.type !== 'SHORT_ANSWER') return [];
+    const text = answer.text.trim();
+    const { acceptable } = q.correctAnswer as { acceptable?: string[] };
+    const modelAnswers = acceptable ?? [];
+    if (!text || modelAnswers.length === 0 || gradeAnswer(q, answer).isCorrect) return [];
+    return [{ id: q.id, questionPrompt: q.prompt ?? '', modelAnswers, answer: text }];
+  });
+
+  try {
+    const verdicts = await Promise.all(
+      pending.map(async ({ id, ...input }) => [id, await grader.grade(input)] as const),
+    );
+    return new Map(verdicts);
+  } catch {
+    throw ApiError.upstreamUnavailable('Chưa chấm được câu tự luận. Vui lòng nộp lại sau ít phút.');
+  }
 }
 
 /**
