@@ -7,6 +7,7 @@ import { AuthModule } from './domains/auth/auth.module';
 import { CoursesModule } from './domains/courses/courses.module';
 import { DocumentsModule } from './domains/documents/documents.module';
 import { LearningModule } from './domains/learning/learning.module';
+import { ReviewsModule } from './domains/reviews/reviews.module';
 import { SubscriptionsModule } from './domains/subscriptions/subscriptions.module';
 import { AiModule } from './domains/ai/ai.module';
 import { AdminModule } from './domains/admin/admin.module';
@@ -21,6 +22,7 @@ import { AdminModule } from './domains/admin/admin.module';
     CoursesModule,
     DocumentsModule,
     LearningModule,
+    ReviewsModule,
     SubscriptionsModule,
     AiModule,
     AdminModule,
