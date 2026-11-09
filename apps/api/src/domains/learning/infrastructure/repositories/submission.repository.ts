@@ -57,6 +57,8 @@ export class SubmissionRepository {
       percent: number;
       maxScore: number;
       durationMs: number | null;
+      /** Header `Idempotency-Key` + dấu vân tay body; unique theo `(userId, idempotencyKey)`. */
+      idempotency?: { key: string; requestHash: string };
       results: Array<{
         questionId: string;
         rawAnswer: Prisma.InputJsonValue;
@@ -79,6 +81,8 @@ export class SubmissionRepository {
         score: args.percent,
         maxScore: args.maxScore,
         durationMs: args.durationMs,
+        idempotencyKey: args.idempotency?.key ?? null,
+        requestHash: args.idempotency?.requestHash ?? null,
       },
     });
 
@@ -96,6 +100,19 @@ export class SubmissionRepository {
     });
 
     return { id, attemptNo, createdAt: submission.createdAt };
+  }
+
+  /** Lượt nộp đã ghi với `Idempotency-Key` này của người dùng (nếu có). */
+  findByIdempotencyKey(userId: string, idempotencyKey: string, db: Db = this.prisma.client) {
+    return db.submission.findUnique({
+      where: { userId_idempotencyKey: { userId, idempotencyKey } },
+      select: { requestHash: true, response: true },
+    });
+  }
+
+  /** Lưu kết quả trả về cùng transaction với lượt nộp, để gửi lại cùng key nhận đúng kết quả này. */
+  async saveResponse(tx: Prisma.TransactionClient, id: string, response: Prisma.InputJsonValue) {
+    await tx.submission.update({ where: { id }, data: { response } });
   }
 
   /** Trung bình điểm (0-100) của một người — aggregate trong Postgres. */

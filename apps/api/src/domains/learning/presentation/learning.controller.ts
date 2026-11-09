@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Post, Delete, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Patch, Post, Delete, Body, Headers, Param, Query } from '@nestjs/common';
 import { z } from 'zod';
 import {
   patchLessonSchema,
@@ -12,6 +12,7 @@ import { zodBody, zodParam } from '../../../core/exceptions/errors';
 import { Auth, CurrentUser, type UserContext } from '../../../core/security';
 import { LessonsService } from '../application/lessons.service';
 import { ExercisesService } from '../application/exercises.service';
+import { parseIdempotencyKey } from '../application/submit-idempotency';
 import { ProgressService } from '../application/progress.service';
 
 const idSchema = z.string().uuid();
@@ -113,8 +114,9 @@ export class LearningController {
     @CurrentUser() user: UserContext,
     @Param('lessonId', zodParam(idSchema)) lessonId: string,
     @Body(zodBody(submitExerciseSchema)) body: SubmitExerciseInput,
+    @Headers('idempotency-key') idempotencyKey?: string,
   ) {
-    return this.exercises.submit(user.userId, lessonId, body);
+    return this.exercises.submit(user.userId, lessonId, body, parseIdempotencyKey(idempotencyKey));
   }
 
   @Get('progress/overview')

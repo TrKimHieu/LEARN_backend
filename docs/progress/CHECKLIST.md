@@ -18,3 +18,6 @@
 - [ ] Verify build and staging AWS OIDC roles with the manual Check AWS access workflow on main.
 
 - [ ] Publish and run ECR release on main; verify migration, API readiness and worker processing on the existing staging host.
+
+- [x] Submit `Idempotency-Key`: replay, 409 on body mismatch, per-user keys, concurrent duplicate replay (unit tests on fakes).
+- [ ] Apply migration `20261109090000_submission_idempotency_key` on staging and verify a duplicate submit against real PostgreSQL.

@@ -30,3 +30,5 @@ AWS access-check workflow: user requested creating and pushing .github/workflows
 Staging release publication: copied existing delivery implementation from aceca40 without application changes or CloudFormation templates. Removed superseded GHCR/per-service staging entry points. Planner tests: 4 pass; 5 Linux/flock host tests skipped on Windows. Bash syntax passes. Docker daemon access denied locally; no cloud deploy executed. User reports both STS identity jobs pass.
 
 Review correction: API readiness returns HTTP200 even for degraded dependencies. Added strict ready-status public probe and updated host probe. Observed host regression fail before fix; targeted suite now7 pass,5 Linux-only skips. Independent reviewer confirms readiness issue resolved and3 readiness tests pass. Cloud runtime remains unverified.
+
+Submit idempotency: requested so the mobile offline outbox can resend exercise submissions. Branch feat/submit-idempotency from origin/main 1138b13 in a separate worktree (local checkout has unrelated uncommitted infra edits). Error code kept as existing CONFLICT plus meta.reason to avoid a contracts hash change. User asked to stop at PR; no deploy.

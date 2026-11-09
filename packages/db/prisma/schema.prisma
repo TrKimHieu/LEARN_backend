@@ -351,11 +351,19 @@ model Submission {
   durationMs Int?
   createdAt  DateTime @default(now())
 
+  /// Header `Idempotency-Key` của lượt nộp (app mobile gửi lại từ hàng chờ offline).
+  idempotencyKey String?
+  /// sha256 của body đã chuẩn hoá — cùng key nhưng khác body thì trả 409.
+  requestHash    String?
+  /// Kết quả đã trả lần đầu, phát lại nguyên văn khi gửi lại cùng key.
+  response       Json?
+
   user     User               @relation(fields: [userId], references: [id], onDelete: Cascade)
   exercise Exercise           @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
   answers  SubmissionAnswer[]
 
   @@unique([userId, exerciseId, attemptNo])
+  @@unique([userId, idempotencyKey])
   @@index([userId, createdAt])
 }
 
