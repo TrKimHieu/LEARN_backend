@@ -3,6 +3,8 @@ import { z } from 'zod';
 import {
   uploadUrlSchema,
   confirmUploadSchema,
+  importTextDocumentSchema,
+  type ImportTextDocumentInput,
   type UploadUrlInput,
   type ConfirmUploadInput,
 } from '@learn/contracts';
@@ -24,6 +26,16 @@ export class DocumentsController {
     @Body(zodBody(uploadUrlSchema)) body: UploadUrlInput,
   ) {
     return this.documents.requestUpload(user.userId, courseId, body);
+  }
+
+  @Post('courses/:courseId/documents/text')
+  @Auth()
+  async importText(
+    @CurrentUser() user: UserContext,
+    @Param('courseId', zodParam(idSchema)) courseId: string,
+    @Body(zodBody(importTextDocumentSchema)) body: ImportTextDocumentInput,
+  ) {
+    return this.documents.importText(user.userId, courseId, body);
   }
 
   @Post('documents/:id/confirm')

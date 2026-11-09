@@ -32,3 +32,5 @@ Staging release publication: copied existing delivery implementation from aceca4
 Review correction: API readiness returns HTTP200 even for degraded dependencies. Added strict ready-status public probe and updated host probe. Observed host regression fail before fix; targeted suite now7 pass,5 Linux-only skips. Independent reviewer confirms readiness issue resolved and3 readiness tests pass. Cloud runtime remains unverified.
 
 Submit idempotency: requested so the mobile offline outbox can resend exercise submissions. Branch feat/submit-idempotency from origin/main 1138b13 in a separate worktree (local checkout has unrelated uncommitted infra edits). Error code kept as existing CONFLICT plus meta.reason to avoid a contracts hash change. User asked to stop at PR; no deploy.
+
+Text import (R3): user chose full on-device extraction for mobile; original-file upload stays disabled on mobile and unchanged for web. Branch feat/text-import from origin/main 83b22ab. Contracts bumped to 1.1.0 within major 1. No deploy.
