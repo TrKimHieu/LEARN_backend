@@ -21,3 +21,5 @@
 
 - [x] Submit `Idempotency-Key`: replay, 409 on body mismatch, per-user keys, concurrent duplicate replay (unit tests on fakes).
 - [ ] Apply migration `20261109090000_submission_idempotency_key` on staging and verify a duplicate submit against real PostgreSQL.
+- [x] Text import endpoint + contracts 1.1.0 (unit tests on fakes, consumer smoke).
+- [ ] Text import against real PostgreSQL/staging from a development build.

@@ -37,6 +37,40 @@ export class DocumentRepository {
     return db.document.create({ data: { id: newId(), ...data } });
   }
 
+  /** Tài liệu nhập văn bản từ điện thoại: tạo `EXTRACTED` cùng chunk trong một transaction. */
+  async createExtracted(
+    data: {
+      id: string;
+      uploaderId: string;
+      courseId: string;
+      filename: string;
+      mimeType: string;
+      sizeBytes: number;
+      checksumSha256: string;
+      storageKey: string;
+      pageCount: number | null;
+    },
+    chunks: Array<{
+      index: number;
+      content: string;
+      tokenCount: number;
+      pageFrom: number | null;
+      pageTo: number | null;
+      headingPath: string | null;
+    }>,
+    db: Db = this.prisma.client,
+  ) {
+    const doc = await db.document.create({
+      data: { ...data, status: 'EXTRACTED', extractedAt: new Date() },
+    });
+    if (chunks.length > 0) {
+      await db.documentChunk.createMany({
+        data: chunks.map((c) => ({ id: newId(), documentId: doc.id, ...c })),
+      });
+    }
+    return doc;
+  }
+
   listForCourse(courseId: string, userId: string, db: Db = this.prisma.client) {
     return db.document.findMany({
       where: { courseId, uploaderId: userId },

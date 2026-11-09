@@ -27,7 +27,7 @@
     "db:seed": "npm run db:seed -w packages/db",
     "db:studio": "npm run db:studio -w packages/db",
     "contracts:release": "node scripts/contracts/build-release.mjs",
-    "contracts:pack": "npm run contracts:release && npm pack ./artifacts/api-contracts/1.0.0/sdk --pack-destination artifacts/api-contracts/1.0.0 --ignore-scripts --cache .local/npm-cache",
+    "contracts:pack": "npm run contracts:release && npm pack ./artifacts/api-contracts/1.1.0/sdk --pack-destination artifacts/api-contracts/1.1.0 --ignore-scripts --cache .local/npm-cache",
     "test:tooling": "node --test scripts/contracts/*.test.mjs scripts/sandbox/*.test.mjs scripts/deploy/*.test.mjs",
     "sandbox:up": "docker compose -f infra/docker-compose.m1.yml up -d --wait",
     "sandbox:verify": "node scripts/sandbox/verify.mjs",

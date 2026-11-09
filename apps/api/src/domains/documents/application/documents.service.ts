@@ -1,7 +1,10 @@
+import { createHash } from 'node:crypto';
 import { Injectable } from '@nestjs/common';
 import { newId } from '@learn/db';
-import { resolveUploadMime } from '@learn/contracts';
+import { chunkPages } from '@learn/ai';
+import { importTextLimits, resolveUploadMime } from '@learn/contracts';
 import type {
+  ImportTextDocumentInput,
   UploadUrlInput,
   UploadUrlResponse,
   ConfirmUploadInput,
@@ -13,6 +16,9 @@ import { env } from '../../../environment';
 import { UsageService } from '../../subscriptions/application/usage.service';
 import { CourseRepository } from '../../courses/infrastructure/repositories/course.repository';
 import { DocumentRepository } from '../infrastructure/repositories/document.repository';
+
+const TEXT_KEY_PREFIX = 'text/';
+const isTextKey = (key: string) => key.startsWith(TEXT_KEY_PREFIX);
 
 @Injectable()
 export class DocumentsService {
@@ -72,7 +78,9 @@ export class DocumentsService {
   async list(userId: string, courseId: string): Promise<{ documents: DocumentList[] }> {
     await this.ownedCourse(courseId, userId);
     const docs = await this.documents.listForCourse(courseId, userId);
-    const urls = await Promise.all(docs.map((d) => this.s3.getDownloadUrl(d.storageKey)));
+    const urls = await Promise.all(
+      docs.map((d) => (isTextKey(d.storageKey) ? null : this.s3.getDownloadUrl(d.storageKey))),
+    );
     const chunkCounts = await this.documents.chunkCounts(docs.map((d) => d.id));
     const chunkMap = new Map(chunkCounts.map((c) => [c.documentId, c._count]));
 
@@ -122,8 +130,91 @@ export class DocumentsService {
     return { documentId: doc.id, status: updated.status };
   }
 
+  /**
+   * Nhập văn bản đã trích sẵn từ điện thoại — không có tệp gốc, không qua S3 hay worker.
+   * Server kiểm lại mọi giới hạn vì client không đáng tin; tài liệu vào thẳng `EXTRACTED`.
+   */
+  async importText(
+    userId: string,
+    courseId: string,
+    input: ImportTextDocumentInput,
+  ): Promise<DocumentList> {
+    await this.ownedCourse(courseId, userId);
+
+    const pages = input.pages.map((p, i) => ({
+      pageNumber: p.page ?? i + 1,
+      text: p.text.replaceAll('\u0000', '').replace(/\r\n?/g, '\n'),
+    }));
+    const total = pages.reduce((n, p) => n + p.text.length, 0);
+    if (total > importTextLimits.maxTotalChars)
+      throw ApiError.payloadTooLarge('Văn bản vượt giới hạn 2.000.000 ký tự.');
+    if (!pages.some((p) => p.text.trim().length > 0))
+      throw ApiError.badRequest('Tài liệu không có nội dung chữ.');
+
+    // Tài liệu không có trang cố định (TEXT) không bị tính theo hạn mức trang, như worker.
+    const paged = input.method !== 'TEXT';
+    if (paged) {
+      const plan = await this.usage.planForUser(userId);
+      const pagesLimit = plan.limits.PAGES_PROCESSED?.limit;
+      if (pagesLimit != null && pages.length > pagesLimit)
+        throw ApiError.quota(pagesLimit, pages.length, 'PAGES_PROCESSED');
+    }
+
+    const checksumSha256 = createHash('sha256')
+      .update(pages.map((p) => p.text).join('\n\n'))
+      .digest('hex');
+    const duplicate = await this.documents.findDuplicateInCourse(courseId, checksumSha256);
+    if (duplicate) {
+      throw ApiError.conflict(
+        `Tài liệu này đã tồn tại trong khóa học (trùng nội dung với "${duplicate.filename}").`,
+      );
+    }
+
+    const chunks = chunkPages(pages).map((c, index) => ({
+      index,
+      content: c.content,
+      tokenCount: c.tokenCount,
+      pageFrom: paged ? (c.pageFrom ?? null) : null,
+      pageTo: paged ? (c.pageTo ?? null) : null,
+      headingPath: c.headingPath ?? null,
+    }));
+
+    const id = newId();
+    const doc = await this.usage.consume(userId, 'DOCUMENTS_UPLOADED', (tx) =>
+      this.documents.createExtracted(
+        {
+          id,
+          uploaderId: userId,
+          courseId,
+          filename: input.filename.slice(0, 255),
+          mimeType: 'text/plain',
+          sizeBytes: input.sourceSizeBytes,
+          checksumSha256,
+          storageKey: `${TEXT_KEY_PREFIX}${id}`,
+          pageCount: paged ? pages.length : null,
+        },
+        chunks,
+        tx,
+      ),
+    );
+
+    return {
+      id: doc.id,
+      filename: doc.filename,
+      mimeType: doc.mimeType,
+      sizeBytes: doc.sizeBytes,
+      status: doc.status as DocumentList['status'],
+      pageCount: doc.pageCount,
+      chunkCount: chunks.length,
+      errorMessage: doc.errorMessage,
+      createdAt: doc.createdAt.toISOString(),
+    };
+  }
+
   async getDownload(userId: string, documentId: string) {
     const doc = await this.ownedDocument(documentId, userId);
+    if (isTextKey(doc.storageKey))
+      throw ApiError.notFound('Tài liệu nhập từ điện thoại không có tệp gốc.');
     return { url: await this.s3.getDownloadUrl(doc.storageKey) };
   }
 
@@ -141,6 +232,8 @@ export class DocumentsService {
     }
 
     await this.documents.delete(doc.id);
+
+    if (isTextKey(doc.storageKey)) return { ok: true };
 
     try {
       await this.s3.deleteObject(doc.storageKey);
