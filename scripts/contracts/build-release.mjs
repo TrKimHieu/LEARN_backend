@@ -7,7 +7,11 @@ import { z } from 'zod';
 import { controllerOperations } from './catalog.mjs';
 
 const root = resolve(import.meta.dirname, '../..');
-const version = '1.0.0';
+// Phiên bản phát hành: `--version x.y.z` hoặc mặc định bên dưới. Cùng major 1 với bản app đang dùng.
+const version = process.argv.includes('--version')
+  ? process.argv[process.argv.indexOf('--version') + 1]
+  : '1.1.0';
+if (!/^1\.\d+\.\d+$/.test(version)) throw new Error(`Unsupported contracts version: ${version}`);
 const out = resolve(
   process.argv.includes('--out')
     ? process.argv[process.argv.indexOf('--out') + 1]
@@ -84,7 +88,8 @@ writeFileSync(
 );
 writeFileSync(
   join(sdk, 'README.md'),
-  '# LEARN API contracts 1.0.0\n\nPublic DTOs and runtime Zod schemas only. Install with Zod 4.6.4 or a compatible version. Web/native authentication state remains the responsibility of each client. The accompanying OpenAPI describes structural validation; server-side refinements, authorization and quota checks remain authoritative. No application implementation or source maps are shipped.\n',
+  `# LEARN API contracts ${version}\n\n` +
+    'Public DTOs and runtime Zod schemas only. Install with Zod 4.6.4 or a compatible version. Web/native authentication state remains the responsibility of each client. The accompanying OpenAPI describes structural validation; server-side refinements, authorization and quota checks remain authoritative. No application implementation or source maps are shipped.\n',
 );
 
 const require = createRequire(join(root, 'package.json'));

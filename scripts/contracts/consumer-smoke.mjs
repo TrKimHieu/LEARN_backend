@@ -6,8 +6,11 @@ import { tmpdir } from 'node:os';
 import { resolve, join, dirname } from 'node:path';
 
 const root = resolve(import.meta.dirname, '../..');
-const release = join(root, 'artifacts/api-contracts/1.0.0');
-const sdk = join(release, 'learn-api-contracts-1.0.0.tgz');
+const version = process.argv.includes('--version')
+  ? process.argv[process.argv.indexOf('--version') + 1]
+  : '1.1.0';
+const release = join(root, 'artifacts/api-contracts', version);
+const sdk = join(release, `learn-api-contracts-${version}.tgz`);
 const cache = join(root, '.local/npm-cache');
 const tools = join(root, '.local/consumer-peer');
 mkdirSync(tools, { recursive: true });
