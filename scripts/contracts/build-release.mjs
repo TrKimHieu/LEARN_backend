@@ -10,7 +10,7 @@ const root = resolve(import.meta.dirname, '../..');
 // Phiên bản phát hành: `--version x.y.z` hoặc mặc định bên dưới. Cùng major 1 với bản app đang dùng.
 const version = process.argv.includes('--version')
   ? process.argv[process.argv.indexOf('--version') + 1]
-  : '1.1.0';
+  : '1.2.0';
 if (!/^1\.\d+\.\d+$/.test(version)) throw new Error(`Unsupported contracts version: ${version}`);
 const out = resolve(
   process.argv.includes('--out')
@@ -34,6 +34,7 @@ const modules = [
   'ai',
   'admin',
   'meta',
+  'review',
   'version',
   'index',
 ];

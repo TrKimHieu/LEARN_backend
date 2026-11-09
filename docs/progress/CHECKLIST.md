@@ -23,3 +23,4 @@
 - [ ] Apply migration `20261109090000_submission_idempotency_key` on staging and verify a duplicate submit against real PostgreSQL.
 - [x] Text import endpoint + contracts 1.1.0 (unit tests on fakes, consumer smoke).
 - [ ] Text import against real PostgreSQL/staging from a development build.
+- [ ] SRS reviews against real PostgreSQL (backfill query, access filter, FOR UPDATE) and on device offline.
