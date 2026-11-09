@@ -13,6 +13,11 @@ import { SubmissionRepository } from '../infrastructure/repositories/submission.
 import { LearningProgressRepository } from '../infrastructure/repositories/learning-progress.repository';
 import { LessonRepository } from '../infrastructure/repositories/lesson.repository';
 import { isLessonComplete } from './lesson-completion';
+import {
+  idempotencyKeyReused,
+  isIdempotencyKeyViolation,
+  submissionFingerprint,
+} from './submit-idempotency';
 
 export interface GradedAnswer {
   questionId: string;
@@ -123,13 +128,25 @@ export class ExercisesService {
     });
   }
 
-  /** Chấm điểm ngay tại server, lưu 1 bản ghi, trả kết quả kèm đáp án — HANDBOOK §7.4. */
+  /**
+   * Chấm điểm ngay tại server, lưu 1 bản ghi, trả kết quả kèm đáp án — HANDBOOK §7.4.
+   *
+   * `idempotencyKey` (header `Idempotency-Key`): cùng người dùng + cùng key trả lại đúng kết quả
+   * lần đầu; cùng key nhưng nội dung khác → 409. Kết quả được lưu cùng transaction với Submission,
+   * nên ai thấy bản ghi cũng thấy kết quả của nó.
+   */
   async submit(
     userId: string,
     lessonId: string,
     input: SubmitExerciseInput,
+    idempotencyKey: string | null = null,
   ): Promise<SubmissionResult> {
     const lesson = await this.assertLessonAccess(userId, lessonId);
+    const requestHash = idempotencyKey ? submissionFingerprint(lessonId, input) : null;
+    if (idempotencyKey && requestHash) {
+      const prior = await this.replay(userId, idempotencyKey, requestHash);
+      if (prior) return prior;
+    }
     const exercise = await this.exercises.findForLesson(lessonId, input.exerciseId);
     if (!exercise) throw ApiError.notFound('Không có bài tập này trong bài học.');
 
@@ -150,18 +167,12 @@ export class ExercisesService {
       passScore: exercise.passScore,
     });
 
-    const created = await this.persistSubmission({
-      userId,
-      courseId: lesson.courseId,
-      lessonId,
-      exerciseId: exercise.id,
-      percent,
-      durationMs: input.durationMs ?? null,
-      results,
-      answerByQuestion,
-    });
-
-    return {
+    const toResult = (created: {
+      id: string;
+      attemptNo: number;
+      createdAt: Date;
+      lessonCompleted: boolean;
+    }): SubmissionResult => ({
       id: created.id,
       exerciseId: exercise.id,
       lessonCompleted: created.lessonCompleted,
@@ -171,7 +182,42 @@ export class ExercisesService {
       passed,
       createdAt: created.createdAt.toISOString(),
       results,
-    };
+    });
+
+    try {
+      return await this.persistSubmission({
+        userId,
+        courseId: lesson.courseId,
+        lessonId,
+        exerciseId: exercise.id,
+        percent,
+        durationMs: input.durationMs ?? null,
+        results,
+        answerByQuestion,
+        idempotency:
+          idempotencyKey && requestHash ? { key: idempotencyKey, requestHash } : undefined,
+        toResult,
+      });
+    } catch (e) {
+      // Lượt song song cùng key đã ghi trước: trả kết quả của lượt đó thay vì lỗi.
+      if (idempotencyKey && requestHash && isIdempotencyKeyViolation(e)) {
+        const prior = await this.replay(userId, idempotencyKey, requestHash);
+        if (prior) return prior;
+      }
+      throw e;
+    }
+  }
+
+  /** Kết quả đã lưu của lượt nộp cùng key; `null` khi chưa có. Khác nội dung → 409. */
+  private async replay(
+    userId: string,
+    key: string,
+    requestHash: string,
+  ): Promise<SubmissionResult | null> {
+    const prior = await this.submissions.findByIdempotencyKey(userId, key);
+    if (!prior) return null;
+    if (prior.requestHash !== requestHash || !prior.response) throw idempotencyKeyReused();
+    return prior.response as unknown as SubmissionResult;
   }
 
   /**
@@ -199,7 +245,14 @@ export class ExercisesService {
     durationMs: number | null;
     results: GradedAnswer[];
     answerByQuestion: Map<string, SubmittedAnswer>;
-  }): Promise<{ id: string; attemptNo: number; createdAt: Date; lessonCompleted: boolean }> {
+    idempotency?: { key: string; requestHash: string };
+    toResult: (created: {
+      id: string;
+      attemptNo: number;
+      createdAt: Date;
+      lessonCompleted: boolean;
+    }) => SubmissionResult;
+  }): Promise<SubmissionResult> {
     for (let retry = 0; ; retry++) {
       try {
         return await this.prisma.client.$transaction(async (tx) => {
@@ -209,6 +262,7 @@ export class ExercisesService {
             percent: args.percent,
             maxScore: SCORE_SCALE,
             durationMs: args.durationMs,
+            idempotency: args.idempotency,
             results: args.results.map((r) => ({
               questionId: r.questionId,
               rawAnswer: rawAnswerOf(args.answerByQuestion.get(r.questionId)),
@@ -236,9 +290,19 @@ export class ExercisesService {
             lessonComplete,
           });
 
-          return { ...created, lessonCompleted: lessonComplete };
+          const result = args.toResult({ ...created, lessonCompleted: lessonComplete });
+          if (args.idempotency) {
+            await this.submissions.saveResponse(
+              tx,
+              created.id,
+              result as unknown as Prisma.InputJsonValue,
+            );
+          }
+          return result;
         });
       } catch (e) {
+        // Đụng key idempotency không phải tranh `attemptNo`: thử lại vô ích, để `submit` phát lại.
+        if (isIdempotencyKeyViolation(e)) throw e;
         if (isUniqueViolation(e) && retry < ATTEMPT_CONFLICT_RETRIES) continue;
         throw e;
       }
