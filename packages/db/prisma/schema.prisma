@@ -32,6 +32,8 @@ model User {
   aiJobs              AIJob[]
   progress            LearningProgress[]
   submissions         Submission[]
+  cardSchedules       CardSchedule[]
+  cardReviews         CardReview[]
   refreshTokens       RefreshToken[]
   passwordResetTokens PasswordResetToken[]
   usage               UsageCounter[]
@@ -290,6 +292,8 @@ model Question {
   exercise          Exercise           @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
   options           AnswerOption[]
   submissionAnswers SubmissionAnswer[]
+  cardSchedules     CardSchedule[]
+  cardReviews       CardReview[]
 
   @@unique([exerciseId, orderIndex])
 }
@@ -380,6 +384,50 @@ model SubmissionAnswer {
   question   Question   @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
   @@unique([submissionId, questionId])
+}
+
+// ─── Ôn tập ngắt quãng (SM-2) ───────────────────────────────────────
+
+/// Trạng thái SM-2 của một thẻ (= câu hỏi đã nộp) theo người dùng.
+model CardSchedule {
+  id             String    @id @default(uuid())
+  userId         String
+  questionId     String
+  easeFactor     Float     @default(2.5)
+  intervalDays   Int       @default(0)
+  repetitions    Int       @default(0)
+  lapses         Int       @default(0)
+  dueAt          DateTime
+  lastReviewedAt DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+  @@index([userId, dueAt])
+}
+
+/// Lịch sử chấm thẻ; `idempotencyKey` cho phép app mobile gửi lại từ hàng chờ offline.
+model CardReview {
+  id             String   @id @default(uuid())
+  userId         String
+  questionId     String
+  grade          String
+  reviewedAt     DateTime
+  createdAt      DateTime @default(now())
+  idempotencyKey String?
+  /// sha256 của body đã chuẩn hoá — cùng key nhưng khác body thì trả 409.
+  requestHash    String?
+  /// Kết quả đã trả lần đầu, phát lại nguyên văn khi gửi lại cùng key.
+  response       Json?
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, idempotencyKey])
+  @@index([userId, reviewedAt])
 }
 
 // ─── Gói dịch vụ và thanh toán ──────────────────────────────────────
