@@ -55,6 +55,11 @@ export class AiService {
         throw ApiError.notFound('Có tài liệu không thuộc khóa học của bạn.');
     }
 
+    // Từ chối ngay ở API khi không có tài liệu nào đã trích xuất xong: nếu để worker phát hiện
+    // thì AIJob vẫn được tạo và hạn mức vẫn bị trừ cho một job chắc chắn thất bại.
+    if (!(await this.documents.countExtractedInCourse(userId, courseId, input.documentIds)))
+      throw ApiError.conflict('Chưa có tài liệu nào sẵn sàng trong khóa học này để sinh bài học.');
+
     const params = {
       documentIds: input.documentIds ?? [],
       language: input.language ?? course.language,

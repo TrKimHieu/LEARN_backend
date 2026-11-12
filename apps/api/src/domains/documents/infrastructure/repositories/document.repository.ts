@@ -98,6 +98,23 @@ export class DocumentRepository {
     return db.document.delete({ where: { id } });
   }
 
+  /** Đếm tài liệu đã trích xuất xong (`EXTRACTED`) — chỉ loại này mới sinh được bài học. */
+  countExtractedInCourse(
+    userId: string,
+    courseId: string,
+    documentIds?: string[],
+    db: Db = this.prisma.client,
+  ) {
+    return db.document.count({
+      where: {
+        uploaderId: userId,
+        courseId,
+        status: 'EXTRACTED',
+        ...(documentIds?.length ? { id: { in: documentIds } } : {}),
+      },
+    });
+  }
+
   /** Đếm tài liệu thuộc đúng khoá học của người dùng — cho AI job kiểm quyền sở hữu. */
   countOwnedInCourse(
     userId: string,
